@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{00388914-6CAA-46E8-9245-B852A2331997}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KITH.Interface.WeChat</RootNamespace>
+    <AssemblyName>KITH.Interface.WeChat</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractResult.cs" />
+    <Compile Include="CData.cs" />
+    <Compile Include="Epoch.cs" />
+    <Compile Include="IGetRequest.cs" />
+    <Compile Include="IPostRequest.cs" />
+    <Compile Include="IResult.cs" />
+    <Compile Include="IWeChatRequest.cs" />
+    <Compile Include="Messages\WeChatEventMsg.cs" />
+    <Compile Include="Messages\WeChatImageMsg.cs" />
+    <Compile Include="Messages\WeChatLinkMsg.cs" />
+    <Compile Include="Messages\WeChatLocationEvent.cs" />
+    <Compile Include="Messages\WeChatLocationMsg.cs" />
+    <Compile Include="Messages\WeChatMediaMsg.cs" />
+    <Compile Include="Messages\WeChatMenuEvent.cs" />
+    <Compile Include="Messages\WeChatNormalMsg.cs" />
+    <Compile Include="Messages\WeChatScanQrEvent.cs" />
+    <Compile Include="Messages\WeChatTextMsg.cs" />
+    <Compile Include="Messages\WeChatVideoMsg.cs" />
+    <Compile Include="Messages\WeChatVoiceMsg.cs" />
+    <Compile Include="Models\Button.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\DeleteMenu.cs" />
+    <Compile Include="Requests\GetAccessToken.cs" />
+    <Compile Include="Requests\GetMenu.cs" />
+    <Compile Include="Requests\GetOpenId.cs" />
+    <Compile Include="Requests\GetOpenIdByCode.cs" />
+    <Compile Include="Requests\GetQRTicket.cs" />
+    <Compile Include="Requests\GetSubscribers.cs" />
+    <Compile Include="Requests\GetUserInfo.cs" />
+    <Compile Include="Requests\UploadMedia.cs" />
+    <Compile Include="Results\AccessTokenResult.cs" />
+    <Compile Include="Results\GetOpenIdResult.cs" />
+    <Compile Include="Results\MenuResult.cs" />
+    <Compile Include="Results\OpenIdResult.cs" />
+    <Compile Include="Results\QRTicketResult.cs" />
+    <Compile Include="Results\SubscriberListResult.cs" />
+    <Compile Include="Results\UploadMediaResult.cs" />
+    <Compile Include="Results\UserInfoResult.cs" />
+    <Compile Include="WeChatBaseMsg.cs" />
+    <Compile Include="WeChatMediaType.cs" />
+    <Compile Include="WeChatOAuth.cs" />
+    <Compile Include="WeChatRequestException.cs" />
+    <Compile Include="WeChatService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITH.Interface.WeChat", "KITH.Interface.WeChat\KITH.Interface.WeChat.csproj", "{00388914-6CAA-46E8-9245-B852A2331997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITH.Interface.WeChat.Test", "KITH.Interface.WeChat.Test\KITH.Interface.WeChat.Test.csproj", "{46FC9DC7-BF8D-4629-BF7A-79B6E02ABE7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00388914-6CAA-46E8-9245-B852A2331997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00388914-6CAA-46E8-9245-B852A2331997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00388914-6CAA-46E8-9245-B852A2331997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00388914-6CAA-46E8-9245-B852A2331997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FC9DC7-BF8D-4629-BF7A-79B6E02ABE7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FC9DC7-BF8D-4629-BF7A-79B6E02ABE7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FC9DC7-BF8D-4629-BF7A-79B6E02ABE7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FC9DC7-BF8D-4629-BF7A-79B6E02ABE7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
