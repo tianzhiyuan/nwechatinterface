@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-namespace KITH.Interface.WeChat.Test
+namespace NWeChatInterface.Test
 {
     [TestFixture]
     public class EpochTest

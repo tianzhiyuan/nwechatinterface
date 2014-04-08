@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using KITH.Interface.WeChat.Requests;
+using NWeChatInterface.Requests;
 using NUnit.Framework;
-namespace KITH.Interface.WeChat.Test
+namespace NWeChatInterface.Test
 {
     [TestFixture]
     class WeChatServiceGetTest

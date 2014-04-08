@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace KITH.Interface.WeChat
+namespace NWeChatInterface
 {
     /// <summary>
     /// marker interface

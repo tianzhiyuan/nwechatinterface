@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KITH.Interface.WeChat.Models
+namespace NWeChatInterface.Models
 {
     /// <summary>
     /// 微信推广二维码

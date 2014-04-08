@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using KITH.Interface.WeChat.Models;
+using NWeChatInterface.Models;
 
-namespace KITH.Interface.WeChat.Results
+namespace NWeChatInterface.Results
 {
     public class MenuResult : AbstractResult
     {

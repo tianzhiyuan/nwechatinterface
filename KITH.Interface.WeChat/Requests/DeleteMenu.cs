@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KITH.Interface.WeChat.Requests
+namespace NWeChatInterface.Requests
 {
     public class DeleteMenu:IGetRequest<AbstractResult>
     {

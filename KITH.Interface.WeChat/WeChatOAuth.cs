@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using KITH.Interface.WeChat.Requests;
+using NWeChatInterface.Requests;
 
-namespace KITH.Interface.WeChat
+namespace NWeChatInterface
 {
     /// <summary>
     /// 微信OAuth类

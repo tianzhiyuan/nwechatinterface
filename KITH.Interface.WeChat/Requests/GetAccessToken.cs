@@ -1,6 +1,6 @@
-﻿using KITH.Interface.WeChat.Results;
+﻿using NWeChatInterface.Results;
 
-namespace KITH.Interface.WeChat.Requests
+namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 获取AccessToken

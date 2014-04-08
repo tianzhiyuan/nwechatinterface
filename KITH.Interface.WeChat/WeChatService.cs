@@ -7,11 +7,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
-using KITH.Interface.WeChat.Requests;
-using KITH.Interface.WeChat.Results;
+using NWeChatInterface.Requests;
+using NWeChatInterface.Results;
 using Newtonsoft.Json;
 
-namespace KITH.Interface.WeChat
+namespace NWeChatInterface
 {
     /// <summary>
     /// 微信公众平台接口服务

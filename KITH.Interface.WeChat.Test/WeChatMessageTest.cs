@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using KITH.Interface.WeChat.Messages;
+using NWeChatInterface.Messages;
 using NUnit.Framework;
-namespace KITH.Interface.WeChat.Test
+namespace NWeChatInterface.Test
 {
     [TestFixture]
     public class WeChatMessageTest

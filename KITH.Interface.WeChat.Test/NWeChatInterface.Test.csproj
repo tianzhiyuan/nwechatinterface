@@ -52,9 +52,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KITH.Interface.WeChat\KITH.Interface.WeChat.csproj">
+    <ProjectReference Include="..\KITH.Interface.WeChat\NWeChatInterface.csproj">
       <Project>{00388914-6CAA-46E8-9245-B852A2331997}</Project>
-      <Name>KITH.Interface.WeChat</Name>
+      <Name>NWeChatInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

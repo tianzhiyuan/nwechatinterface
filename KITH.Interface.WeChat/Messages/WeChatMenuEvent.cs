@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KITH.Interface.WeChat.Messages
+namespace NWeChatInterface.Messages
 {
     /// <summary>
     /// 用户自定义菜单菜单事件，包括单击（CLICK）和链接跳转（VIEW）

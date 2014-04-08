@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using KITH.Interface.WeChat.Models;
+using NWeChatInterface.Models;
 using Newtonsoft.Json;
-namespace KITH.Interface.WeChat.Requests
+namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 创建自定义菜单接口

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KITH.Interface.WeChat.Messages
+namespace NWeChatInterface.Messages
 {
     /// <summary>
     /// 微信链接消息

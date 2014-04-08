@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace KITH.Interface.WeChat.Messages
+namespace NWeChatInterface.Messages
 {
     /// <summary>
     /// 用户扫描

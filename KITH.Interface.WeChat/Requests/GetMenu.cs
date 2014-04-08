@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using KITH.Interface.WeChat.Results;
+using NWeChatInterface.Results;
 
-namespace KITH.Interface.WeChat.Requests
+namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 获取当前的自定义菜单

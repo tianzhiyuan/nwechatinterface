@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KITH.Interface.WeChat.Results
+namespace NWeChatInterface.Results
 {
     /// <summary>
     /// 获取二维码Ticket

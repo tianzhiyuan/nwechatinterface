@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using KITH.Interface.WeChat.Models;
-using KITH.Interface.WeChat.Results;
+using NWeChatInterface.Models;
+using NWeChatInterface.Results;
 
-namespace KITH.Interface.WeChat.Requests
+namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 创建推广二维码

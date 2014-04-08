@@ -1,4 +1,4 @@
-﻿namespace KITH.Interface.WeChat.Results
+﻿namespace NWeChatInterface.Results
 {
     /// <summary>
     /// AccessToken获取结果

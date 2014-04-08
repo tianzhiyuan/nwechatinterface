@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace KITH.Interface.WeChat.Messages
+namespace NWeChatInterface.Messages
 {
     /// <summary>
     /// 微信普通消息

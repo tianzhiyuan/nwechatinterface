@@ -7,8 +7,8 @@
     <ProjectGuid>{00388914-6CAA-46E8-9245-B852A2331997}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KITH.Interface.WeChat</RootNamespace>
-    <AssemblyName>KITH.Interface.WeChat</AssemblyName>
+    <RootNamespace>NWeChatInterface</RootNamespace>
+    <AssemblyName>NWeChatInterface</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

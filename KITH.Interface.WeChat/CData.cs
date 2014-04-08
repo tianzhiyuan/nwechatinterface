@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace KITH.Interface.WeChat
+namespace NWeChatInterface
 {
     /// <summary>
     /// XML中CDATA封装
