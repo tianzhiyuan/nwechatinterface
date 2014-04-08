@@ -61,12 +61,17 @@ namespace KITH.Interface.WeChat
             var req = WebRequest.Create(url);
             req.Method = "POST";
             req.ContentType = "application/json";
-            
-            using(var writer = new StreamWriter(req.GetRequestStream()))
-            using (var jw = new JsonTextWriter(writer))
+            var requestData = request.Data;
+            if (!string.IsNullOrEmpty(requestData))
             {
-                _serializer.Serialize(jw, request);
+                var bytes = Encoding.UTF8.GetBytes(requestData);
+                req.ContentLength = bytes.Length;
+                using (var stream = req.GetRequestStream())
+                {
+                    stream.Write(bytes, 0, bytes.Length);
+                }
             }
+            
             var data = DoRequest<TResult>(req, request);
             return data;
         }

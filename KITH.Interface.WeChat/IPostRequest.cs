@@ -11,6 +11,6 @@ namespace KITH.Interface.WeChat
     /// <typeparam name="TResult"></typeparam>
     public interface IPostRequest<TResult> : IWeChatRequest<TResult> where TResult : class ,IResult
     {
-
+        string Data { get; }
     }
 }

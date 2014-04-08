@@ -2,26 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using KITH.Interface.WeChat.Models;
 using KITH.Interface.WeChat.Results;
 
 namespace KITH.Interface.WeChat.Requests
 {
     /// <summary>
-    /// 获取推广二维码
+    /// 创建推广二维码
     /// </summary>
-    public class GetQRTicket : IPostRequest<QRTicketResult>
+    public class CreateQRTicket : IPostRequest<QRTicketResult>
     {
         public const string TempQR = "QR_SCENE";
         public const string PermanentQR = "QR_LIMIT_SCENE";
         public const int PermantQRSecenId_MAX = 100000;
-
-        public int expire_seconds { get; private set; }
-        public string action_name { get; private set; }
-        public dynamic action_info { get; private set; }
         public string AccessToken { get; private set; }
-
-        public GetQRTicket(string accessToken, int scene_id, string actionName = PermanentQR, int expire = 1800)
+        public QRTicket QRTicket { get; private set; }
+        public CreateQRTicket(string accessToken, int scene_id, string actionName = PermanentQR, int expire = 1800)
         {
+            this.QRTicket = new QRTicket();
             if (actionName != TempQR && actionName != PermanentQR)
             {
                 throw new ArgumentException("action_name must be QR_SCENE or QR_LIMIT_SCENE");
@@ -36,7 +34,7 @@ namespace KITH.Interface.WeChat.Requests
                 {
                     throw new ArgumentException(string.Format("expire seconds must between 30-1800"));
                 }
-                this.expire_seconds = expire;
+                this.QRTicket.expire_seconds = expire;
             }
             else
             {
@@ -45,8 +43,8 @@ namespace KITH.Interface.WeChat.Requests
                     throw new ArgumentException("scene_id larger than max");
                 }
             }
-            this.action_name = actionName;
-            this.action_info = new {scene = new {scene_id = scene_id}};
+            this.QRTicket.action_name = actionName;
+            this.QRTicket.scene_id = scene_id;
             this.AccessToken = accessToken;
         }
 
@@ -56,6 +54,24 @@ namespace KITH.Interface.WeChat.Requests
             {
                 return string.Format("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={0}",
                                      this.AccessToken);
+            }
+        }
+
+        public string Data
+        {
+            get
+            {
+                var sb = new StringBuilder();
+                sb.Append("{");
+                if (this.QRTicket.action_name == QRTicket.TempQR)
+                {
+                    sb.AppendFormat("'expire_seconds':{0},", this.QRTicket.expire_seconds);
+                }
+                sb.AppendFormat("'action_name':'{0}',", this.QRTicket.action_name);
+                sb.AppendFormat("'action_info':{{'scene':{{'scene_id':{0}}}}}", this.QRTicket.scene_id);
+                sb.Append("}");
+                sb.Replace(',', '\"');
+                return sb.ToString();
             }
         }
     }

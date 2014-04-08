@@ -32,29 +32,29 @@ namespace KITH.Interface.WeChat.Test
             Assert.AreEqual(obj.errcode, 0);
         }
 
-        [TestCase(1, GetQRTicket.PermanentQR, 0)]
-        [TestCase(2, GetQRTicket.PermanentQR, 0)]
-        [TestCase(GetQRTicket.PermantQRSecenId_MAX, GetQRTicket.PermanentQR, 0)]
-        [TestCase(1, GetQRTicket.TempQR, 1000)]
-        [TestCase(2, GetQRTicket.TempQR, 1000)]
-        [TestCase(100000, GetQRTicket.TempQR, 1000)]
+        [TestCase(1, CreateQRTicket.PermanentQR, 0)]
+        [TestCase(2, CreateQRTicket.PermanentQR, 0)]
+        [TestCase(CreateQRTicket.PermantQRSecenId_MAX, CreateQRTicket.PermanentQR, 0)]
+        [TestCase(1, CreateQRTicket.TempQR, 1000)]
+        [TestCase(2, CreateQRTicket.TempQR, 1000)]
+        [TestCase(100000, CreateQRTicket.TempQR, 1000)]
         public void GetQRTicketWithNoException(int sceneid, string actionName, int expire)
         {
-            var obj = Service.Get(new GetQRTicket(TempAT, sceneid, actionName, expire));
+            var obj = Service.Get(new CreateQRTicket(TempAT, sceneid, actionName, expire));
             Assert.AreEqual(obj.errcode, 0);
         }
         [Test]
         public void GetPermanentQRTicketWithSameSceneIdAndTicketAreSame()
         {
-            var obj = Service.Get(new GetQRTicket(TempAT, 100, GetQRTicket.PermanentQR, 300));
-            var obj2 = Service.Get(new GetQRTicket(TempAT, 100, GetQRTicket.PermanentQR, 300));
+            var obj = Service.Get(new CreateQRTicket(TempAT, 100, CreateQRTicket.PermanentQR, 300));
+            var obj2 = Service.Get(new CreateQRTicket(TempAT, 100, CreateQRTicket.PermanentQR, 300));
             Assert.AreEqual(obj.ticket, obj2.ticket);
         }
         [Test]
         public void GeTempQRTicketWithSameSceneIdAndTicketAreDifferent()
         {
-            var obj = Service.Get(new GetQRTicket(TempAT, 100, GetQRTicket.TempQR, 300));
-            var obj2 = Service.Get(new GetQRTicket(TempAT, 100, GetQRTicket.TempQR, 300));
+            var obj = Service.Get(new CreateQRTicket(TempAT, 100, CreateQRTicket.TempQR, 300));
+            var obj2 = Service.Get(new CreateQRTicket(TempAT, 100, CreateQRTicket.TempQR, 300));
             Assert.AreNotEqual(obj.ticket, obj2.ticket);
         }
         [Test]
