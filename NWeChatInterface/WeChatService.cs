@@ -148,7 +148,7 @@ namespace NWeChatInterface
         /// <param name="token">微信公众号配置的Token</param>
         /// <param name="signature">签名</param>
         /// <returns>是否匹配</returns>
-        bool verifySignature(string nonce, string timestamp, string token, string signature)
+        public bool VerifySignature(string nonce, string timestamp, string token, string signature)
         {
             var list = new string[] {nonce, timestamp, token};
             Array.Sort(list);

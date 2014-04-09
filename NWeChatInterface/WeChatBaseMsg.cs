@@ -45,6 +45,10 @@ namespace NWeChatInterface
         /// 事件
         /// </summary>
         public const string @event = "event";
+        /// <summary>
+        /// 图文
+        /// </summary>
+        public const string news = "news";
     }
     /// <summary>
     /// 微信推送的事件类型

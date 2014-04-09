@@ -58,6 +58,7 @@
     <Compile Include="Messages\WeChatLocationMsg.cs" />
     <Compile Include="Messages\WeChatMediaMsg.cs" />
     <Compile Include="Messages\WeChatMenuEvent.cs" />
+    <Compile Include="Messages\WeChatNewsMsg.cs" />
     <Compile Include="Messages\WeChatNormalMsg.cs" />
     <Compile Include="Messages\WeChatScanQrEvent.cs" />
     <Compile Include="Messages\WeChatTextMsg.cs" />
