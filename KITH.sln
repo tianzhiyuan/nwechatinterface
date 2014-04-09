@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWeChatInterface", "KITH.Interface.WeChat\NWeChatInterface.csproj", "{00388914-6CAA-46E8-9245-B852A2331997}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWeChatInterface", "NWeChatInterface\NWeChatInterface.csproj", "{00388914-6CAA-46E8-9245-B852A2331997}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWeChatInterface.Test", "KITH.Interface.WeChat.Test\NWeChatInterface.Test.csproj", "{46FC9DC7-BF8D-4629-BF7A-79B6E02ABE7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NWeChatInterface.Test", "NWeChatInterface.Test\NWeChatInterface.Test.csproj", "{46FC9DC7-BF8D-4629-BF7A-79B6E02ABE7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
