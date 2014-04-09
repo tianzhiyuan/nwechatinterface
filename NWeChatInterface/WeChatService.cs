@@ -141,6 +141,32 @@ namespace NWeChatInterface
         }
 
         /// <summary>
+        /// 发送客服消息
+        /// </summary>
+        /// <param name="message">待发送的客服消息</param>
+        /// <param name="accessToken">AccessToken</param>
+        public void SendCustomerServiceMessage(CustomerServiceMessage message, string accessToken)
+        {
+            var targetUrl = string.Format("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token={0}",
+                                          accessToken);
+            var request = WebRequest.Create(targetUrl);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            var data = JsonConvert.SerializeObject(message, new JsonSerializerSettings() {});
+            var bytes = Encoding.UTF8.GetBytes(data);
+            request.ContentLength = bytes.Length;
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(bytes, 0, bytes.Length);
+            }
+            using (var response = request.GetResponse())
+            using (var stream = new StreamReader(response.GetResponseStream()))
+            {
+                var result = stream.ReadToEnd();
+            }
+        }
+
+        /// <summary>
         /// 验证消息真实性
         /// </summary>
         /// <param name="nonce">随机数</param>

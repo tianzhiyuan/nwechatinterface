@@ -46,7 +46,14 @@
   <ItemGroup>
     <Compile Include="AbstractResult.cs" />
     <Compile Include="CData.cs" />
+    <Compile Include="CustomerServiceMessages\ImageMessage.cs" />
+    <Compile Include="CustomerServiceMessages\MusicMessage.cs" />
+    <Compile Include="CustomerServiceMessages\NewsMessage.cs" />
+    <Compile Include="CustomerServiceMessages\VideoMessage.cs" />
+    <Compile Include="CustomerServiceMessages\VoiceMessage.cs" />
+    <Compile Include="CustomerServiceMessages\TextMessage.cs" />
     <Compile Include="Epoch.cs" />
+    <Compile Include="CustomerServiceMessage.cs" />
     <Compile Include="IGetRequest.cs" />
     <Compile Include="IPostRequest.cs" />
     <Compile Include="IResult.cs" />

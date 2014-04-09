@@ -49,6 +49,10 @@ namespace NWeChatInterface
         /// 图文
         /// </summary>
         public const string news = "news";
+        /// <summary>
+        /// 音乐消息，在发送客服消息中会用到
+        /// </summary>
+        public const string music = "music";
     }
     /// <summary>
     /// 微信推送的事件类型
