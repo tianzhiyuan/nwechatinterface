@@ -16,7 +16,7 @@ namespace NWeChatInterface.Requests
     /// 请注意，创建自定义菜单后，由于微信客户端缓存，需要24小时微信客户端才会展现出来。
     /// 建议测试时可以尝试取消关注公众账号后再次关注，则可以看到创建后的效果。
     /// </summary>
-    public class CreateMenu:IPostRequest<AbstractResult>
+    public class CreateMenu:IPostRequest<WeChatResponse>
     {
         public CreateMenu(string accessToken, Menu menu)
         {

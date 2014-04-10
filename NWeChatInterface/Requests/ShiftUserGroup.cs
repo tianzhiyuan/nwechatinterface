@@ -8,7 +8,7 @@ namespace NWeChatInterface.Requests
     /// <summary>
     /// 移动用户分组
     /// </summary>
-    public class ShiftUserGroup:IPostRequest<AbstractResult>
+    public class ShiftUserGroup:IPostRequest<WeChatResponse>
     {
         public ShiftUserGroup(string accessToken, string openId, int groupId)
         {

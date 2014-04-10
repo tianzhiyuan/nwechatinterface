@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NWeChatInterface.Results;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 获取关注着列表
     /// </summary>
-    public class GetSubscribers : IGetRequest<SubscriberListResult>
+    public class GetSubscribers : IGetRequest<SubscriberListResponse>
     {
         public string AccessToken { get; private set; }
         public string NextOpenId { get; private set; }

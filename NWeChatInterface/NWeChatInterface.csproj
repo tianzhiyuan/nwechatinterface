@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractResult.cs" />
+    <Compile Include="WeChatResponse.cs" />
     <Compile Include="CData.cs" />
     <Compile Include="CustomerServiceMessages\ImageMessage.cs" />
     <Compile Include="CustomerServiceMessages\MusicMessage.cs" />
@@ -91,17 +91,17 @@
     <Compile Include="Requests\ShiftUserGroup.cs" />
     <Compile Include="Requests\UpdateUserGroupName.cs" />
     <Compile Include="Requests\UploadMedia.cs" />
-    <Compile Include="Results\AccessTokenResult.cs" />
-    <Compile Include="Results\CreateUserGroupResult.cs" />
-    <Compile Include="Results\GetBelongUserGroupResult.cs" />
-    <Compile Include="Results\GetOpenIdResult.cs" />
-    <Compile Include="Results\GetUserGroupResult.cs" />
-    <Compile Include="Results\MenuResult.cs" />
-    <Compile Include="Results\OpenIdResult.cs" />
-    <Compile Include="Results\QRTicketResult.cs" />
-    <Compile Include="Results\SubscriberListResult.cs" />
-    <Compile Include="Results\UploadMediaResult.cs" />
-    <Compile Include="Results\UserInfoResult.cs" />
+    <Compile Include="Response\AccessTokenResponse.cs" />
+    <Compile Include="Response\CreateUserGroupResponse.cs" />
+    <Compile Include="Response\GetBelongUserGroupResponse.cs" />
+    <Compile Include="Response\GetOpenIdResponse.cs" />
+    <Compile Include="Response\GetUserGroupResponse.cs" />
+    <Compile Include="Response\MenuResponse.cs" />
+    <Compile Include="Response\OpenIdResponse.cs" />
+    <Compile Include="Response\QRTicketResponse.cs" />
+    <Compile Include="Response\SubscriberListResponse.cs" />
+    <Compile Include="Response\UploadMediaResponse.cs" />
+    <Compile Include="Response\UserInfoResponset.cs" />
     <Compile Include="WeChatBaseMsg.cs" />
     <Compile Include="WeChatMediaType.cs" />
     <Compile Include="WeChatOAuth.cs" />

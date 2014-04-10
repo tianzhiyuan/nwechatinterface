@@ -9,7 +9,7 @@ namespace NWeChatInterface.Requests
     /// <summary>
     /// 更新用户组名称
     /// </summary>
-    public class UpdateUserGroupName : IPostRequest<AbstractResult>
+    public class UpdateUserGroupName : IPostRequest<WeChatResponse>
     {
         public UpdateUserGroupName(string accessToken, UserGroup group)
         {

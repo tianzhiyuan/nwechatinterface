@@ -18,5 +18,9 @@ namespace NWeChatInterface.Messages
         public int Scale { get; set; }
 
         public CData Label { get; set; }
+        public override CData MsgType
+        {
+            get { return WeChatMessageTypes.location; }
+        }
     }
 }

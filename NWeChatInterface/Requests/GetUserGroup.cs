@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NWeChatInterface.Results;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 获取所有用户分组
     /// </summary>
-    public class GetUserGroup:IGetRequest<GetUserGroupResult>
+    public class GetUserGroup:IGetRequest<GetUserGroupResponse>
     {
         public GetUserGroup(string accessToken)
         {

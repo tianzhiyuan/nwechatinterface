@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NWeChatInterface.Results;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 根据OpenId获取用户信息
     /// </summary>
-    public class GetUserInfo : IGetRequest<UserInfoResult>
+    public class GetUserInfo : IGetRequest<UserInfoResponset>
     {
         public string OpenId { get; private set; }
         public string AccessToken { get; private set; }

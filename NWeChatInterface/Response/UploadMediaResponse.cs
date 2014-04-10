@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace NWeChatInterface.Results
+namespace NWeChatInterface.Response
 {
     /// <summary>
     /// 上传多媒体文件返回值 
     /// </summary>
-    public class UploadMediaResult:AbstractResult
+    public class UploadMediaResponse:WeChatResponse
     {
         public string type { get; set; }
         public string media_id { get; set; }

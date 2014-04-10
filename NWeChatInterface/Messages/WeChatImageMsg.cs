@@ -11,6 +11,9 @@ namespace NWeChatInterface.Messages
     public class WeChatImageMsg : WeChatMediaMsg
     {
         public CData PicUrl { get; set; }
-
+        public override CData MsgType
+        {
+            get { return WeChatMessageTypes.image; }
+        }
     }
 }

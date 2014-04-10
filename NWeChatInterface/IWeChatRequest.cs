@@ -14,7 +14,7 @@ namespace NWeChatInterface
         [JsonIgnore]
         string RequestUrl { get; }
     }
-    public interface IWeChatRequest<TResult>:IWeChatRequest where TResult:class , IResult
+    public interface IWeChatRequest<TResponse> : IWeChatRequest where TResponse : class , IResponse
     {
         
     }

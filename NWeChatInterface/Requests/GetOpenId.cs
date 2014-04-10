@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NWeChatInterface.Results;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 根据Code获取OpenId
     /// </summary>
-    public class GetOpenId : IGetRequest<OpenIdResult>
+    public class GetOpenId : IGetRequest<OpenIdResponse>
     {
         public string Code { get; private set; }
 

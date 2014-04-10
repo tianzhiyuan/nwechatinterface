@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace NWeChatInterface.Results
+namespace NWeChatInterface.Response
 {
     public enum UserInfoSex
     {
@@ -14,7 +11,7 @@ namespace NWeChatInterface.Results
     /// <summary>
     /// 获取用户信息的返回结果
     /// </summary>
-    public class UserInfoResult:AbstractResult
+    public class UserInfoResponset:WeChatResponse
     {
         /// <summary>
         /// 如果为false，则未关注，拉取不到其他信息

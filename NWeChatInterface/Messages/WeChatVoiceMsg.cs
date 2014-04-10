@@ -12,5 +12,9 @@ namespace NWeChatInterface.Messages
     {
         public CData Format { get; set; }
         public CData Recognition { get; set; }
+        public override CData MsgType
+        {
+            get { return WeChatMessageTypes.voice; }
+        }
     }
 }

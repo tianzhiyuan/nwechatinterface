@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using NWeChatInterface.Requests;
-using NWeChatInterface.Results;
+using NWeChatInterface.Response;
 using Newtonsoft.Json;
 
 namespace NWeChatInterface
@@ -31,7 +31,7 @@ namespace NWeChatInterface
         
 
         TData DoRequest<TData>(WebRequest request, IWeChatRequest from)
-            where TData : IResult
+            where TData : IResponse
         {
             using (var response = request.GetResponse())
             using (var stream = response.GetResponseStream())
@@ -46,7 +46,7 @@ namespace NWeChatInterface
             }
         }
 
-        public TResult Get<TResult>(IGetRequest<TResult> request) where TResult : class ,IResult
+        public TResult Get<TResult>(IGetRequest<TResult> request) where TResult : class ,IResponse
         {
             var url = request.RequestUrl;
             var req = WebRequest.Create(url);
@@ -55,7 +55,7 @@ namespace NWeChatInterface
             return data;
         }
 
-        public TResult Get<TResult>(IPostRequest<TResult> request) where TResult : class, IResult
+        public TResult Get<TResult>(IPostRequest<TResult> request) where TResult : class, IResponse
         {
             var url = request.RequestUrl;
             var req = WebRequest.Create(url);
@@ -76,7 +76,7 @@ namespace NWeChatInterface
             return data;
         }
 
-        public UploadMediaResult UploadMedia(UploadMedia request)
+        public UploadMediaResponse UploadMedia(UploadMedia request)
         {
             //var b = "----------------------------" + DateTime.Now.Ticks.ToString("x");
             //using (var client = new HttpClient())
@@ -134,7 +134,7 @@ namespace NWeChatInterface
             memStream.Close();
             var requestStream = httpWebRequest.GetRequestStream();
             requestStream.Write(tempBuffer, 0, tempBuffer.Length);
-            var result = DoRequest<UploadMediaResult>(httpWebRequest, request);
+            var result = DoRequest<UploadMediaResponse>(httpWebRequest, request);
             return result;
             
             

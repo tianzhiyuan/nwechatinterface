@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NWeChatInterface.Results;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
@@ -10,7 +10,7 @@ namespace NWeChatInterface.Requests
     /// 微信网页授权接口
     /// 根据回调中获取到的code，拿到openid
     /// </summary>
-    public class GetOpenIdByCode:IGetRequest<GetOpenIdResult>
+    public class GetOpenIdByCode:IGetRequest<GetOpenIdResponse>
     {
         public string appid { get; private set; }
         public string secret { get; private set; }

@@ -106,7 +106,7 @@ namespace NWeChatInterface
         /// <summary>
         /// 消息类型 <see cref="WeChatMessageTypes"/>
         /// </summary>
-        public CData MsgType { get; set; }
+        public virtual CData MsgType { get; set; }
         /// <summary>
         /// 序列化当前对象
         /// </summary>

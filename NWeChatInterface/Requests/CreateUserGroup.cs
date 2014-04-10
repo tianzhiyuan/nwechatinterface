@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NWeChatInterface.Results;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 创建用户分组
     /// </summary>
-    public class CreateUserGroup : IPostRequest<CreateUserGroupResult>
+    public class CreateUserGroup : IPostRequest<CreateUserGroupResponse>
     {
         public CreateUserGroup(string accessToken, string groupName)
         {

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NWeChatInterface.Results;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 获取某个用户属于哪个用户组
     /// </summary>
-    public class GetBelongUserGroup:IPostRequest<GetBelongUserGroupResult>
+    public class GetBelongUserGroup:IPostRequest<GetBelongUserGroupResponse>
     {
         public GetBelongUserGroup(string accessToken, string openId)
         {

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace NWeChatInterface.Results
+namespace NWeChatInterface.Response
 {
     public class OpenIdList
     {
@@ -12,7 +9,7 @@ namespace NWeChatInterface.Results
     /// <summary>
     /// 获取所有关注者列表的返回值
     /// </summary>
-    public class SubscriberListResult : AbstractResult
+    public class SubscriberListResponse : WeChatResponse
     {
         public int total { get; set; }
         public int count { get; set; }

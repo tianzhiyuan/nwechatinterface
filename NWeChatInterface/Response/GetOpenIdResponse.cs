@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace NWeChatInterface.Results
+﻿namespace NWeChatInterface.Response
 {
     /// <summary>
     /// OpenId结果 
     /// </summary>
-    public class GetOpenIdResult : AbstractResult
+    public class GetOpenIdResponse : WeChatResponse
     {
         public string access_token { get; set; }
         public int expires_in { get; set; }

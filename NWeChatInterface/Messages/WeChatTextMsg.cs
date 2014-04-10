@@ -10,6 +10,10 @@ namespace NWeChatInterface.Messages
     /// </summary>
     public class WeChatTextMsg : WeChatNormalMsg
     {
+        public override CData MsgType
+        {
+            get { return WeChatMessageTypes.text; }
+        }
         public CData Content { get; set; }
     }
 }

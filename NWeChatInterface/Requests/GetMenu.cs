@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NWeChatInterface.Results;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 获取当前的自定义菜单
     /// </summary>
-    public class GetMenu : IGetRequest<MenuResult>
+    public class GetMenu : IGetRequest<MenuResponse>
     {
         public string AccessToken { get; private set; }
 

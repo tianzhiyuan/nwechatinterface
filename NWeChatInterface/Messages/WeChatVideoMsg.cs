@@ -11,5 +11,9 @@ namespace NWeChatInterface.Messages
     public class WeChatVideoMsg : WeChatMediaMsg
     {
         public CData ThumbMediaId { get; set; }
+        public override CData MsgType
+        {
+            get { return WeChatMessageTypes.video; }
+        }
     }
 }

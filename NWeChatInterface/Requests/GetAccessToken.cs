@@ -1,11 +1,11 @@
-﻿using NWeChatInterface.Results;
+﻿using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 获取AccessToken
     /// </summary>
-    public class GetAccessToken : IGetRequest<AccessTokenResult>
+    public class GetAccessToken : IGetRequest<AccessTokenResponse>
     {
         public string GrandType { get; private set; }
         public string AppId { get; private set; }

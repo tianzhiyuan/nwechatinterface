@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="EpochTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestClass.cs" />
     <Compile Include="WeChatTestCaseSupplier.cs" />
     <Compile Include="WeChatMessageTest.cs" />
     <Compile Include="WeChatServiceGetTest.cs" />

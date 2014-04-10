@@ -32,5 +32,9 @@ namespace NWeChatInterface.Messages
         {
             return base.Serialize(_serializer);
         }
+        public override CData MsgType
+        {
+            get { return WeChatMessageTypes.news; }
+        }
     }
 }

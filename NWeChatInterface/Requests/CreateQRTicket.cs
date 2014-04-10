@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NWeChatInterface.Models;
-using NWeChatInterface.Results;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 创建推广二维码
     /// </summary>
-    public class CreateQRTicket : IPostRequest<QRTicketResult>
+    public class CreateQRTicket : IPostRequest<QRTicketResponse>
     {
         public const string TempQR = "QR_SCENE";
         public const string PermanentQR = "QR_LIMIT_SCENE";

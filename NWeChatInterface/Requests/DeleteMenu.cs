@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NWeChatInterface.Requests
 {
-    public class DeleteMenu:IGetRequest<AbstractResult>
+    public class DeleteMenu:IGetRequest<WeChatResponse>
     {
         public string AccessToken { get; private set; }
         public DeleteMenu(string accessToken)

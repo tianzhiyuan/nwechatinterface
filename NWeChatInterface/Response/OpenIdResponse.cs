@@ -1,6 +1,6 @@
-﻿namespace NWeChatInterface.Results
+﻿namespace NWeChatInterface.Response
 {
-    public class OpenIdResult : AbstractResult
+    public class OpenIdResponse : WeChatResponse
     {
         public string access_token { get; set; }
         public string expires_in { get; set; }
