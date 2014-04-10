@@ -13,6 +13,8 @@ namespace NWeChatInterface
     {
         [JsonIgnore]
         string RequestUrl { get; }
+
+        //bool Validate();
     }
     public interface IWeChatRequest<TResponse> : IWeChatRequest where TResponse : class , IResponse
     {

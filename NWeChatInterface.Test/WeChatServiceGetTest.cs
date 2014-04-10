@@ -20,7 +20,7 @@ namespace NWeChatInterface.Test
         public void GetAccessToken()
         {
             var svc = WeChatTestCaseSupplier.Service;
-            var ret = svc.Get(new GetAccessToken(WeChatTestCaseSupplier.SomeAppKey, WeChatTestCaseSupplier.SomeAppSecret));
+            var ret = svc.Execute(new GetAccessToken(WeChatTestCaseSupplier.SomeAppKey, WeChatTestCaseSupplier.SomeAppSecret));
             Assert.AreEqual(ret.errcode, 0);
 
         }
@@ -28,7 +28,7 @@ namespace NWeChatInterface.Test
         public void GetMenu()
         {
             var svc = WeChatTestCaseSupplier.Service;
-            var obj = svc.Get(new GetMenu(WeChatTestCaseSupplier.TempAccessToken));
+            var obj = svc.Execute(new GetMenu(WeChatTestCaseSupplier.TempAccessToken));
             Assert.AreEqual(obj.errcode, 0);
         }
 
@@ -40,33 +40,33 @@ namespace NWeChatInterface.Test
         [TestCase(100000, CreateQRTicket.TempQR, 1000)]
         public void GetQRTicketWithNoException(int sceneid, string actionName, int expire)
         {
-            var obj = Service.Get(new CreateQRTicket(TempAT, sceneid, actionName, expire));
+            var obj = Service.Execute(new CreateQRTicket(TempAT, sceneid, actionName, expire));
             Assert.AreEqual(obj.errcode, 0);
         }
         [Test]
         public void GetPermanentQRTicketWithSameSceneIdAndTicketAreSame()
         {
-            var obj = Service.Get(new CreateQRTicket(TempAT, 100, CreateQRTicket.PermanentQR, 300));
-            var obj2 = Service.Get(new CreateQRTicket(TempAT, 100, CreateQRTicket.PermanentQR, 300));
+            var obj = Service.Execute(new CreateQRTicket(TempAT, 100, CreateQRTicket.PermanentQR, 300));
+            var obj2 = Service.Execute(new CreateQRTicket(TempAT, 100, CreateQRTicket.PermanentQR, 300));
             Assert.AreEqual(obj.ticket, obj2.ticket);
         }
         [Test]
         public void GeTempQRTicketWithSameSceneIdAndTicketAreDifferent()
         {
-            var obj = Service.Get(new CreateQRTicket(TempAT, 100, CreateQRTicket.TempQR, 300));
-            var obj2 = Service.Get(new CreateQRTicket(TempAT, 100, CreateQRTicket.TempQR, 300));
+            var obj = Service.Execute(new CreateQRTicket(TempAT, 100, CreateQRTicket.TempQR, 300));
+            var obj2 = Service.Execute(new CreateQRTicket(TempAT, 100, CreateQRTicket.TempQR, 300));
             Assert.AreNotEqual(obj.ticket, obj2.ticket);
         }
         [Test]
         public void GetSubscriber()
         {
-            var obj = Service.Get(new GetSubscribers(TempAT));
+            var obj = Service.Execute(new GetSubscribers(TempAT));
             Assert.AreEqual(0, obj.errcode);
         }
         [Test]
         public void GetUserInfo()
         {
-            var obj = Service.Get(new GetUserInfo(SomeOpenId, TempAT));
+            var obj = Service.Execute(new GetUserInfo(SomeOpenId, TempAT));
             Assert.AreEqual(0, obj.errcode);
         }
         [Test]
@@ -74,7 +74,7 @@ namespace NWeChatInterface.Test
         {
             var filename = @"d:\123.jpg";
             var obj =
-                Service.UploadMedia(new UploadMedia(TempAT, WeChatMediaType.Image, File.ReadAllBytes(filename),
+                Service.Execute(new UploadMedia(TempAT, WeChatMediaType.Image, File.ReadAllBytes(filename),
                                                     "123.jpg"));
 
         }

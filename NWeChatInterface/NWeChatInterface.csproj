@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IWeChatService.cs" />
+    <Compile Include="Requests\SendCustomerServiceMessage.cs" />
     <Compile Include="WeChatResponse.cs" />
     <Compile Include="CData.cs" />
     <Compile Include="CustomerServiceMessages\ImageMessage.cs" />
@@ -56,7 +58,7 @@
     <Compile Include="CustomerServiceMessage.cs" />
     <Compile Include="IGetRequest.cs" />
     <Compile Include="IPostRequest.cs" />
-    <Compile Include="IResult.cs" />
+    <Compile Include="IResponse.cs" />
     <Compile Include="IWeChatRequest.cs" />
     <Compile Include="Messages\WeChatEventMsg.cs" />
     <Compile Include="Messages\WeChatImageMsg.cs" />

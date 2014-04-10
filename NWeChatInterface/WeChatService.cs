@@ -16,9 +16,9 @@ namespace NWeChatInterface
     /// <summary>
     /// 微信公众平台接口服务
     /// </summary>
-    public class WeChatService
+    public class WeChatService:IWeChatService
     {
-        private JsonSerializer _serializer;
+        private readonly JsonSerializer _serializer;
         
         public WeChatService()
         {
@@ -46,16 +46,16 @@ namespace NWeChatInterface
             }
         }
 
-        public TResult Get<TResult>(IGetRequest<TResult> request) where TResult : class ,IResponse
+        public TResponse Execute<TResponse>(IGetRequest<TResponse> request) where TResponse : class ,IResponse
         {
             var url = request.RequestUrl;
             var req = WebRequest.Create(url);
             req.Method = "GET";
-            var data = DoRequest<TResult>(req, request);
+            var data = DoRequest<TResponse>(req, request);
             return data;
         }
 
-        public TResult Get<TResult>(IPostRequest<TResult> request) where TResult : class, IResponse
+        public TResponse Execute<TResponse>(IPostRequest<TResponse> request) where TResponse : class, IResponse
         {
             var url = request.RequestUrl;
             var req = WebRequest.Create(url);
@@ -72,11 +72,11 @@ namespace NWeChatInterface
                 }
             }
             
-            var data = DoRequest<TResult>(req, request);
+            var data = DoRequest<TResponse>(req, request);
             return data;
         }
 
-        public UploadMediaResponse UploadMedia(UploadMedia request)
+        public UploadMediaResponse Execute(UploadMedia request)
         {
             //var b = "----------------------------" + DateTime.Now.Ticks.ToString("x");
             //using (var client = new HttpClient())
@@ -140,31 +140,7 @@ namespace NWeChatInterface
             
         }
 
-        /// <summary>
-        /// 发送客服消息
-        /// </summary>
-        /// <param name="message">待发送的客服消息</param>
-        /// <param name="accessToken">AccessToken</param>
-        public void SendCustomerServiceMessage(CustomerServiceMessage message, string accessToken)
-        {
-            var targetUrl = string.Format("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token={0}",
-                                          accessToken);
-            var request = WebRequest.Create(targetUrl);
-            request.Method = "POST";
-            request.ContentType = "application/json";
-            var data = JsonConvert.SerializeObject(message, new JsonSerializerSettings() {});
-            var bytes = Encoding.UTF8.GetBytes(data);
-            request.ContentLength = bytes.Length;
-            using (var stream = request.GetRequestStream())
-            {
-                stream.Write(bytes, 0, bytes.Length);
-            }
-            using (var response = request.GetResponse())
-            using (var stream = new StreamReader(response.GetResponseStream()))
-            {
-                var result = stream.ReadToEnd();
-            }
-        }
+        
 
         /// <summary>
         /// 验证消息真实性
@@ -185,5 +161,20 @@ namespace NWeChatInterface
                 return result == signature;
             }
         }
+
+        #region IWeChatService Members
+        TResponse IWeChatService.Execute<TResponse>(IWeChatRequest<TResponse> request)
+        {
+            dynamic me = this;
+            return me.Execute(request);
+        }
+        bool IWeChatService.VerifySignature(string nonce, string timestamp, string token, string signature)
+        {
+            return this.VerifySignature(nonce, timestamp, token, signature);
+        }
+        #endregion
+
+
+        
     }
 }
