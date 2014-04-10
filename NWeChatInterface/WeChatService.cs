@@ -162,6 +162,11 @@ namespace NWeChatInterface
             }
         }
 
+        public WeChatBaseMsg Parse(string data)
+        {
+            return WeChatBaseMsg.LoadFrom(data);
+        }
+
         #region IWeChatService Members
         TResponse IWeChatService.Execute<TResponse>(IWeChatRequest<TResponse> request)
         {
@@ -171,6 +176,10 @@ namespace NWeChatInterface
         bool IWeChatService.VerifySignature(string nonce, string timestamp, string token, string signature)
         {
             return this.VerifySignature(nonce, timestamp, token, signature);
+        }
+        WeChatBaseMsg IWeChatService.Parse(string data)
+        {
+            return this.Parse(data);
         }
         #endregion
 

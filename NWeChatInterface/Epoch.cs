@@ -6,7 +6,7 @@ using System.Text;
 namespace NWeChatInterface
 {
     /// <summary>
-    /// Linux时间和DateTime之间的转换
+    /// Linux时间和DateTime(本地时间)之间的转换
     /// 精度到秒
     /// </summary>
     public class Epoch
