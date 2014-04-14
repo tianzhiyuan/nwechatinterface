@@ -5,9 +5,18 @@ using System.Text;
 
 namespace NWeChatInterface
 {
+    /// <summary>
+    /// 微信请求异常
+    /// </summary>
     public class WeChatRequestException : Exception
     {
+        /// <summary>
+        /// 异常码
+        /// </summary>
         public int ErrorCode { get; private set; }
+        /// <summary>
+        /// 请求实体
+        /// </summary>
         public IWeChatRequest Request { get; private set; }
         public WeChatRequestException(int errcode, IWeChatRequest request = null)
             : base(GetMessageByCode(errcode))

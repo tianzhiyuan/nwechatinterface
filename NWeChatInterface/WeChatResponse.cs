@@ -7,8 +7,6 @@ namespace NWeChatInterface
 {
     public class WeChatResponse : AbstractResponse
     {
-        public int errcode { get; set; }
-        public string errmsg { get; set; }
         public override string ToString()
         {
             var type = this.GetType();
