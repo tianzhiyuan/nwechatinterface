@@ -27,7 +27,6 @@ WeixinJSBridge.invoke('getNetworkType', {},
         function (e) {
             switch (e.err_msg) {
                 case 'network_type:wifi'://wifi网络
-
                     break;
                 case 'network_type:edge'://非wifi,包含3G/2G
                     break;

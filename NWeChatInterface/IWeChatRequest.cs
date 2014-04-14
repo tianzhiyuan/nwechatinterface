@@ -16,7 +16,7 @@ namespace NWeChatInterface
 
         //bool Validate();
     }
-    public interface IWeChatRequest<TResponse> : IWeChatRequest where TResponse : class , IResponse
+    public interface IWeChatRequest<TResponse> : IWeChatRequest where TResponse :  AbstractResponse
     {
         
     }

@@ -16,16 +16,16 @@ namespace NWeChatInterface.Response
         /// <summary>
         /// 如果为false，则未关注，拉取不到其他信息
         /// </summary>
-        public bool subscribe { get; set; }
-        public string opendid { get; set; }
-        public string nickname { get; set; }
-        public int sex { get; set; }
-        public string city { get; set; }
-        public string country { get; set; }
-        public string province { get; set; }
-        public string language { get; set; }
-        public string headimgurl { get; set; }
-        public long subscribe_time { get; set; }
+        public bool subscribe { get; internal set; }
+        public string opendid { get; internal set; }
+        public string nickname { get; internal set; }
+        public int sex { get; internal set; }
+        public string city { get; internal set; }
+        public string country { get; internal set; }
+        public string province { get; internal set; }
+        public string language { get; internal set; }
+        public string headimgurl { get; internal set; }
+        public long subscribe_time { get; internal set; }
         public DateTime SubscribedAt
         {
             get

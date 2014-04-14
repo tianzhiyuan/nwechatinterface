@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NWeChatInterface
 {
-    public class WeChatResponse : IResponse
+    public class WeChatResponse : AbstractResponse
     {
         public int errcode { get; set; }
         public string errmsg { get; set; }

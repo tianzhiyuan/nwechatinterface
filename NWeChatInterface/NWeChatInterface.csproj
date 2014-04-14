@@ -58,7 +58,7 @@
     <Compile Include="CustomerServiceMessage.cs" />
     <Compile Include="IGetRequest.cs" />
     <Compile Include="IPostRequest.cs" />
-    <Compile Include="IResponse.cs" />
+    <Compile Include="AbstractResponse.cs" />
     <Compile Include="IWeChatRequest.cs" />
     <Compile Include="Messages\WeChatEventMsg.cs" />
     <Compile Include="Messages\WeChatImageMsg.cs" />
@@ -112,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WeChatApiExample.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

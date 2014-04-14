@@ -4,6 +4,6 @@ namespace NWeChatInterface.Response
 {
     public class GetUserGroupResponse:WeChatResponse
     {
-        public UserGroup[] groups { get; set; }
+        public UserGroup[] groups { get; internal set; }
     }
 }

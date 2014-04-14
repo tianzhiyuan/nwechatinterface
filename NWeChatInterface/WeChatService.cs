@@ -31,7 +31,7 @@ namespace NWeChatInterface
         
 
         TData DoRequest<TData>(WebRequest request, IWeChatRequest from)
-            where TData : IResponse
+            where TData : AbstractResponse
         {
             using (var response = request.GetResponse())
             using (var stream = response.GetResponseStream())
@@ -46,7 +46,7 @@ namespace NWeChatInterface
             }
         }
 
-        public TResponse Execute<TResponse>(IGetRequest<TResponse> request) where TResponse : class ,IResponse
+        public TResponse Execute<TResponse>(IGetRequest<TResponse> request) where TResponse :AbstractResponse
         {
             var url = request.RequestUrl;
             var req = WebRequest.Create(url);
@@ -55,7 +55,7 @@ namespace NWeChatInterface
             return data;
         }
 
-        public TResponse Execute<TResponse>(IPostRequest<TResponse> request) where TResponse : class, IResponse
+        public TResponse Execute<TResponse>(IPostRequest<TResponse> request) where TResponse : AbstractResponse
         {
             var url = request.RequestUrl;
             var req = WebRequest.Create(url);

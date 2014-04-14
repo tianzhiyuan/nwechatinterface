@@ -2,6 +2,6 @@
 {
     public class GetBelongUserGroupResponse:WeChatResponse
     {
-        public string groupid { get; set; }
+        public string groupid { get; internal set; }
     }
 }

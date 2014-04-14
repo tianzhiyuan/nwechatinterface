@@ -10,7 +10,7 @@ namespace NWeChatInterface
         /// <summary>
         /// 向微信服务器发送命令请求
         /// </summary>
-        TResponse Execute<TResponse>(IWeChatRequest<TResponse> request) where TResponse : class, IResponse;
+        TResponse Execute<TResponse>(IWeChatRequest<TResponse> request) where TResponse : AbstractResponse;
         /// <summary>
         /// 验证消息真实性
         /// </summary>

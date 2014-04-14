@@ -9,7 +9,7 @@ namespace NWeChatInterface
     /// Marker interface represents a request uses post method
     /// </summary>
     /// <typeparam name="TResponse"></typeparam>
-    public interface IPostRequest<TResponse> : IWeChatRequest<TResponse> where TResponse : class ,IResponse
+    public interface IPostRequest<TResponse> : IWeChatRequest<TResponse> where TResponse : AbstractResponse
     {
         string Data { get; }
     }
