@@ -36,6 +36,8 @@ namespace NWeChatInterface.Messages
             var menuSerializer = new XmlSerializer(typeof (WeChatMenuEvent), new XmlRootAttribute("xml"));
             _serializerCache.Add(WeChatEventTypes.click, menuSerializer);
             _serializerCache.Add(WeChatEventTypes.view, menuSerializer);
+            _serializerCache.Add(WeChatEventTypes.masssendjobfinish,
+                                 new XmlSerializer(typeof (WeChatMassSendJobEvent), new XmlRootAttribute("xml")));
         }
         public static WeChatEventMsg ReadFrom(string xmlDoc)
         {

@@ -83,6 +83,10 @@ namespace NWeChatInterface
         /// 点击自定义菜单链接事件
         /// </summary>
         public const string view = "VIEW";
+        /// <summary>
+        /// 群发结束消息推送
+        /// </summary>
+        public const string masssendjobfinish = "MASSSENDJOBFINISH";
     }
     /// <summary>
     /// 微信推送消息基础类
