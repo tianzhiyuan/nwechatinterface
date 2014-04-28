@@ -57,6 +57,10 @@
       <Project>{00388914-6CAA-46E8-9245-B852A2331997}</Project>
       <Name>NWeChatInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NWeChatPay\NWeChatPay.csproj">
+      <Project>{0e52427a-a910-4081-b349-acd5c478f190}</Project>
+      <Name>NWeChatPay</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
