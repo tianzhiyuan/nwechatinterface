@@ -69,19 +69,16 @@ namespace NWeChatPay
         /// 附加数据，原样返回
         /// 128字节以下
         /// 选填
-        /// TODO 暂不支持
         /// </summary>
         public string Attach { get; set; }
         /// <summary>
         /// 交易起始时间
         /// 选填
-        /// TODO 暂不支持
         /// </summary>
         public DateTime? TimeStart { get; set; }
         /// <summary>
         /// 交易失效时间
         /// 选填
-        /// TODO 暂不支持
         /// </summary>
         public DateTime? TimeExpire { get; set; }
         /// <summary>
@@ -93,13 +90,11 @@ namespace NWeChatPay
         /// <summary>
         /// 商品费用，单位为分，如果有值，必须保证TransportFee + ProductFee = TotalFee
         /// 选填
-        /// TODO 暂不支持
         /// </summary>
         public string ProductFee { get; set; }
         /// <summary>
         /// 商品标记，优惠券可能用到
         /// 选填
-        /// TODO 暂不支持
         /// </summary>
         public string GoodsTag { get; set; }
         internal void Validate()

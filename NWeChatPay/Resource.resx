@@ -123,6 +123,15 @@
   <data name="AppKey_Null" xml:space="preserve">
     <value>AppKey不能为空</value>
   </data>
+  <data name="DeliverNotify_Url" xml:space="preserve">
+    <value>https://api.weixin.qq.com/pay/delivernotify?access_token={0}</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>网络错误</value>
+  </data>
+  <data name="OrderQuery_Url" xml:space="preserve">
+    <value>https://api.weixin.qq.com/pay/orderquery?access_token={0}</value>
+  </data>
   <data name="Parameter_Missing" xml:space="preserve">
     <value>参数缺失</value>
   </data>

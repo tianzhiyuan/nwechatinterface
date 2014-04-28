@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace NWeChatPay
 {
@@ -64,8 +67,99 @@ namespace NWeChatPay
             parameters.Add("signType", "SHA1");
             return DictionaryToJson(parameters);
         }
+        /// <summary>
+        /// 发货通知
+        /// </summary>
+        public void SendDeliveryNotify(DeliveryNotifyParam param)
+        {
+            var url = string.Format(Resource.DeliverNotify_Url, param.AccessToken);
+            var jsonParam = new List<KeyValuePair<string, string>>();
+            jsonParam.Add(new KeyValuePair<string, string>("appid", param.AppId));
+            jsonParam.Add(new KeyValuePair<string, string>("openid", param.OpenId));
+            jsonParam.Add(new KeyValuePair<string, string>("transid", param.TransId));
+            jsonParam.Add(new KeyValuePair<string, string>("out_trade_no", param.OutTradeNo));
+            jsonParam.Add(new KeyValuePair<string, string>("deliver_timestamp",
+                                                           Epoch.ConvertToEpoch(param.DeliverTimeStamp).ToString()));
+            jsonParam.Add(new KeyValuePair<string, string>("deliver_status", param.DeliverStatus.ToString()));
+            jsonParam.Add(new KeyValuePair<string, string>("deliver_msg", param.DeliveryMsg));
+            jsonParam.Add(new KeyValuePair<string, string>("app_signature", CreatePaySign(jsonParam, param.AppKey)));
+            jsonParam.Add(new KeyValuePair<string, string>("sign_method", "sha1"));
+            var json = DictionaryToJson(jsonParam);
+            try
+            {
+                var request = WebRequest.Create(url);
+                request.Method = "POST";
+                var postBytes = Encoding.UTF8.GetBytes(json);
+                using (var writer = new StreamWriter(request.GetRequestStream()))
+                {
+                    writer.Write(postBytes);
+                }
+                using (var response = request.GetResponse())
+                using (var reader = new StreamReader(response.GetResponseStream()))
+                {
+                    var body = reader.ReadToEnd();
+                    var obj = JsonConvert.DeserializeObject<WeChatResponse>(body, new JsonSerializerSettings()
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
+                    if (obj.errcode != 0)
+                    {
+                        throw new WeChatPayException(obj.errmsg);
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                throw new WeChatPayException(Resource.NetworkError, error);
+            }
+        }
 
-
+        /// <summary>
+        /// 查询订单
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public OrderInfo QueryOrder(OrderQuery query)
+        {
+            var url = string.Format(Resource.OrderQuery_Url, query.AccessToken);
+            var jsonParam = new List<KeyValuePair<string, string>>();
+            jsonParam.Add(new KeyValuePair<string, string>("appid", query.AppId));
+            jsonParam.Add(new KeyValuePair<string, string>("package", ""));
+            jsonParam.Add(new KeyValuePair<string, string>("timestamp", Epoch.ConvertToEpoch(query.TimeStamp).ToString()));
+            jsonParam.Add(new KeyValuePair<string, string>("app_signature", ""));
+            jsonParam.Add(new KeyValuePair<string, string>("sign_method", "sha1"));
+            var json = DictionaryToJson(jsonParam);
+            try
+            {
+                var request = WebRequest.Create(url);
+                request.Method = "POST";
+                var postBytes = Encoding.UTF8.GetBytes(json);
+                using (var writer = new StreamWriter(request.GetRequestStream()))
+                {
+                    writer.Write(postBytes);
+                }
+                using (var response = request.GetResponse())
+                using (var reader = new StreamReader(response.GetResponseStream()))
+                {
+                    var body = reader.ReadToEnd();
+                    var obj = JsonConvert.DeserializeObject<OrderResponse>(body, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+                    if (obj.errcode != 0)
+                    {
+                        throw new WeChatPayException(obj.errmsg);
+                    }
+                    return obj.order_info;
+                }
+            }
+            catch (Exception error)
+            {
+                throw new WeChatPayException(Resource.NetworkError, error);
+            }
+        }
         #region private methods
         /// <summary>
         /// 生成订单详情package
@@ -116,7 +210,7 @@ namespace NWeChatPay
         /// 生成支付签名paySign
         /// </summary>
         /// <returns></returns>
-        string CreatePaySign(IDictionary<string, string> dicParam, string appkey)
+        string CreatePaySign(IEnumerable<KeyValuePair<string, string>> dicParam, string appkey)
         {
             var dictionary = dicParam.ToDictionary(pair => pair.Key.ToLower(), pair => pair.Value);
             dictionary.Add("appkey", appkey);
@@ -181,7 +275,7 @@ namespace NWeChatPay
                 return BitConverter.ToString(bytearray).Replace("-", "");
             }
         }
-        internal static string DictionaryToJson(IDictionary<string, string> dic)
+        internal static string DictionaryToJson(IEnumerable<KeyValuePair<string, string>> dic)
         {
             var entries = dic.Select(d => string.Format("\"{0}\": \"{1}\"", d.Key, d.Value));
             return "{" + string.Join(",", entries.ToArray()) + "}";
@@ -193,6 +287,11 @@ namespace NWeChatPay
                                        pairs.Select(
                                            o => o.Key.ToLower() + "=" + (NeedUrlEncode ? UrlEncode(o.Value, encoding) : o.Value)));
             return queryStr;
+        }
+
+        internal class OrderResponse:WeChatResponse
+        {
+            public OrderInfo order_info { get; set; }
         }
         #endregion
     }

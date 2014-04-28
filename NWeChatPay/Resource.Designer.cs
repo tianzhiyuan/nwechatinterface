@@ -79,6 +79,33 @@ namespace NWeChatPay {
         }
         
         /// <summary>
+        ///   查找类似 https://api.weixin.qq.com/pay/delivernotify?access_token={0} 的本地化字符串。
+        /// </summary>
+        internal static string DeliverNotify_Url {
+            get {
+                return ResourceManager.GetString("DeliverNotify_Url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 网络错误 的本地化字符串。
+        /// </summary>
+        internal static string NetworkError {
+            get {
+                return ResourceManager.GetString("NetworkError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://api.weixin.qq.com/pay/orderquery?access_token={0} 的本地化字符串。
+        /// </summary>
+        internal static string OrderQuery_Url {
+            get {
+                return ResourceManager.GetString("OrderQuery_Url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 参数缺失 的本地化字符串。
         /// </summary>
         internal static string Parameter_Missing {
