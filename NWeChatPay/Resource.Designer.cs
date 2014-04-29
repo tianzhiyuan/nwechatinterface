@@ -122,5 +122,15 @@ namespace NWeChatPay {
                 return ResourceManager.GetString("PartnerKey_Null", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 https://api.weixin.qq.com/payfeedback/update?access_token=xxxxx&amp;openid=XXXX&amp;fee
+        ///https://api.weixin.qq.com/payfeedback/update?access_token={0}&amp;openid={1}&amp;feedbackid={2} 的本地化字符串。
+        /// </summary>
+        internal static string UpdateFeedback_Url {
+            get {
+                return ResourceManager.GetString("UpdateFeedback_Url", resourceCulture);
+            }
+        }
     }
 }

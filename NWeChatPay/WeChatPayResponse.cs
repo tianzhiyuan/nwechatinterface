@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NWeChatPay
 {
-    public class WeChatResponse
+    public class WeChatPayResponse
     {
         public string errmsg { get; set; }
         public int errcode { get; set; }

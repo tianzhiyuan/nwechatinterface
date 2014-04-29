@@ -138,4 +138,8 @@
   <data name="PartnerKey_Null" xml:space="preserve">
     <value>密钥不能为空</value>
   </data>
+  <data name="UpdateFeedback_Url" xml:space="preserve">
+    <value>https://api.weixin.qq.com/payfeedback/update?access_token=xxxxx&amp;openid=XXXX&amp;fee
+https://api.weixin.qq.com/payfeedback/update?access_token={0}&amp;openid={1}&amp;feedbackid={2}</value>
+  </data>
 </root>

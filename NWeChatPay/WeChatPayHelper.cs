@@ -6,6 +6,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace NWeChatPay
@@ -98,7 +99,7 @@ namespace NWeChatPay
                 using (var reader = new StreamReader(response.GetResponseStream()))
                 {
                     var body = reader.ReadToEnd();
-                    var obj = JsonConvert.DeserializeObject<WeChatResponse>(body, new JsonSerializerSettings()
+                    var obj = JsonConvert.DeserializeObject<WeChatPayResponse>(body, new JsonSerializerSettings()
                         {
                             NullValueHandling = NullValueHandling.Ignore,
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -120,6 +121,7 @@ namespace NWeChatPay
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
+        /// <exception cref="WeChatPayException">请求失败或者网络错误</exception>
         public OrderInfo QueryOrder(OrderQuery query)
         {
             var url = string.Format(Resource.OrderQuery_Url, query.AccessToken);
@@ -160,63 +162,60 @@ namespace NWeChatPay
                 throw new WeChatPayException(Resource.NetworkError, error);
             }
         }
+
+        /// <summary>
+        /// 解析用户维权请求对象
+        /// </summary>
+        /// <param name="input"></param>
+        public PayFeedback ParsePayFeedback(Stream input)
+        {
+            var obj = (PayFeedback)_payFeedbackSerializer.Deserialize(input);
+            return obj;
+        }
+        /// <summary>
+        /// 解析用户维权请求对象
+        /// </summary>
+        /// <param name="xml"></param>
+        public PayFeedback ParsePayFeedback(string xml)
+        {
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(xml));
+            return ParsePayFeedback(stream);
+        }
+
+        
+        /// <summary>
+        /// 标记客户的投诉处理状态
+        /// </summary>
+        /// <param name="accessToken">AccessToken</param>
+        /// <param name="feedbackId">客户投诉单号</param>
+        /// <param name="userOpenId">客户OpenId</param>
+        /// <exception cref="WeChatPayException">请求错误</exception>
+        public void UpdateFeedback(string accessToken, string feedbackId, string userOpenId)
+        {
+            var url = string.Format(Resource.UpdateFeedback_Url, accessToken, userOpenId, feedbackId);
+            var request = WebRequest.Create(url);
+            request.Method = "POST";
+            using (var response = request.GetResponse())
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                var body = reader.ReadToEnd();
+                var obj = JsonConvert.DeserializeObject<WeChatPayResponse>(body, new JsonSerializerSettings()
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+                if (obj.errcode != 0)
+                {
+                    throw new WeChatPayException(obj.errmsg);
+                }
+                
+            }
+        }
         #region private methods
-        /// <summary>
-        /// 生成订单详情package
-        /// </summary>
-        /// <returns></returns>
-        string CreatePackage(JSApiParam param)
-        {
-            var parameters = new Dictionary<string, string>();
-            parameters.Add("bank_type", "WX");
-            parameters.Add("body", param.Body);
-            parameters.Add("partner", param.Partner);
-            parameters.Add("out_trade_no", param.OutTradeNo);
-            parameters.Add("total_fee", param.TotalFee);
-            parameters.Add("fee_type", "1");
-            parameters.Add("notify_url", param.NotifyUrl);
-            parameters.Add("spbill_create_ip", param.ClientIp);
-            parameters.Add("input_charset", param.Charset);
-            if (!string.IsNullOrWhiteSpace(param.Attach))
-            {
-                parameters.Add("attach", param.Attach);
-            }
-            if (param.TimeStart != null)
-            {
-                parameters.Add("time_start", Epoch.ConvertToEpoch(param.TimeStart.Value).ToString());
-            }
-            if (param.TimeExpire != null)
-            {
-                parameters.Add("time_expire", Epoch.ConvertToEpoch(param.TimeExpire.Value).ToString());
-            }
-            if (!string.IsNullOrWhiteSpace(param.TransportFee))
-            {
-                parameters.Add("transport_fee", param.TransportFee);
-            }
-            if (!string.IsNullOrWhiteSpace(param.ProductFee))
-            {
-                parameters.Add("product_fee", param.ProductFee);
-            }
-            if (!string.IsNullOrWhiteSpace(param.GoodsTag))
-            {
-                parameters.Add("goods_tag", param.GoodsTag);
-            }
-            var unsignedQueryStr = FormatUrlQuery(parameters, false, param.Charset);
-            var packageStr = FormatUrlQuery(parameters, true, param.Charset) + "&sign=" +
-                             Hash(unsignedQueryStr + "&key=" + param.PartnerKey, MD5);
-            return packageStr;
-        }
-        /// <summary>
-        /// 生成支付签名paySign
-        /// </summary>
-        /// <returns></returns>
-        string CreatePaySign(IEnumerable<KeyValuePair<string, string>> dicParam, string appkey)
-        {
-            var dictionary = dicParam.ToDictionary(pair => pair.Key.ToLower(), pair => pair.Value);
-            dictionary.Add("appkey", appkey);
-            var unsignedStr = FormatUrlQuery(dictionary, false, "");
-            return Hash(unsignedStr, SHA1).ToLower();
-        }
+
+        private static readonly XmlSerializer _payFeedbackSerializer = new XmlSerializer(typeof (PayFeedback),
+                                                                                         new XmlRootAttribute("xml"));
+        
         #endregion
         #region internal methods
         private static readonly char[] nonceRange =
@@ -288,8 +287,63 @@ namespace NWeChatPay
                                            o => o.Key.ToLower() + "=" + (NeedUrlEncode ? UrlEncode(o.Value, encoding) : o.Value)));
             return queryStr;
         }
-
-        internal class OrderResponse:WeChatResponse
+        /// <summary>
+        /// 生成订单详情package
+        /// </summary>
+        /// <returns></returns>
+        internal static string CreatePackage(JSApiParam param)
+        {
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("bank_type", "WX");
+            parameters.Add("body", param.Body);
+            parameters.Add("partner", param.Partner);
+            parameters.Add("out_trade_no", param.OutTradeNo);
+            parameters.Add("total_fee", param.TotalFee);
+            parameters.Add("fee_type", "1");
+            parameters.Add("notify_url", param.NotifyUrl);
+            parameters.Add("spbill_create_ip", param.ClientIp);
+            parameters.Add("input_charset", param.Charset);
+            if (!string.IsNullOrWhiteSpace(param.Attach))
+            {
+                parameters.Add("attach", param.Attach);
+            }
+            if (param.TimeStart != null)
+            {
+                parameters.Add("time_start", Epoch.ConvertToEpoch(param.TimeStart.Value).ToString());
+            }
+            if (param.TimeExpire != null)
+            {
+                parameters.Add("time_expire", Epoch.ConvertToEpoch(param.TimeExpire.Value).ToString());
+            }
+            if (!string.IsNullOrWhiteSpace(param.TransportFee))
+            {
+                parameters.Add("transport_fee", param.TransportFee);
+            }
+            if (!string.IsNullOrWhiteSpace(param.ProductFee))
+            {
+                parameters.Add("product_fee", param.ProductFee);
+            }
+            if (!string.IsNullOrWhiteSpace(param.GoodsTag))
+            {
+                parameters.Add("goods_tag", param.GoodsTag);
+            }
+            var unsignedQueryStr = FormatUrlQuery(parameters, false, param.Charset);
+            var packageStr = FormatUrlQuery(parameters, true, param.Charset) + "&sign=" +
+                             Hash(unsignedQueryStr + "&key=" + param.PartnerKey, MD5);
+            return packageStr;
+        }
+        /// <summary>
+        /// 生成支付签名paySign
+        /// </summary>
+        /// <returns></returns>
+        internal static string CreatePaySign(IEnumerable<KeyValuePair<string, string>> dicParam, string appkey)
+        {
+            var dictionary = dicParam.ToDictionary(pair => pair.Key.ToLower(), pair => pair.Value);
+            dictionary.Add("appkey", appkey);
+            var unsignedStr = FormatUrlQuery(dictionary, false, "");
+            return Hash(unsignedStr, SHA1).ToLower();
+        }
+        internal class OrderResponse:WeChatPayResponse
         {
             public OrderInfo order_info { get; set; }
         }
