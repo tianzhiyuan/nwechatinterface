@@ -61,6 +61,16 @@ namespace NWeChatPay
         /// </summary>
         public string ClientIp { get; set; }
         /// <summary>
+        /// Linux时间戳
+        /// 选填（如果为空则默认填充当前时间）
+        /// </summary>
+        public string TimeStamp { get; set; }
+        /// <summary>
+        /// 随机字符串
+        /// 选填（如果为空则随机生成）
+        /// </summary>
+        public string NonceStr { get; set; }
+        /// <summary>
         /// 编码方式
         /// 默认为UTF-8,取值范围 GBK、UTF-8
         /// </summary>
@@ -84,7 +94,6 @@ namespace NWeChatPay
         /// <summary>
         /// 物流费用,单位为分，如果有值，必须保证TransportFee + ProductFee = TotalFee
         /// 选填
-        /// TODO 暂不支持
         /// </summary>
         public string TransportFee { get; set; }
         /// <summary>

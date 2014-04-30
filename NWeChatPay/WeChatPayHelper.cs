@@ -59,14 +59,87 @@ namespace NWeChatPay
             {
                 param.Charset = JSApiParam.UTF8;
             }
+            if (string.IsNullOrWhiteSpace(param.NonceStr))
+            {
+                param.NonceStr = CreateNonce();
+            }
+            if (string.IsNullOrWhiteSpace(param.TimeStamp))
+            {
+                param.TimeStamp = Epoch.Now.ToString();
+            }
             var parameters = new Dictionary<string, string>();
             parameters.Add("appId", param.AppId);
             parameters.Add("package", CreatePackage(param));
-            parameters.Add("timeStamp", Epoch.Now.ToString());
-            parameters.Add("nonceStr", CreateNonce());
+            parameters.Add("timeStamp", param.TimeStamp);
+            parameters.Add("nonceStr", param.NonceStr);
             parameters.Add("paySign", CreatePaySign(parameters, param.AppKey));
             parameters.Add("signType", "SHA1");
             return DictionaryToJson(parameters);
+        }
+        /// <summary>
+        /// 生成Native原生支付Url
+        /// </summary>
+        /// <param name="param"></param>
+        public string CreateNativePayUrl(NativePayParam param)
+        {
+            if (string.IsNullOrWhiteSpace(param.TimeStamp))
+            {
+                param.TimeStamp = Epoch.Now.ToString();
+            }
+            if (string.IsNullOrWhiteSpace(param.NonceStr))
+            {
+                param.NonceStr = CreateNonce();
+            }
+            var parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("appid", param.AppId));
+            parameters.Add(new KeyValuePair<string, string>("timestamp", param.TimeStamp));
+            parameters.Add(new KeyValuePair<string, string>("noncestr", param.NonceStr));
+            parameters.Add(new KeyValuePair<string, string>("productid", param.ProductId));
+            var sign = CreatePaySign(parameters, param.AppKey);
+            parameters.Add(new KeyValuePair<string, string>("sign", sign));
+            var dic = parameters.ToDictionary(p => p.Key, p => p.Value);
+            var urlparam = string.Format("weixin://wxpay/bizpayurl?{0}", FormatUrlQuery(dic, false, ""));
+
+            return urlparam;
+        }
+        /// <summary>
+        /// 生成Native原生支付回调package
+        /// </summary>
+        /// <returns></returns>
+        /*
+		 * <xml> <AppId><![CDATA[wwwwb4f85f3a797777]]></AppId>
+		 * <Package><![CDATA[a=1&url=http%3A%2F%2Fwww.qq.com]]></Package>
+		 * <TimeStamp> 1369745073</TimeStamp>
+		 * <NonceStr><![CDATA[iuytxA0cH6PyTAVISB28]]></NonceStr>
+		 * <RetCode>0</RetCode> <RetErrMsg><![CDATA[ok]]></ RetErrMsg>
+		 * <AppSignature><![CDATA[53cca9d47b883bd4a5c85a9300df3da0cb48565c]]>
+		 * </AppSignature> <SignMethod><![CDATA[sha1]]></ SignMethod > </xml>
+		 */
+        public string CreateNativePackage(NativePackageParam param)
+        {
+            param.Validate();
+            if (string.IsNullOrWhiteSpace(param.Charset))
+            {
+                param.Charset = JSApiParam.UTF8;
+            }
+            if (string.IsNullOrWhiteSpace(param.NonceStr))
+            {
+                param.NonceStr = CreateNonce();
+            }
+            if (string.IsNullOrWhiteSpace(param.TimeStamp))
+            {
+                param.TimeStamp = Epoch.Now.ToString();
+            }
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("AppId", param.AppId);
+            parameters.Add("Package", CreatePackage(param));
+            parameters.Add("TimeStamp", param.TimeStamp);
+            parameters.Add("NonceStr", param.NonceStr);
+            parameters.Add("RetCode", param.RetCode);
+            parameters.Add("RetErrmsg", param.RetErrMsg);
+            parameters.Add("AppSignature", CreatePaySign(parameters, param.AppKey));
+            parameters.Add("SignMethod", "sha1");
+            return ToXml(parameters);
         }
         /// <summary>
         /// 发货通知
@@ -278,6 +351,25 @@ namespace NWeChatPay
         {
             var entries = dic.Select(d => string.Format("\"{0}\": \"{1}\"", d.Key, d.Value));
             return "{" + string.Join(",", entries.ToArray()) + "}";
+        }
+        internal static string ToXml(IEnumerable<KeyValuePair<string, string>> pairs)
+        {
+            var buffer = new StringBuilder();
+            buffer.Append("<xml>");
+            foreach (var pair in pairs)
+            {
+                int temp;
+                if (int.TryParse(pair.Value, out temp))
+                {
+                    buffer.AppendFormat("<{0}>{1}</{0}>", pair.Key, pair.Value);
+                }
+                else
+                {
+                    buffer.AppendFormat("<{0}><![CDATA[{1}]]</{0}>", pair.Key, pair.Value);
+                }
+            }
+            buffer.Append("</xml>");
+            return buffer.ToString();
         }
         internal static string FormatUrlQuery(IDictionary<string, string> dic, bool NeedUrlEncode, string encoding)
         {

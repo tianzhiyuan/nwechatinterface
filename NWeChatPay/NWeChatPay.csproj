@@ -46,6 +46,8 @@
     <Compile Include="DeliveryNotifyParam.cs" />
     <Compile Include="Epoch.cs" />
     <Compile Include="JSApiParam.cs" />
+    <Compile Include="NativePackageParam.cs" />
+    <Compile Include="NativePayParam.cs" />
     <Compile Include="OrderInfo.cs" />
     <Compile Include="OrderQuery.cs" />
     <Compile Include="PayFeedback.cs" />
