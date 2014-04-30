@@ -142,6 +142,29 @@ namespace NWeChatPay
             return ToXml(parameters);
         }
         /// <summary>
+        /// 生成收货地址共享请求Json参数
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public string CreateAddressParam(AddressParam param)
+        {
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("appId", param.AppId);
+            parameters.Add("timeStamp", param.TimeStamp);
+            parameters.Add("nonceStr", param.NonceStr);
+            parameters.Add("accessToken", param.AccessToken);
+            parameters.Add("url", param.Url);
+            var addrSign = Hash(FormatUrlQuery(parameters, false, ""), SHA1);
+            var list = new List<KeyValuePair<string, string>>();
+            list.Add(new KeyValuePair<string, string>("appId", param.AppId));
+            list.Add(new KeyValuePair<string, string>("scope", "jsapi_address"));
+            list.Add(new KeyValuePair<string, string>("signType", "sha1"));
+            list.Add(new KeyValuePair<string, string>("addrSign", addrSign));
+            list.Add(new KeyValuePair<string, string>("timeStamp", param.TimeStamp));
+            list.Add(new KeyValuePair<string, string>("nonceStr", param.NonceStr));
+            return DictionaryToJson(list);
+        }
+        /// <summary>
         /// 发货通知
         /// </summary>
         public void SendDeliveryNotify(DeliveryNotifyParam param)

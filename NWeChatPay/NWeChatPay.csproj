@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressParam.cs" />
     <Compile Include="DeliveryNotifyParam.cs" />
     <Compile Include="Epoch.cs" />
     <Compile Include="JSApiParam.cs" />
