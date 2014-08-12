@@ -89,7 +89,7 @@ namespace NWeChatInterface
         public const string masssendjobfinish = "MASSSENDJOBFINISH";
     }
     /// <summary>
-    /// 微信推送消息基础类
+    /// 微信推送消息基类
     /// </summary>
     public abstract class WeChatBaseMsg
     {
@@ -105,8 +105,14 @@ namespace NWeChatInterface
         /// 创建时间
         /// </summary>
         public long CreateTime { get; set; }
+
         [XmlIgnore]
-        public DateTime CreatedAt { get { return new DateTime(1970, 1, 1).AddSeconds(this.CreateTime); } }
+        public DateTime CreatedAt
+        {
+            get { return Epoch.ConvertToLocalTime(this.CreateTime); }
+            set { this.CreateTime = Epoch.ConvertToEpoch(value); }
+        }
+
         /// <summary>
         /// 消息类型 <see cref="WeChatMessageTypes"/>
         /// </summary>

@@ -10,6 +10,9 @@ namespace NWeChatInterface.Messages
 {
     /// <summary>
     /// 微信普通消息
+    /// 这类消息是用户主动使用微信向公众号发送的。微信服务器会将这类消息以XML数据包的形式POST到开发者填写的URL上。
+    /// 
+    /// 微信服务器在五秒内如果收不到相应会断开链接，并且重新发起请求，总共尝试三次。
     /// </summary>
     public class WeChatNormalMsg : WeChatBaseMsg
     {

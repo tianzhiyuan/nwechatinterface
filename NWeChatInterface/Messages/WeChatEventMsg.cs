@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace NWeChatInterface.Messages
 {
     /// <summary>
-    /// 微信事件推送基础类，
+    /// 微信事件推送基类
     /// 同时也是：
     /// 微信关注/取消关注事件
     /// </summary>

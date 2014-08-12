@@ -10,6 +10,9 @@ namespace NWeChatInterface.Messages
     /// </summary>
     public abstract class WeChatMediaMsg : WeChatNormalMsg
     {
+        /// <summary>
+        /// 消息媒体id，可以调用多媒体文件下载接口拉取数据。
+        /// </summary>
         public CData MediaId { get; set; }
     }
 }
