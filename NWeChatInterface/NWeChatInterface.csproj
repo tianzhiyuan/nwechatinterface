@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICustomerServiceMessage.cs" />
     <Compile Include="IWeChatService.cs" />
     <Compile Include="Messages\WeChatMassSendJobEvent.cs" />
     <Compile Include="Models\NewsArticle.cs" />
@@ -62,7 +63,6 @@
     <Compile Include="ResponseMessages\VoiceMessage.cs" />
     <Compile Include="ResponseMessages\TextMessage.cs" />
     <Compile Include="Epoch.cs" />
-    <Compile Include="ResponseMessage.cs" />
     <Compile Include="IGetRequest.cs" />
     <Compile Include="IPostRequest.cs" />
     <Compile Include="AbstractResponse.cs" />
