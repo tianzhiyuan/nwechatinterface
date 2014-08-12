@@ -8,12 +8,12 @@ namespace NWeChatInterface.Requests
 {
     public class SendCustomerServiceMessage : IPostRequest<WeChatResponse>
     {
-        public SendCustomerServiceMessage(string accessToken, CustomerServiceMessage message)
+        public SendCustomerServiceMessage(string accessToken, ResponseMessage message)
         {
             this.AccessToken = accessToken;
             this.Message = message;
         }
-        public CustomerServiceMessage Message { get; private set; }
+        public ResponseMessage Message { get; private set; }
         public string AccessToken { get; private set; }
 
         public string RequestUrl

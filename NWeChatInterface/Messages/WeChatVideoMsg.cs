@@ -17,7 +17,7 @@ namespace NWeChatInterface.Messages
         
         public override CData MsgType
         {
-            get { return WeChatMessageTypes.video; }
+            get { return WeChatMessageTypes.VIDEO; }
         }
     }
 }

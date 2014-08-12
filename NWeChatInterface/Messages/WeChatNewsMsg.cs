@@ -34,7 +34,7 @@ namespace NWeChatInterface.Messages
         }
         public override CData MsgType
         {
-            get { return WeChatMessageTypes.news; }
+            get { return WeChatMessageTypes.NEWS; }
         }
     }
 }

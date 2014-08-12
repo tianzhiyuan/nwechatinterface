@@ -20,7 +20,7 @@ namespace NWeChatInterface.Messages
         public CData Label { get; set; }
         public override CData MsgType
         {
-            get { return WeChatMessageTypes.location; }
+            get { return WeChatMessageTypes.LOCATION; }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace NWeChatInterface.Messages
     {
         public override CData MsgType
         {
-            get { return WeChatMessageTypes.text; }
+            get { return WeChatMessageTypes.TEXT; }
         }
         public CData Content { get; set; }
     }

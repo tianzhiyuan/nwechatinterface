@@ -13,7 +13,7 @@ namespace NWeChatInterface.Messages
         public CData PicUrl { get; set; }
         public override CData MsgType
         {
-            get { return WeChatMessageTypes.image; }
+            get { return WeChatMessageTypes.IMAGE; }
         }
     }
 }

@@ -12,48 +12,7 @@ using NWeChatInterface.Messages;
 namespace NWeChatInterface
 {
     
-    /// <summary>
-    /// 微信推送消息类型
-    /// </summary>
-    public class WeChatMessageTypes
-    {
-        /// <summary>
-        /// 文本类型
-        /// </summary>
-        public const string text = "text";
-        /// <summary>
-        /// 图片
-        /// </summary>
-        public const string image = "image";
-        /// <summary>
-        /// 音频
-        /// </summary>
-        public const string voice = "voice";
-        /// <summary>
-        /// 视频
-        /// </summary>
-        public const string video = "video";
-        /// <summary>
-        /// 位置
-        /// </summary>
-        public const string location = "location";
-        /// <summary>
-        /// 链接
-        /// </summary>
-        public const string link = "link";
-        /// <summary>
-        /// 事件
-        /// </summary>
-        public const string @event = "event";
-        /// <summary>
-        /// 图文
-        /// </summary>
-        public const string news = "news";
-        /// <summary>
-        /// 音乐消息，在发送客服消息中会用到
-        /// </summary>
-        public const string music = "music";
-    }
+    
     /// <summary>
     /// 微信推送的事件类型
     /// </summary>
@@ -155,7 +114,7 @@ namespace NWeChatInterface
         public static WeChatBaseMsg LoadFrom(string xmlDoc)
         {
             var msgType = GetMsgType(xmlDoc);
-            if (msgType == WeChatMessageTypes.@event)
+            if (msgType == WeChatMessageTypes.EVENT)
             {
                 return WeChatEventMsg.ReadFrom(xmlDoc);
             }

@@ -30,13 +30,13 @@ namespace NWeChatInterface.Messages
         //public const string @event = "event";
         static WeChatNormalMsg()
         {
-            _serializerCache.Add(WeChatMessageTypes.text, new XmlSerializer(typeof(WeChatTextMsg), new XmlRootAttribute("xml")));
-            _serializerCache.Add(WeChatMessageTypes.image, new XmlSerializer(typeof(WeChatImageMsg), new XmlRootAttribute("xml")));
-            _serializerCache.Add(WeChatMessageTypes.voice, new XmlSerializer(typeof(WeChatVoiceMsg), new XmlRootAttribute("xml")));
-            _serializerCache.Add(WeChatMessageTypes.video, new XmlSerializer(typeof(WeChatVideoMsg), new XmlRootAttribute("xml")));
-            _serializerCache.Add(WeChatMessageTypes.location,
+            _serializerCache.Add(WeChatMessageTypes.TEXT, new XmlSerializer(typeof(WeChatTextMsg), new XmlRootAttribute("xml")));
+            _serializerCache.Add(WeChatMessageTypes.IMAGE, new XmlSerializer(typeof(WeChatImageMsg), new XmlRootAttribute("xml")));
+            _serializerCache.Add(WeChatMessageTypes.VOICE, new XmlSerializer(typeof(WeChatVoiceMsg), new XmlRootAttribute("xml")));
+            _serializerCache.Add(WeChatMessageTypes.VIDEO, new XmlSerializer(typeof(WeChatVideoMsg), new XmlRootAttribute("xml")));
+            _serializerCache.Add(WeChatMessageTypes.LOCATION,
                                  new XmlSerializer(typeof(WeChatLocationMsg), new XmlRootAttribute("xml")));
-            _serializerCache.Add(WeChatMessageTypes.link, new XmlSerializer(typeof(WeChatLinkMsg), new XmlRootAttribute("xml")));
+            _serializerCache.Add(WeChatMessageTypes.LINK, new XmlSerializer(typeof(WeChatLinkMsg), new XmlRootAttribute("xml")));
             //_serializerCache.Add(WeChatMessageTypes.@event, new DataContractSerializer(typeof));
         }
         public long MsgId { get; set; }
