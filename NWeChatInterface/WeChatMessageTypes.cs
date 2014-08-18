@@ -8,7 +8,7 @@ namespace NWeChatInterface
     /// <summary>
     /// 微信推送消息类型
     /// </summary>
-    public class WeChatMessageTypes
+    public static class WeChatMessageTypes
     {
         /// <summary>
         /// 文本类型

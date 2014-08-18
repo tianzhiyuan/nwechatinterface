@@ -28,7 +28,7 @@ namespace NWeChatInterface.ResponseMessages
         /// 如果是客服消息，不需要设置这个属性
         /// </summary>
         [JsonIgnore]
-        public string Content { get; set; }
+        public CData Content { get; set; }
         public override CData MsgType
         {
             get { return WeChatMessageTypes.TEXT; }

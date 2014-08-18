@@ -74,7 +74,7 @@ namespace NWeChatInterface.Test
         {
             var filename = @"d:\123.jpg";
             var obj =
-                Service.Execute(new UploadMedia(TempAT, WeChatMediaType.Image, File.ReadAllBytes(filename),
+                Service.Execute(new UploadMedia(TempAT, WeChatMediaType.IMAGE, File.ReadAllBytes(filename),
                                                     "123.jpg"));
 
         }

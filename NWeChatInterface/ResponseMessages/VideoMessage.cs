@@ -10,14 +10,14 @@ namespace NWeChatInterface.ResponseMessages
     public class VideoContent
     {
         [JsonProperty("media_id")]
-        public string MediaId { get; set; }
+        public CData MediaId { get; set; }
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public CData Title { get; set; }
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public CData Description { get; set; }
         [XmlIgnore]
         [JsonProperty("thumb_media_id")]
-        public string ThumbMediaId { get; set; }
+        public CData ThumbMediaId { get; set; }
     }
     /// <summary>
     /// 视频消息

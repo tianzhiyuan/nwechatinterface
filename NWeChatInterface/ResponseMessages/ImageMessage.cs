@@ -9,7 +9,7 @@ namespace NWeChatInterface.ResponseMessages
     public class ImageContent
     {
         [JsonProperty("media_id")]
-        public string MediaId { get; set; }
+        public CData MediaId { get; set; }
     }
 
     /// <summary>

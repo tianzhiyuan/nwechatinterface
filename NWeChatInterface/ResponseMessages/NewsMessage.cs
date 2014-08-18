@@ -9,13 +9,13 @@ namespace NWeChatInterface.ResponseMessages
     public class Article
     {
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public CData Title { get; set; }
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public CData Description { get; set; }
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public CData Url { get; set; }
         [JsonProperty("picurl")]
-        public string PicUrl { get; set; }
+        public CData PicUrl { get; set; }
     }
     public class NewsConent
     {

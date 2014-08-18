@@ -5,11 +5,11 @@ using System.Text;
 
 namespace NWeChatInterface
 {
-    public class WeChatMediaType
+    public static class WeChatMediaType
     {
-        public const string Image = "image";
-        public const string Voice = "voice";
-        public const string Video = "video";
-        public const string Thumb = "thumb";
+        public const string IMAGE = "image";
+        public const string VOICE = "voice";
+        public const string VIDEO = "video";
+        public const string THUMB = "thumb";
     }
 }

@@ -9,7 +9,7 @@ namespace NWeChatInterface.ResponseMessages
     public class VoiceContent
     {
         [JsonProperty("media_id")]
-        public string MediaId { get; set; }
+        public CData MediaId { get; set; }
     }
     /// <summary>
     /// 语音消息

@@ -14,40 +14,7 @@ namespace NWeChatInterface
 {
     
     
-    /// <summary>
-    /// 微信推送的事件类型
-    /// </summary>
-    public class WeChatEventTypes
-    {
-        /// <summary>
-        /// 关注事件 或 用户未关注时扫描带参二维码
-        /// </summary>
-        public const string subscribe = "subscribe";
-        /// <summary>
-        /// 取消关注
-        /// </summary>
-        public const string unsubscribe = "unsubscribe";
-        /// <summary>
-        /// 用户已关注时扫描二维码
-        /// </summary>
-        public const string scan = "SCAN";
-        /// <summary>
-        /// 上报地理位置
-        /// </summary>
-        public const string location = "LOCATION";
-        /// <summary>
-        /// 自定义菜单点击事件 
-        /// </summary>
-        public const string click = "CLICK";
-        /// <summary>
-        /// 点击自定义菜单链接事件
-        /// </summary>
-        public const string view = "VIEW";
-        /// <summary>
-        /// 群发结束消息推送
-        /// </summary>
-        public const string masssendjobfinish = "MASSSENDJOBFINISH";
-    }
+    
     /// <summary>
     /// 微信推送消息基类，同时也是返回给微信时消息的基类
     /// 

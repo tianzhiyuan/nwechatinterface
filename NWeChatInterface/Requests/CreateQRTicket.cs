@@ -63,7 +63,7 @@ namespace NWeChatInterface.Requests
             {
                 var sb = new StringBuilder();
                 sb.Append("{");
-                if (this.QRTicket.action_name == QRTicket.TempQR)
+                if (this.QRTicket.action_name == QRTicket.TEMP_QR)
                 {
                     sb.AppendFormat("'expire_seconds':{0},", this.QRTicket.expire_seconds);
                 }

@@ -49,10 +49,13 @@
     <Compile Include="Messages\WeChatMassSendJobEvent.cs" />
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="Requests\DeleteMassMessage.cs" />
+    <Compile Include="Requests\GetUserBelongGroup.cs" />
     <Compile Include="Requests\SendCustomerServiceMessage.cs" />
     <Compile Include="Requests\SendMassMessage.cs" />
     <Compile Include="Requests\UploadNews.cs" />
+    <Compile Include="Response\GetUserBelongGroupResponse.cs" />
     <Compile Include="Response\UploadNewsResponse.cs" />
+    <Compile Include="WeChatEventTypes.cs" />
     <Compile Include="WeChatMessageTypes.cs" />
     <Compile Include="WeChatResponse.cs" />
     <Compile Include="CData.cs" />

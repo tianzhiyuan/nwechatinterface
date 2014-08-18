@@ -29,25 +29,25 @@ namespace NWeChatInterface.Messages
                                                                             new XmlRootAttribute("xml"));
         static WeChatEventMsg()
         {
-            _serializerCache.Add(WeChatEventTypes.scan,
+            _serializerCache.Add(WeChatEventTypes.EVENT_SCAN,
                                  new XmlSerializer(typeof (WeChatScanQrEvent), new XmlRootAttribute("xml")));
-            _serializerCache.Add(WeChatEventTypes.location,
+            _serializerCache.Add(WeChatEventTypes.EVENT_LOCATION,
                                  new XmlSerializer(typeof (WeChatLocationEvent), new XmlRootAttribute("xml")));
             var menuSerializer = new XmlSerializer(typeof (WeChatMenuEvent), new XmlRootAttribute("xml"));
-            _serializerCache.Add(WeChatEventTypes.click, menuSerializer);
-            _serializerCache.Add(WeChatEventTypes.view, menuSerializer);
-            _serializerCache.Add(WeChatEventTypes.masssendjobfinish,
+            _serializerCache.Add(WeChatEventTypes.EVENT_CLICK, menuSerializer);
+            _serializerCache.Add(WeChatEventTypes.EVENT_VIEW, menuSerializer);
+            _serializerCache.Add(WeChatEventTypes.EVENT_MASSSENDJOBFINISH,
                                  new XmlSerializer(typeof (WeChatMassSendJobEvent), new XmlRootAttribute("xml")));
         }
         public static WeChatEventMsg ReadFrom(string xmlDoc)
         {
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(xmlDoc));
             var msg = (WeChatEventMsg)_serializer.Deserialize(stream);
-            if (msg.Event == WeChatEventTypes.unsubscribe)
+            if (msg.Event == WeChatEventTypes.EVENT_UNSUBSCRIBE)
             {
                 return msg;
             }
-            if (msg.Event == WeChatEventTypes.subscribe)
+            if (msg.Event == WeChatEventTypes.EVENT_SUBSCRIBE)
             {
                 if (xmlDoc.Contains("EventKey"))
                 {
@@ -69,11 +69,11 @@ namespace NWeChatInterface.Messages
         public override string Serialize()
         {
             XmlSerializer serializer = null;
-            if (this.MsgType == WeChatEventTypes.unsubscribe)
+            if (this.MsgType == WeChatEventTypes.EVENT_UNSUBSCRIBE)
             {
                 serializer = _serializer;
             }
-            else if (this.MsgType == WeChatEventTypes.subscribe)
+            else if (this.MsgType == WeChatEventTypes.EVENT_SUBSCRIBE)
             {
                 serializer = _serializer;
             }

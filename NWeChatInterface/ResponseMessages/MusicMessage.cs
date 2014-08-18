@@ -9,15 +9,15 @@ namespace NWeChatInterface.ResponseMessages
     public class MusicContent
     {
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public CData Title { get; set; }
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public CData Description { get; set; }
         [JsonProperty("musicurl")]
-        public string MusicUrl { get; set; }
+        public CData MusicUrl { get; set; }
         [JsonProperty("hqmusicurl")]
-        public string HQMusicUrl { get; set; }
+        public CData HQMusicUrl { get; set; }
         [JsonProperty("thumb_media_id")]
-        public string ThumbMediaId { get; set; }
+        public CData ThumbMediaId { get; set; }
     }
     /// <summary>
     /// 音乐消息
