@@ -20,38 +20,60 @@ namespace NWeChatInterface
         /// <summary>
         /// 只能获取到openid
         /// </summary>
-        public const string SnsapiBase = "snsapi_base";
+        public const string SNSAPI_BASE = "snsapi_base";
         /// <summary>
         /// 能获取到openid及用户信息
         /// </summary>
-        public const string SnsapiUserinfo = "snsapi_userinfo";
+        public const string SNSAPI_USERINFO = "snsapi_userinfo";
+        /// <summary>
+        /// 网页应用授权登录
+        /// </summary>
+        public const string SNSAPI_LOGIN = "snsapi_login";
         /// <summary>
         /// 构建微信OAuth2.0授权Url
         /// </summary>
-        /// <param name="scope">授权域，必须是<value>snsapi_base</value>或者<value>snsapi_userinfo</value>之一</param>
+        /// <param name="scope">授权域，必须是<value>snsapi_base</value>或者<value>snsapi_userinfo</value>或者<value>snsapi_login</value>之一</param>
         /// <param name="appid">当前服务号AppId</param>
         /// <param name="redirectUrl">回调Url</param>
-        /// <param name="state">选填状态参数，限制为：a-zA-Z0-9</param>
-        /// <returns></returns>
+        /// <param name="state">选填状态参数，限制为：a-zA-Z0-9用于保持请求和回调的状态，
+        /// 授权请求后原样带回给第三方。该参数可用于防止csrf攻击（跨站请求伪造攻击），
+        /// 建议第三方带上该参数，可设置为简单的随机数加session进行校验</param>
+        /// <returns>跳转的Url</returns>
         public static string BuildUrl(string scope, string appid, string redirectUrl, string state = null)
         {
-            if (scope != SnsapiBase && scope != SnsapiUserinfo) throw new ArgumentException("scope参数错误");
+            if (scope != SNSAPI_BASE && scope != SNSAPI_USERINFO && scope != SNSAPI_LOGIN)
+                throw new ArgumentException("scope参数错误");
             if (string.IsNullOrWhiteSpace(state)) state = "1";
+            if (scope == SNSAPI_LOGIN)
+            {
+                return
+                    string.Format(
+                        "https://open.weixin.qq.com/connect/qrconnect?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect",
+                        appid,
+                        HttpUtility.UrlEncode(redirectUrl),
+                        scope,
+                        state
+                        );
+            }
             return
                 string.Format(
                     "https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect",
                     appid,
-                    HttpUtility.HtmlEncode(redirectUrl),
+                    HttpUtility.UrlEncode(redirectUrl),
                     scope,
                     state);
         }
         public static string BuildBaseUrl(string appid, string redirectUrl, string state = null)
         {
-            return BuildUrl(SnsapiBase, appid, redirectUrl, state);
+            return BuildUrl(SNSAPI_BASE, appid, redirectUrl, state);
         }
         public static string BuildUserInfoUrl(string appid, string redirectUrl, string state = null)
         {
-            return BuildUrl(SnsapiUserinfo, appid, redirectUrl, state);
+            return BuildUrl(SNSAPI_USERINFO, appid, redirectUrl, state);
+        }
+        public static string BuildLoginUrl(string appid, string redirectUrl, string state = null)
+        {
+            return BuildUrl(SNSAPI_LOGIN, appid, redirectUrl, state);
         }
     }
 }

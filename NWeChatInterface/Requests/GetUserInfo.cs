@@ -9,7 +9,7 @@ namespace NWeChatInterface.Requests
     /// <summary>
     /// 根据OpenId获取用户信息
     /// </summary>
-    public class GetUserInfo : IGetRequest<UserInfoResponset>
+    public class GetUserInfo : IGetRequest<UserInfoResponse>
     {
         public string OpenId { get; private set; }
         public string AccessToken { get; private set; }

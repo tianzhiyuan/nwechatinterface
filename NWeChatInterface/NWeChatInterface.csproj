@@ -51,6 +51,8 @@
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="Requests\DeleteMassMessage.cs" />
     <Compile Include="Requests\GetCustomerServiceRecord.cs" />
+    <Compile Include="Requests\GetOAuthUserInfo.cs" />
+    <Compile Include="Requests\GetOpenIdByCode.cs" />
     <Compile Include="Requests\GetUserBelongGroup.cs" />
     <Compile Include="Requests\SendCustomerServiceMessage.cs" />
     <Compile Include="Requests\SendMassMessage.cs" />
@@ -97,8 +99,6 @@
     <Compile Include="Requests\GetAccessToken.cs" />
     <Compile Include="Requests\GetBelongUserGroup.cs" />
     <Compile Include="Requests\GetMenu.cs" />
-    <Compile Include="Requests\GetOpenId.cs" />
-    <Compile Include="Requests\GetOpenIdByCode.cs" />
     <Compile Include="Requests\CreateQRTicket.cs" />
     <Compile Include="Requests\GetSubscribers.cs" />
     <Compile Include="Requests\GetUserGroup.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="Response\QRTicketResponse.cs" />
     <Compile Include="Response\SubscriberListResponse.cs" />
     <Compile Include="Response\UploadMediaResponse.cs" />
-    <Compile Include="Response\UserInfoResponset.cs" />
+    <Compile Include="Response\UserInfoResponse.cs" />
     <Compile Include="WeChatBaseMsg.cs" />
     <Compile Include="WeChatMediaType.cs" />
     <Compile Include="WeChatOAuth.cs" />
