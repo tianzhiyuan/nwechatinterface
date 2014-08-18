@@ -47,12 +47,15 @@
     <Compile Include="ICustomerServiceMessage.cs" />
     <Compile Include="IWeChatService.cs" />
     <Compile Include="Messages\WeChatMassSendJobEvent.cs" />
+    <Compile Include="Models\CustomerServiceRecord.cs" />
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="Requests\DeleteMassMessage.cs" />
+    <Compile Include="Requests\GetCustomerServiceRecord.cs" />
     <Compile Include="Requests\GetUserBelongGroup.cs" />
     <Compile Include="Requests\SendCustomerServiceMessage.cs" />
     <Compile Include="Requests\SendMassMessage.cs" />
     <Compile Include="Requests\UploadNews.cs" />
+    <Compile Include="Response\GetCustomerServiceRecordResponse.cs" />
     <Compile Include="Response\GetUserBelongGroupResponse.cs" />
     <Compile Include="Response\UploadNewsResponse.cs" />
     <Compile Include="WeChatEventTypes.cs" />
