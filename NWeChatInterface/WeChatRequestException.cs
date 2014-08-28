@@ -5,6 +5,12 @@ using System.Text;
 
 namespace NWeChatInterface
 {
+    public enum WeChatRequestCode
+    {
+        Success = 0,
+        ConnectionError = 100,
+        RequestError = 200
+    }
     /// <summary>
     /// 微信请求异常
     /// </summary>

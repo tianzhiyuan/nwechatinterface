@@ -8,6 +8,12 @@ namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 上传多媒体文件
+    /// 目前限制：
+    /// 图片（image）: 1M，支持JPG格式
+    /// 语音（voice）：2M，播放长度不超过60s，支持AMR\MP3格式
+    /// 视频（video）：10MB，支持MP4格式
+    /// 缩略图（thumb）：64KB，支持JPG格式
+    /// 注意多媒体文件三天后会被删除
     /// </summary>
     public class UploadMedia : IWeChatRequest<UploadMediaResponse>
     {

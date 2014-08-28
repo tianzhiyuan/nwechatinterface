@@ -7,7 +7,7 @@ namespace NWeChatInterface
 {
     public abstract class AbstractResponse
     {
-        public int errcode { get; internal set; }
-        public string errmsg { get; internal set; }
+        public int errcode { get; set; }
+        public string errmsg { get; set; }
     }
 }

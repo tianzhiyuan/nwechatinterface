@@ -50,7 +50,7 @@ namespace NWeChatInterface
                     string.Format(
                         "https://open.weixin.qq.com/connect/qrconnect?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect",
                         appid,
-                        HttpUtility.UrlEncode(redirectUrl),
+                        MyUrlEncode(redirectUrl),
                         scope,
                         state
                         );
@@ -59,7 +59,7 @@ namespace NWeChatInterface
                 string.Format(
                     "https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect",
                     appid,
-                    HttpUtility.UrlEncode(redirectUrl),
+                    MyUrlEncode(redirectUrl),
                     scope,
                     state);
         }
@@ -74,6 +74,30 @@ namespace NWeChatInterface
         public static string BuildLoginUrl(string appid, string redirectUrl, string state = null)
         {
             return BuildUrl(SNSAPI_LOGIN, appid, redirectUrl, state);
+        }
+        /// <summary>
+        /// URL编码
+        /// </summary>
+        /// <param name="value">The value to Url encode</param>
+        /// <returns>Returns a Url encoded string</returns>
+        public static string MyUrlEncode(string value)
+        {
+            StringBuilder result = new StringBuilder();
+
+            string unreservedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
+            foreach (char symbol in value)
+            {
+                if (unreservedChars.IndexOf(symbol) != -1)
+                {
+                    result.Append(symbol);
+                }
+                else
+                {
+                    result.Append('%' + String.Format("{0:X2}", (int)symbol));
+                }
+            }
+
+            return result.ToString();
         }
     }
 }

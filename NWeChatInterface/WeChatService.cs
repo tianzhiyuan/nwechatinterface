@@ -16,10 +16,10 @@ namespace NWeChatInterface
     /// <summary>
     /// 微信公众平台接口服务
     /// </summary>
-    public class WeChatService:IWeChatService
+    public class WeChatService : IWeChatService
     {
         private readonly JsonSerializer _serializer;
-        
+
         public WeChatService()
         {
             _serializer = new JsonSerializer()
@@ -28,25 +28,24 @@ namespace NWeChatInterface
                     NullValueHandling = NullValueHandling.Ignore,
                 };
         }
-        
+
 
         TData DoRequest<TData>(WebRequest request, IWeChatRequest from)
             where TData : AbstractResponse
         {
             using (var response = request.GetResponse())
-            using (var stream = response.GetResponseStream())
-            using (var reader = new JsonTextReader(new StreamReader(stream)))
+            using (var stream = new StreamReader(response.GetResponseStream()))
             {
-                var obj = _serializer.Deserialize<TData>(reader);
-                if (obj.errcode != 0)
+                var text = stream.ReadToEnd();
+                using (var reader = new JsonTextReader(new StringReader(text)))
                 {
-                    throw new WeChatRequestException(obj.errcode, from);
+                    return this._serializer.Deserialize<TData>(reader);
                 }
-                return obj;
             }
+
         }
 
-        public TResponse Execute<TResponse>(IGetRequest<TResponse> request) where TResponse :AbstractResponse
+        public TResponse Execute<TResponse>(IGetRequest<TResponse> request) where TResponse : AbstractResponse
         {
             var url = request.RequestUrl;
             var req = WebRequest.Create(url);
@@ -71,7 +70,7 @@ namespace NWeChatInterface
                     stream.Write(bytes, 0, bytes.Length);
                 }
             }
-            
+
             var data = DoRequest<TResponse>(req, request);
             return data;
         }
@@ -82,7 +81,7 @@ namespace NWeChatInterface
             //using (var client = new HttpClient())
             //using (var formData = new MultipartFormDataContent())
             //{
-                
+
             //    var bytes = new ByteArrayContent(request.Content);
             //    //formData.Headers.Remove("Content-Type");
             //    //formData.Headers.TryAddWithoutValidation("Contenty-Type", "multipart/form-data; boundary=" + b);
@@ -136,11 +135,11 @@ namespace NWeChatInterface
             requestStream.Write(tempBuffer, 0, tempBuffer.Length);
             var result = DoRequest<UploadMediaResponse>(httpWebRequest, request);
             return result;
-            
-            
+
+
         }
 
-        
+
 
         /// <summary>
         /// 验证消息真实性
@@ -152,13 +151,13 @@ namespace NWeChatInterface
         /// <returns>是否匹配</returns>
         public bool VerifySignature(string nonce, string timestamp, string token, string signature)
         {
-            var list = new string[] {nonce, timestamp, token};
+            var list = new string[] { nonce, timestamp, token };
             Array.Sort(list);
             using (var algo = HashAlgorithm.Create("SHA1"))
             {
-                var byteArray = algo.ComputeHash(Encoding.UTF8.GetBytes(string.Join("",list)));
+                var byteArray = algo.ComputeHash(Encoding.UTF8.GetBytes(string.Join("", list)));
                 var result = BitConverter.ToString(byteArray).Replace("-", "");
-                return result == signature;
+                return System.String.Compare(result, signature, System.StringComparison.OrdinalIgnoreCase) == 0;
             }
         }
 
@@ -184,6 +183,6 @@ namespace NWeChatInterface
         #endregion
 
 
-        
+
     }
 }
