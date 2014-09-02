@@ -37,15 +37,15 @@ namespace NWeChatInterface
     public abstract class WeChatBaseMsg
     {
         /// <summary>
-        /// 发送着帐号OpenId
-        /// </summary>
-        [JsonIgnore]
-        public CData FromUserName { get; set; }
-        /// <summary>
         /// 开发者微信号
         /// </summary>
         [JsonProperty("touser")]
         public CData ToUserName { get; set; }
+        /// <summary>
+        /// 发送着帐号OpenId
+        /// </summary>
+        [JsonIgnore]
+        public CData FromUserName { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>

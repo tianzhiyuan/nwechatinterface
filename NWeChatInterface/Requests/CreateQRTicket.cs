@@ -82,7 +82,7 @@ namespace NWeChatInterface.Requests
                 sb.AppendFormat("'action_name':'{0}',", this.QRTicket.action_name);
                 sb.AppendFormat("'action_info':{{'scene':{{'scene_id':{0}}}}}", this.QRTicket.scene_id);
                 sb.Append("}");
-                sb.Replace(',', '\"');
+                sb.Replace("'", "\"");
                 return sb.ToString();
             }
         }

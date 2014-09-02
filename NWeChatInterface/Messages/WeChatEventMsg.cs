@@ -25,8 +25,7 @@ namespace NWeChatInterface.Messages
 
         private static Dictionary<string, XmlSerializer> _serializerCache = new Dictionary<string, XmlSerializer>();
 
-        private static XmlSerializer _qrsceneSerializer = new XmlSerializer(typeof(WeChatScanQrEvent),
-                                                                            new XmlRootAttribute("xml"));
+        
         static WeChatEventMsg()
         {
             _serializerCache.Add(WeChatEventTypes.EVENT_SCAN,
@@ -38,6 +37,8 @@ namespace NWeChatInterface.Messages
             _serializerCache.Add(WeChatEventTypes.EVENT_VIEW, menuSerializer);
             _serializerCache.Add(WeChatEventTypes.EVENT_MASSSENDJOBFINISH,
                                  new XmlSerializer(typeof (WeChatMassSendJobEvent), new XmlRootAttribute("xml")));
+            _serializerCache.Add(WeChatEventTypes.EVENT_SUBSCRIBE,
+                                 new XmlSerializer(typeof (WeChatSubscribeEvent), new XmlRootAttribute("xml")));
         }
         public static WeChatEventMsg ReadFrom(string xmlDoc)
         {
@@ -47,16 +48,7 @@ namespace NWeChatInterface.Messages
             {
                 return msg;
             }
-            if (msg.Event == WeChatEventTypes.EVENT_SUBSCRIBE)
-            {
-                if (xmlDoc.Contains("EventKey"))
-                {
-                    //带参二维码扫描事件
-                    stream.Position = 0;
-                    return (WeChatEventMsg)_qrsceneSerializer.Deserialize(stream);
-                }
-                return msg;
-            }
+            
             XmlSerializer realSerializer;
             if (_serializerCache.TryGetValue(msg.Event, out realSerializer))
             {
@@ -70,10 +62,6 @@ namespace NWeChatInterface.Messages
         {
             XmlSerializer serializer = null;
             if (this.MsgType == WeChatEventTypes.EVENT_UNSUBSCRIBE)
-            {
-                serializer = _serializer;
-            }
-            else if (this.MsgType == WeChatEventTypes.EVENT_SUBSCRIBE)
             {
                 serializer = _serializer;
             }

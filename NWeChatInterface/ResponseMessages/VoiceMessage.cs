@@ -14,7 +14,7 @@ namespace NWeChatInterface.ResponseMessages
     /// <summary>
     /// 语音消息
     /// </summary>
-    public class VoiceMessage : WeChatBaseMsg, ICustomerServiceMessage
+    public class VoiceMessage : WeChatBaseMsg, IResponseMessage
     {
         [JsonProperty("voice")]
         public VoiceContent Voice { get; set; }

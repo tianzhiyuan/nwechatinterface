@@ -46,9 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICustomerServiceMessage.cs" />
+    <Compile Include="IResponseMessage.cs" />
     <Compile Include="IWeChatService.cs" />
     <Compile Include="Messages\WeChatMassSendJobEvent.cs" />
+    <Compile Include="Messages\WeChatSubscribeEvent.cs" />
     <Compile Include="Models\CustomerServiceRecord.cs" />
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="Requests\CreateShortUrl.cs" />

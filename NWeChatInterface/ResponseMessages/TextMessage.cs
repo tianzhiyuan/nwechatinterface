@@ -14,18 +14,14 @@ namespace NWeChatInterface.ResponseMessages
     /// <summary>
     /// 文本消息
     /// </summary>
-    public class TextMessage : WeChatBaseMsg, ICustomerServiceMessage
+    public class TextMessage : WeChatBaseMsg, IResponseMessage
     {
-        /// <summary>
-        /// 注意如果是被动响应消息，这个值不需要填写
-        /// 如果是客服消息，使用这个属性
-        /// </summary>
+        
         [XmlIgnore]
         [JsonProperty("text")]
-        public TextContent text { get; set; }
+        public TextContent text { get { return new TextContent() {content = this.Content}; } }
         /// <summary>
-        /// 如果是被动响应消息，使用这个属性
-        /// 如果是客服消息，不需要设置这个属性
+        /// 内容
         /// </summary>
         [JsonIgnore]
         public CData Content { get; set; }

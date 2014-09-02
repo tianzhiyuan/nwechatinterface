@@ -22,7 +22,7 @@ namespace NWeChatInterface.ResponseMessages
     /// <summary>
     /// 视频消息
     /// </summary>
-    public class VideoMessage : WeChatBaseMsg, ICustomerServiceMessage
+    public class VideoMessage : WeChatBaseMsg, IResponseMessage
     {
         [JsonProperty("video")]
         public VideoContent Video { get; set; }

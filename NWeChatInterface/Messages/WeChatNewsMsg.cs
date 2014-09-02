@@ -3,20 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using NWeChatInterface.Models;
 
 namespace NWeChatInterface.Messages
 {
-    public class Articles : List<item>
-    {
-
-    }
-    public class item
-    {
-        public CData Title { get; set; }
-        public CData Description { get; set; }
-        public CData PicUrl { get; set; }
-        public CData Url { get; set; }
-    }
+    
     /// <summary>
     /// 微信图文消息
     /// </summary>
