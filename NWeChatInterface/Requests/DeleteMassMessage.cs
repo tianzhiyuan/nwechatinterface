@@ -7,12 +7,13 @@ namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 删除群发消息
-    /// 请注意，只有已经发送成功的消息才能删除删除消息只是将消息的图文详情页失效，
-    /// 已经收到的用户，还是能在其本地看到消息卡片。
+    /// 请注意，只有已经发送成功的消息才能删除。删除消息只是将消息的图文详情页失效，
+    /// 已经收到的用户，还是能在其本地看到消息卡片。 
+    /// 另外，删除群发消息只能删除图文消息和视频消息，其他类型的消息一经发送，无法删除。
     /// </summary>
     public class DeleteMassMessage:IPostRequest<AbstractResponse>
     {
-        public DeleteMassMessage(string accessToken, string msgid)
+        public DeleteMassMessage(string accessToken, long msgid)
         {
             this.AccessToken = accessToken;
             this.MsgId = msgid;
@@ -27,7 +28,7 @@ namespace NWeChatInterface.Requests
                                      this.AccessToken);
             }
         }
-        public string MsgId { get; private set; }
+        public long MsgId { get; private set; }
         public string Data { get { return string.Format("{{\"msgid\":{0}}}", this.MsgId); }}
     }
 }

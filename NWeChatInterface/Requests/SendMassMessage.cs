@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
@@ -15,19 +16,31 @@ namespace NWeChatInterface.Requests
     /// 3、无论在公众平台网站上，还是使用接口群发，用户每月只能接收4条群发消息，多于4条的群发将对该用户发送失败。
     /// 4、具备微信支付权限的公众号，在使用高级群发接口上传、群发图文消息类型时，可使用a标签加入外链
     /// </summary>
-    public class SendMassMessage:IPostRequest<AbstractResponse>
+    public class SendMassMessage : IPostRequest<SendMassMessageResponse>
     {
 
         protected SendMassMessage(string accessToken)
         {
             this.AccessToken = accessToken;
         }
-        public SendMassMessage(string accessToken, int group_id) : this(accessToken)
+        /// <summary>
+        /// 根据分组进行群发
+        /// </summary>
+        /// <param name="accessToken">AccessToken</param>
+        /// <param name="group_id">群发到的分组的group_id</param>
+        public SendMassMessage(string accessToken, int group_id)
+            : this(accessToken)
         {
             this.SendByGroupId = true;
             this.GroupId = group_id;
         }
-        public SendMassMessage(string accessToken, string[] userOpenIds) : this(accessToken)
+        /// <summary>
+        /// 根据openid 列表进行群发
+        /// </summary>
+        /// <param name="accessToken">AccessToken</param>
+        /// <param name="userOpenIds">填写图文消息的接收者，一串OpenID列表，OpenID最少1个，最多10000个</param>
+        public SendMassMessage(string accessToken, string[] userOpenIds)
+            : this(accessToken)
         {
             this.SendByGroupId = false;
             this.UserIds = userOpenIds;
