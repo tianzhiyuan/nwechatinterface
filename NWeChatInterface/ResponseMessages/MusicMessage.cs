@@ -22,7 +22,7 @@ namespace NWeChatInterface.ResponseMessages
     /// <summary>
     /// 音乐消息
     /// </summary>
-    public class MusicMessage : WeChatBaseMsg, IResponseMessage
+    public class MusicMessage : WeChatReponseMessage, IResponseMessage
     {
         [JsonProperty("music")]
         public MusicContent Music { get; set; }

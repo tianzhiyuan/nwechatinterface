@@ -14,7 +14,7 @@ namespace NWeChatInterface.ResponseMessages
     /// <summary>
     /// 文本消息
     /// </summary>
-    public class TextMessage : WeChatBaseMsg, IResponseMessage
+    public class TextMessage : WeChatReponseMessage, IResponseMessage
     {
         
         [XmlIgnore]

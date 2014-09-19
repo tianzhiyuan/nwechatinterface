@@ -68,6 +68,7 @@
     <Compile Include="Response\UploadNewsResponse.cs" />
     <Compile Include="WeChatEventTypes.cs" />
     <Compile Include="WeChatMessageTypes.cs" />
+    <Compile Include="WeChatReponseMessage.cs" />
     <Compile Include="WeChatResponse.cs" />
     <Compile Include="CData.cs" />
     <Compile Include="ResponseMessages\ImageMessage.cs" />
