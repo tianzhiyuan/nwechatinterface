@@ -18,32 +18,41 @@ namespace NWeChatInterface.Requests
     /// </summary>
     public class SendMassMessage : IPostRequest<SendMassMessageResponse>
     {
-
+        public string Type { get; private set; }
         protected SendMassMessage(string accessToken)
         {
             this.AccessToken = accessToken;
         }
+
         /// <summary>
         /// 根据分组进行群发
         /// </summary>
         /// <param name="accessToken">AccessToken</param>
         /// <param name="group_id">群发到的分组的group_id</param>
-        public SendMassMessage(string accessToken, int group_id)
+        /// <param name="type">消息类型，包括语音voice,图片image，文本text，多图文news，视频video<see cref="WeChatMessageTypes"/></param>
+        /// <param name="mediaId">如果消息类型问文本，这里可以直接输入文本内容，其他则输入media_id</param>
+        public SendMassMessage(string accessToken, int group_id, string type, string mediaId)
             : this(accessToken)
         {
             this.SendByGroupId = true;
             this.GroupId = group_id;
+            this.Type = type;
+            this.MediaId = mediaId;
         }
         /// <summary>
         /// 根据openid 列表进行群发
         /// </summary>
         /// <param name="accessToken">AccessToken</param>
         /// <param name="userOpenIds">填写图文消息的接收者，一串OpenID列表，OpenID最少1个，最多10000个</param>
-        public SendMassMessage(string accessToken, string[] userOpenIds)
+        /// <param name="type">消息类型，包括语音voice,图片image，文本text，多图文news，视频video<see cref="WeChatMessageTypes"/></param>
+        /// <param name="mediaId">如果消息类型问文本，这里可以直接输入文本内容，其他则输入media_id</param>
+        public SendMassMessage(string accessToken, string[] userOpenIds, string type, string mediaId)
             : this(accessToken)
         {
             this.SendByGroupId = false;
             this.UserIds = userOpenIds;
+            this.Type = type;
+            this.MediaId = mediaId;
         }
         public bool SendByGroupId { get; private set; }
         public string[] UserIds { get; private set; }
@@ -68,17 +77,38 @@ namespace NWeChatInterface.Requests
                 sb.Append("{");
                 if (this.SendByGroupId)
                 {
-                    sb.AppendFormat("'filter':{{'group_id':'{0}'}},", this.GroupId);
+                    sb.AppendFormat("\"filter\":{{\"group_id\":\"{0}\"}},", this.GroupId);
                 }
                 else
                 {
-                    sb.AppendFormat("'touser':[{0}]",
+                    sb.AppendFormat("\"touser\":[{0}]",
                                     string.Join(",", this.UserIds.Select(o => string.Format("\"{0}\"", o))));
                 }
-                sb.AppendFormat("'mpnews':{{'media_id':'{0}'}},", this.MediaId);
-                sb.AppendFormat("'msgtype':'mpnews'");
+                switch (Type)
+                {
+                    case WeChatMessageTypes.TEXT:
+                        sb.AppendFormat("\"text\":{{{0}}}", JsonHelper.WriteObject("content", this.MediaId));
+                        sb.AppendFormat("\"msgtype\":\"text\"");
+                        break;
+                    case WeChatMessageTypes.IMAGE:
+                        sb.AppendFormat("\"image\":{{{0}}}", JsonHelper.WriteObject("media_id", this.MediaId));
+                        sb.AppendFormat("\"msgtype\":\"image\"");
+                        break;
+                    case WeChatMessageTypes.NEWS:
+                        sb.AppendFormat("\"mpnews\":{{\"media_id\":\"{0}\"}},", this.MediaId);
+                        sb.AppendFormat("\"msgtype\":\"mpnews\"");
+                        break;
+                    case WeChatMessageTypes.VIDEO:
+                        sb.AppendFormat("\"mpvideo\":{{{0}}}", JsonHelper.WriteObject("media_id", this.MediaId));
+                        sb.AppendFormat("\"msgtype\":\"mpvideo\"");
+                        break;
+                    case WeChatMessageTypes.VOICE:
+                        sb.AppendFormat("\"voice\":{{{0}}}", JsonHelper.WriteObject("media_id", this.MediaId));
+                        sb.AppendFormat("\"msgtype\":\"voice\"");
+                        break;
+                }
+                
                 sb.Append("}");
-                sb.Replace('\'', '"');
                 return sb.ToString();
             }
         }

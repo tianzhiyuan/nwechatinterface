@@ -61,6 +61,7 @@
     <Compile Include="Requests\GetUserBelongGroup.cs" />
     <Compile Include="Requests\SendCustomerServiceMessage.cs" />
     <Compile Include="Requests\SendMassMessage.cs" />
+    <Compile Include="Requests\SetUserRemark.cs" />
     <Compile Include="Requests\UploadNews.cs" />
     <Compile Include="Requests\UploadVideo.cs" />
     <Compile Include="Response\CreateShortUrlResponse.cs" />
