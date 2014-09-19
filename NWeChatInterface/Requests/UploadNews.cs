@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NWeChatInterface.Models;
+using NWeChatInterface.Response;
 using Newtonsoft.Json;
 
 namespace NWeChatInterface.Requests
@@ -10,7 +11,7 @@ namespace NWeChatInterface.Requests
     /// <summary>
     /// 上传图文消息素材
     /// </summary>
-    public class UploadNews : IPostRequest<AbstractResponse>
+    public class UploadNews : IPostRequest<UploadResponse>
     {
         public UploadNews(string accessToken, NewsArticle[] articles)
         {
@@ -27,6 +28,6 @@ namespace NWeChatInterface.Requests
                                      this.AccessToken);
             }
         }
-        public string Data { get { return JsonConvert.SerializeObject(new {articles = Articles}); } }
+        public string Data { get { return JsonConvert.SerializeObject(new { articles = Articles }); } }
     }
 }

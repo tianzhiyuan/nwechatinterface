@@ -66,6 +66,7 @@
     <Compile Include="Response\GetUserBelongGroupResponse.cs" />
     <Compile Include="Response\SendMassMessageResponse.cs" />
     <Compile Include="Response\UploadNewsResponse.cs" />
+    <Compile Include="Response\UploadResponse.cs" />
     <Compile Include="WeChatEventTypes.cs" />
     <Compile Include="WeChatMessageTypes.cs" />
     <Compile Include="WeChatReponseMessage.cs" />
