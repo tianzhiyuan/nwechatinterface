@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="IResponseMessage.cs" />
     <Compile Include="IWeChatService.cs" />
+    <Compile Include="JsonHelper.cs" />
     <Compile Include="Messages\WeChatMassSendJobEvent.cs" />
     <Compile Include="Messages\WeChatSubscribeEvent.cs" />
     <Compile Include="Models\CustomerServiceRecord.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Requests\SendCustomerServiceMessage.cs" />
     <Compile Include="Requests\SendMassMessage.cs" />
     <Compile Include="Requests\UploadNews.cs" />
+    <Compile Include="Requests\UploadVideo.cs" />
     <Compile Include="Response\CreateShortUrlResponse.cs" />
     <Compile Include="Response\GetCustomerServiceRecordResponse.cs" />
     <Compile Include="Response\GetUserBelongGroupResponse.cs" />
