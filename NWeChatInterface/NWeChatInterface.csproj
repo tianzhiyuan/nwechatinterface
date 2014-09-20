@@ -51,6 +51,7 @@
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Messages\WeChatMassSendJobEvent.cs" />
     <Compile Include="Messages\WeChatSubscribeEvent.cs" />
+    <Compile Include="Messages\WeChatTemplateSendJobEvent.cs" />
     <Compile Include="Models\CustomerServiceRecord.cs" />
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="Requests\CreateShortUrl.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Requests\GetUserBelongGroup.cs" />
     <Compile Include="Requests\SendCustomerServiceMessage.cs" />
     <Compile Include="Requests\SendMassMessage.cs" />
+    <Compile Include="Requests\SendTemplateMessage.cs" />
     <Compile Include="Requests\SetUserRemark.cs" />
     <Compile Include="Requests\UploadNews.cs" />
     <Compile Include="Requests\UploadVideo.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Response\GetCustomerServiceRecordResponse.cs" />
     <Compile Include="Response\GetUserBelongGroupResponse.cs" />
     <Compile Include="Response\SendMassMessageResponse.cs" />
+    <Compile Include="Response\SendTemplateResponse.cs" />
     <Compile Include="Response\UploadNewsResponse.cs" />
     <Compile Include="Response\UploadResponse.cs" />
     <Compile Include="WeChatEventTypes.cs" />
