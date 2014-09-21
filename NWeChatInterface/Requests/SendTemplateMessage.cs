@@ -1,4 +1,5 @@
-﻿using NWeChatInterface.Response;
+﻿using NWeChatInterface.Models;
+using NWeChatInterface.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using Newtonsoft.Json;
 
 namespace NWeChatInterface.Requests
 {
+    
     /// <summary>
     /// 发送模版消息
     /// 模板消息仅用于公众号向用户发送重要的服务通知，
@@ -15,10 +17,12 @@ namespace NWeChatInterface.Requests
     /// </summary>
     public class SendTemplateMessage : IPostRequest<SendTemplateResponse>
     {
-        public SendTemplateMessage(string accessToken)
+        public SendTemplateMessage(string accessToken, TemplateMessage message)
         {
             this.AccessToken = accessToken;
+            this.Message = message;
         }
+        public TemplateMessage Message { get; private set; }
         public string AccessToken { get; private set; }
         
 
@@ -31,6 +35,6 @@ namespace NWeChatInterface.Requests
             }
         }
 
-        public string Data { get { return JsonConvert.SerializeObject(new {}); } }
+        public string Data { get { return JsonConvert.SerializeObject(this.Message); } }
     }
 }

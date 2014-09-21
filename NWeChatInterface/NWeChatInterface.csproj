@@ -54,6 +54,7 @@
     <Compile Include="Messages\WeChatTemplateSendJobEvent.cs" />
     <Compile Include="Models\CustomerServiceRecord.cs" />
     <Compile Include="Models\NewsArticle.cs" />
+    <Compile Include="Models\TemplateMessage.cs" />
     <Compile Include="Requests\CreateShortUrl.cs" />
     <Compile Include="Requests\DeleteMassMessage.cs" />
     <Compile Include="Requests\GetCustomerServiceRecord.cs" />
