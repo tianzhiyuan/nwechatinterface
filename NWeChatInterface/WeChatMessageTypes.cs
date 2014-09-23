@@ -46,5 +46,9 @@ namespace NWeChatInterface
         /// 音乐消息，在发送客服消息中会用到
         /// </summary>
         public const string MUSIC = "music";
+        /// <summary>
+        /// 消息转发到多客服
+        /// </summary>
+        public const string TRANSFER_CUSTOMER_SERVICE = "transfer_customer_service";
     }
 }

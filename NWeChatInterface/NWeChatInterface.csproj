@@ -67,6 +67,7 @@
     <Compile Include="Requests\SetUserRemark.cs" />
     <Compile Include="Requests\UploadNews.cs" />
     <Compile Include="Requests\UploadVideo.cs" />
+    <Compile Include="ResponseMessages\TransferCustomerMessage.cs" />
     <Compile Include="Response\CreateShortUrlResponse.cs" />
     <Compile Include="Response\GetCustomerServiceRecordResponse.cs" />
     <Compile Include="Response\GetUserBelongGroupResponse.cs" />
