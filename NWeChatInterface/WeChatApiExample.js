@@ -36,4 +36,11 @@ WeixinJSBridge.invoke('getNetworkType', {},
                     break;
             }
         });
+//在微信内置浏览器中被访问的网页，可使用该JavaScript代码关闭当前网页。
+//主要使用场景： 微信用户在公众号会话中点击外链到达公众号的网页，在用户完成操作后，公众号（网页方）可调用此接口关闭当前网页窗口，使用户返回会话。
+WeixinJSBridge.invoke('closeWindow', {}, function (res) {
 
+    //alert(res.err_msg);
+    //关闭成功返回“close_window:ok”，关闭失败返回“close_window:error”。
+
+});
