@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -277,7 +279,46 @@ namespace NWeChatPay
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(xml));
             return ParsePayFeedback(stream);
         }
-
+        /// <summary>
+        /// 解析微信支付回调
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="appKey"></param>
+        /// <returns></returns>
+        public WeChatPayNotify ParsePayNotify(NameValueCollection values, string appKey)
+        {
+            if (values == null) return null;
+            var notify = new WeChatPayNotify();
+            notify.SignType = values["sign_type"];
+            notify.Sign = values["sign"];
+            notify.InputCharset = values["input_charset"];
+            var dic = values.Keys.Cast<string>().ToDictionary(key => key, key => values[key]);
+            var sign = CreatePaySign(dic, appKey, MD5);
+            if (sign != notify.Sign) return null;
+            int tradeMode;
+            int.TryParse(values["trade_mode"], out tradeMode);
+            notify.TradeMode = tradeMode;
+            int tradeStatus;
+            int.TryParse(values["trade_status"], out tradeStatus);
+            notify.TradeStatus = tradeStatus;
+            notify.Partner = values["partner"];
+            notify.BankType = values["bank_type"];
+            notify.BankBillNo = values["bank_billno"];
+            notify.TotalFee = ((decimal) tryParseInt(values["total_fee"]))/100;
+            notify.FeeType = tryParseInt(values["fee_type"]);
+            notify.NotifyId = values["notify_id"];
+            notify.TransactionId = values["transation_id"];
+            notify.OutTradeNo = values["out_trade_no"];
+            notify.Attach = values["attach"];
+            DateTime dt;
+            DateTime.TryParseExact(values["time_end"], "yyyyMMddhhmmss", null, DateTimeStyles.None, out dt);
+            notify.TimeEnd = dt;
+            notify.TransportFee = ((decimal) tryParseInt(values["transport_fee"]))/100;
+            notify.ProductFee = ((decimal) tryParseInt(values["product_fee"]))/100;
+            notify.Discount = ((decimal) tryParseInt(values["discount"]))/100;
+            
+            return notify;
+        }
         
         /// <summary>
         /// 标记客户的投诉处理状态
@@ -305,6 +346,12 @@ namespace NWeChatPay
             }
         }
         #region private methods
+        private int tryParseInt(string source)
+        {
+            int value;
+            int.TryParse(source, out value);
+            return value;
+        }
 
         private static readonly XmlSerializer _payFeedbackSerializer = new XmlSerializer(typeof (PayFeedback),
                                                                                          new XmlRootAttribute("xml"));
@@ -349,8 +396,8 @@ namespace NWeChatPay
             return sb.ToString();
         }
 
-        internal static string MD5 = "MD5";
-        internal static string SHA1 = "SHA1";
+        internal const string MD5 = "MD5";
+        internal const string SHA1 = "SHA1";
         /// <summary>
         /// 哈希函数，支持MD5和SHA1
         /// </summary>
@@ -448,12 +495,12 @@ namespace NWeChatPay
         /// 生成支付签名paySign
         /// </summary>
         /// <returns></returns>
-        internal static string CreatePaySign(IEnumerable<KeyValuePair<string, string>> dicParam, string appkey)
+        internal static string CreatePaySign(IEnumerable<KeyValuePair<string, string>> dicParam, string appkey, string method=SHA1)
         {
             var dictionary = dicParam.ToDictionary(pair => pair.Key.ToLower(), pair => pair.Value);
             dictionary.Add("appkey", appkey);
             var unsignedStr = FormatUrlQuery(dictionary, false, "");
-            return Hash(unsignedStr, SHA1).ToLower();
+            return Hash(unsignedStr, method).ToLower();
         }
         internal class OrderResponse:WeChatPayResponse
         {

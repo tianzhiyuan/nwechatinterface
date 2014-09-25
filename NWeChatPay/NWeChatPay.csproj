@@ -60,6 +60,7 @@
     <Compile Include="WeChatPayException.cs" />
     <Compile Include="WeChatPayHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeChatPayNotify.cs" />
     <Compile Include="WeChatPayRequest.cs" />
     <Compile Include="WeChatPayResponse.cs" />
   </ItemGroup>
