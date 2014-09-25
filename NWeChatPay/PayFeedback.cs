@@ -46,15 +46,15 @@ namespace NWeChatPay
         /// <summary>
         /// 用户提交投诉
         /// </summary>
-        public const string Request = "request";
+        public const string REQUEST = "request";
         /// <summary>
         /// 确认消除投诉
         /// </summary>
-        public const string Confirm = "confirm";
+        public const string CONFIRM = "confirm";
         /// <summary>
         /// 拒绝维权消除投诉
         /// </summary>
-        public const string Reject = "reject";
+        public const string REJECT = "reject";
     }
     /// <summary>
     /// 客户维权

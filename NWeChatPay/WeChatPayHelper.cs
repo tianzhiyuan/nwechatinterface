@@ -286,7 +286,7 @@ namespace NWeChatPay
         /// <param name="feedbackId">客户投诉单号</param>
         /// <param name="userOpenId">客户OpenId</param>
         /// <exception cref="WeChatPayException">请求错误</exception>
-        public void UpdateFeedback(string accessToken, string feedbackId, string userOpenId)
+        public WeChatPayResponse UpdateFeedback(string accessToken, string feedbackId, string userOpenId)
         {
             var url = string.Format(Resource.UpdateFeedback_Url, accessToken, userOpenId, feedbackId);
             var request = WebRequest.Create(url);
@@ -300,11 +300,8 @@ namespace NWeChatPay
                     NullValueHandling = NullValueHandling.Ignore,
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
-                if (obj.errcode != 0)
-                {
-                    throw new WeChatPayException(obj.errmsg);
-                }
-                
+                return obj;
+
             }
         }
         #region private methods
