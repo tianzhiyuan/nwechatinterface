@@ -65,14 +65,11 @@ namespace NWeChatPay
             {
                 param.NonceStr = CreateNonce();
             }
-            if (string.IsNullOrWhiteSpace(param.TimeStamp))
-            {
-                param.TimeStamp = Epoch.Now.ToString();
-            }
+            
             var parameters = new Dictionary<string, string>();
             parameters.Add("appId", param.AppId);
             parameters.Add("package", CreatePackage(param));
-            parameters.Add("timeStamp", param.TimeStamp);
+            parameters.Add("timeStamp", Epoch.ConvertToEpoch(param.TimeStamp).ToString());
             parameters.Add("nonceStr", param.NonceStr);
             parameters.Add("paySign", CreatePaySign(parameters, param.AppKey));
             parameters.Add("signType", "SHA1");
@@ -84,17 +81,14 @@ namespace NWeChatPay
         /// <param name="param"></param>
         public string CreateNativePayUrl(NativePayParam param)
         {
-            if (string.IsNullOrWhiteSpace(param.TimeStamp))
-            {
-                param.TimeStamp = Epoch.Now.ToString();
-            }
+            
             if (string.IsNullOrWhiteSpace(param.NonceStr))
             {
                 param.NonceStr = CreateNonce();
             }
             var parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("appid", param.AppId));
-            parameters.Add(new KeyValuePair<string, string>("timestamp", param.TimeStamp));
+            parameters.Add(new KeyValuePair<string, string>("timestamp", Epoch.ConvertToEpoch(param.TimeStamp).ToString()));
             parameters.Add(new KeyValuePair<string, string>("noncestr", param.NonceStr));
             parameters.Add(new KeyValuePair<string, string>("productid", param.ProductId));
             var sign = CreatePaySign(parameters, param.AppKey);
@@ -128,17 +122,14 @@ namespace NWeChatPay
             {
                 param.NonceStr = CreateNonce();
             }
-            if (string.IsNullOrWhiteSpace(param.TimeStamp))
-            {
-                param.TimeStamp = Epoch.Now.ToString();
-            }
+            
             var parameters = new Dictionary<string, string>();
             parameters.Add("AppId", param.AppId);
             parameters.Add("Package", CreatePackage(param));
-            parameters.Add("TimeStamp", param.TimeStamp);
+            parameters.Add("TimeStamp", Epoch.ConvertToEpoch(param.TimeStamp).ToString());
             parameters.Add("NonceStr", param.NonceStr);
             parameters.Add("RetCode", param.RetCode);
-            parameters.Add("RetErrmsg", param.RetErrMsg);
+            parameters.Add("RetErrMsg", param.RetErrMsg);
             parameters.Add("AppSignature", CreatePaySign(parameters, param.AppKey));
             parameters.Add("SignMethod", "sha1");
             return ToXml(parameters);
@@ -457,7 +448,7 @@ namespace NWeChatPay
             parameters.Add("body", param.Body);
             parameters.Add("partner", param.Partner);
             parameters.Add("out_trade_no", param.OutTradeNo);
-            parameters.Add("total_fee", param.TotalFee);
+            parameters.Add("total_fee", param.TotalFee.ToString());
             parameters.Add("fee_type", "1");
             parameters.Add("notify_url", param.NotifyUrl);
             parameters.Add("spbill_create_ip", param.ClientIp);
@@ -474,13 +465,13 @@ namespace NWeChatPay
             {
                 parameters.Add("time_expire", Epoch.ConvertToEpoch(param.TimeExpire.Value).ToString());
             }
-            if (!string.IsNullOrWhiteSpace(param.TransportFee))
+            if (param.TransportFee != null)
             {
-                parameters.Add("transport_fee", param.TransportFee);
+                parameters.Add("transport_fee", param.TransportFee.Value.ToString());
             }
-            if (!string.IsNullOrWhiteSpace(param.ProductFee))
+            if (param.ProductFee != null)
             {
-                parameters.Add("product_fee", param.ProductFee);
+                parameters.Add("product_fee", param.ProductFee.Value.ToString());
             }
             if (!string.IsNullOrWhiteSpace(param.GoodsTag))
             {

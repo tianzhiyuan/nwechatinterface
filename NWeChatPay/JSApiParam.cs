@@ -10,6 +10,10 @@ namespace NWeChatPay
     /// </summary>
     public class JSApiParam
     {
+        public JSApiParam()
+        {
+            this.TimeStamp = DateTime.Now;
+        }
         public const string GBK = "GBK";
         public const string UTF8 = "UTF-8";
         /// <summary>
@@ -49,7 +53,7 @@ namespace NWeChatPay
         /// 订单总金额，单位为分，例如10元，这里要传 1000
         /// 必填
         /// </summary>
-        public string TotalFee { get; set; }
+        public int TotalFee { get; set; }
         /// <summary>
         /// 支付完成通知URL，需要绝对路径，在255字符内
         /// 必填
@@ -62,9 +66,9 @@ namespace NWeChatPay
         public string ClientIp { get; set; }
         /// <summary>
         /// Linux时间戳
-        /// 选填（如果为空则默认填充当前时间）
+        /// 选填（默认为当前时间）
         /// </summary>
-        public string TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; }
         /// <summary>
         /// 随机字符串
         /// 选填（如果为空则随机生成）
@@ -95,12 +99,12 @@ namespace NWeChatPay
         /// 物流费用,单位为分，如果有值，必须保证TransportFee + ProductFee = TotalFee
         /// 选填
         /// </summary>
-        public string TransportFee { get; set; }
+        public int? TransportFee { get; set; }
         /// <summary>
         /// 商品费用，单位为分，如果有值，必须保证TransportFee + ProductFee = TotalFee
         /// 选填
         /// </summary>
-        public string ProductFee { get; set; }
+        public int? ProductFee { get; set; }
         /// <summary>
         /// 商品标记，优惠券可能用到
         /// 选填
@@ -121,7 +125,7 @@ namespace NWeChatPay
                 throw new WeChatPayException(Resource.PartnerKey_Null);
             }
             if (string.IsNullOrWhiteSpace(Body) || string.IsNullOrWhiteSpace(Partner) ||
-                string.IsNullOrWhiteSpace(OutTradeNo) || string.IsNullOrWhiteSpace(TotalFee) ||
+                string.IsNullOrWhiteSpace(OutTradeNo) || TotalFee<0 ||
                 string.IsNullOrWhiteSpace(NotifyUrl) || string.IsNullOrWhiteSpace(ClientIp))
             {
                 throw new WeChatPayException(Resource.Parameter_Missing);

@@ -15,7 +15,8 @@ namespace NWeChatPay
         /// </summary>
         public string RetCode { get; set; }
         /// <summary>
-        /// 返回消息，可以填ok
+        /// 返回消息,默认OK
+        /// 当出现错误时，RetErrMsg 中填上UTF8 编码的错误提示信息
         /// </summary>
         public string RetErrMsg { get; set; }
     }

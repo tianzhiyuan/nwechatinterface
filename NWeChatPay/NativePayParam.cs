@@ -10,6 +10,10 @@ namespace NWeChatPay
     /// </summary>
     public class NativePayParam
     {
+        public NativePayParam()
+        {
+            this.TimeStamp = DateTime.Now;
+        }
         /// <summary>
         /// 公众号ID
         /// 必填
@@ -32,8 +36,8 @@ namespace NWeChatPay
         public string NonceStr { get; set; }
         /// <summary>
         /// 时间戳
-        /// 选填 （为空时自动填充）
+        /// 默认为当前时间
         /// </summary>
-        public string TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; }
     }
 }
