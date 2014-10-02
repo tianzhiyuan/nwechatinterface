@@ -6,11 +6,23 @@ using System.Xml.Serialization;
 
 namespace NWeChatPay
 {
+    /// <summary>
+    /// 财付通退款渠道
+    /// </summary>
     public enum RefundChannel
     {
+        /// <summary>
+        /// 退款至财付通帐号
+        /// </summary>
         ToTenpayAccount = 0,
+        /// <summary>
+        /// 退款至银行卡
+        /// </summary>
         ToBank = 1,
     }
+    /// <summary>
+    /// 财付通退款状态
+    /// </summary>
     public enum RefundStatus
     {
         /// <summary>

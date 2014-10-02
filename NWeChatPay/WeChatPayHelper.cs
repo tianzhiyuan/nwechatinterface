@@ -18,6 +18,17 @@ namespace NWeChatPay
     /// </summary>
     public class WeChatPayHelper
     {
+        private int _timeOut = 10;
+
+        /// <summary>
+        /// 请求超时时间，单位秒。默认10s
+        /// </summary>
+        public int TimeOut
+        {
+            get { return this._timeOut; }
+            set { _timeOut = value; }
+        }
+
         /// <summary>
         /// 获取微信版本号
         /// </summary>
