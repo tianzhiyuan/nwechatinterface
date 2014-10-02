@@ -94,7 +94,7 @@ namespace NWeChatPay
         /// <summary>
         /// 退款渠道,0:退到财付通、1:退到银行
         /// </summary>
-        public string refund_channel { get; set; }
+        public int refund_channel { get; set; }
         /// <summary>
         /// 退款总金额,单位为分,可以做部分退款
         /// </summary>

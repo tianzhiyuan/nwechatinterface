@@ -8,6 +8,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
@@ -362,6 +363,73 @@ namespace NWeChatPay
         /// </summary>
         public RefundResponse Refund(RefundRequest refund)
         {
+            var queryDic = new Dictionary<string, string>();
+            queryDic.Add("sign_type", refund.sign_type);
+            queryDic.Add("input_charset", refund.input_charset);
+            queryDic.Add("service_version", refund.service_version);
+            if (refund.sign_key_index != null)
+            {
+                queryDic.Add("sign_key_index", refund.sign_key_index.Value.ToString());
+            }
+            queryDic.Add("partner", refund.partner);
+            queryDic.Add("out_trade_no", refund.out_trade_no);
+            queryDic.Add("transation_id", refund.transaction_id);
+            queryDic.Add("out_refund_no", refund.out_refund_no);
+            queryDic.Add("total_fee", refund.total_fee.ToString());
+            queryDic.Add("refund_fee", refund.refund_fee.ToString());
+            queryDic.Add("op_user_id", refund.op_user_id.ToString());
+            if (refund.service_version == "1.1")
+            {
+                refund.op_user_password = Hash(refund.op_user_password, MD5);
+            }
+            queryDic.Add("op_user_password", refund.op_user_password);
+            if (!string.IsNullOrWhiteSpace(refund.recv_user_id))
+            {
+                queryDic.Add("recv_user_id", refund.recv_user_id);
+            }
+            if (!string.IsNullOrWhiteSpace(refund.reccv_user_name))
+            {
+                queryDic.Add("reccv_user_name", refund.reccv_user_name);
+            }
+            if (refund.user_spbill_no_flag != null)
+            {
+                queryDic.Add("user_spbill_no_flag", refund.user_spbill_no_flag.Value.ToString());
+            }
+            if (refund.refund_type != null)
+            {
+                queryDic.Add("refund_type", refund.refund_type.Value.ToString());
+            }
+            var sign = Hash(FormatUrlQuery(queryDic, false, "") + "&key=" + refund.AppKey, refund.sign_type, refund.input_charset).ToUpper();
+            queryDic.Add("sign", sign);
+            var query = FormatUrlQuery(queryDic, true, refund.input_charset);
+            var url = string.Format("https://mch.tenpay.com/refundapi/gateway/refund.xml?{0}", query);
+            
+            try
+            {
+                var request = (HttpWebRequest) WebRequest.Create(url);
+                request.Timeout = this.TimeOut*1000;
+                request.Method = "POST";
+                using (var response = request.GetResponse())
+                using (var sr = new StreamReader(response.GetResponseStream()))
+                {
+                    var content = sr.ReadToEnd();
+                    var parameters = XmlToDictionary(content);
+                    var signParameters = parameters.Where(o => o.Key != "sign").ToDictionary(o => o.Key, o => o.Value);
+                    var retSign = Hash(FormatUrlQuery(signParameters, false, "")+ "&key=" + refund.AppKey, MD5, parameters["sign_type"]).ToUpper();
+                    if (retSign == parameters["sign"])
+                    {
+                        throw new Exception("sign error");
+                    }
+                    return MapResponse(parameters);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+            
             return null;
         }
         #region private methods
@@ -374,7 +442,26 @@ namespace NWeChatPay
 
         private static readonly XmlSerializer _payFeedbackSerializer = new XmlSerializer(typeof (PayFeedback),
                                                                                          new XmlRootAttribute("xml"));
-        
+        private RefundResponse MapResponse(IDictionary<string, string> dictionary)
+        {
+            var response = new RefundResponse();
+            response.sign = dictionary["sign"];
+            response.sign_type = dictionary["sign_type"];
+            response.input_charset = dictionary["input_charset"];
+            response.retcode = tryParseInt(dictionary["retcode"]);
+            response.retmsg = dictionary["retmsg"];
+            response.partner = dictionary["partner"];
+            response.transation_id = dictionary["transaction_id"];
+            response.out_trade_no = dictionary["out_trade_no"];
+            response.out_refund_no = dictionary["out_refund_no"];
+            response.refund_id = dictionary["refund_id"];
+            response.refund_channel = tryParseInt(dictionary["refund_channel"]);
+            response.refund_fee = tryParseInt(dictionary["refund_fee"]);
+            response.refund_status = tryParseInt(dictionary["refund_status"]);
+            response.reccv_user_name = dictionary["reccv_user_name"];
+            response.recv_user_id = dictionary["recv_user_id"];
+            return response;
+        }
         #endregion
         #region internal methods
         private static readonly char[] nonceRange =
@@ -459,6 +546,16 @@ namespace NWeChatPay
             buffer.Append("</xml>");
             return buffer.ToString();
         }
+        internal static IDictionary<string, string> XmlToDictionary(string xml)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xml);
+            XmlNode root = xmlDoc.SelectSingleNode("root");
+            XmlNodeList xnl = root.ChildNodes;
+
+            var dic = xnl.Cast<XmlNode>().ToDictionary(xnf => xnf.Name, xnf => xnf.InnerXml);
+            return dic;
+        } 
         internal static string FormatUrlQuery(IDictionary<string, string> dic, bool NeedUrlEncode, string encoding)
         {
             var pairs = dic.OrderBy(o => o.Key).ToArray();
@@ -523,7 +620,7 @@ namespace NWeChatPay
             var unsignedStr = FormatUrlQuery(dictionary, false, "");
             return Hash(unsignedStr, method).ToLower();
         }
-        internal class OrderResponse:WeChatPayResponse
+        public class OrderResponse:WeChatPayResponse
         {
             public OrderInfo order_info { get; set; }
         }
