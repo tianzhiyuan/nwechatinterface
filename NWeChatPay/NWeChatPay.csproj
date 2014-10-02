@@ -52,6 +52,8 @@
     <Compile Include="OrderInfo.cs" />
     <Compile Include="OrderQuery.cs" />
     <Compile Include="PayFeedback.cs" />
+    <Compile Include="RefundRequest.cs" />
+    <Compile Include="RefundResponse.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

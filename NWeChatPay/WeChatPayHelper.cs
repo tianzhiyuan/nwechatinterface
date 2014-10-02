@@ -346,6 +346,13 @@ namespace NWeChatPay
 
             }
         }
+        /// <summary>
+        /// 发起微信退款请求
+        /// </summary>
+        public RefundResponse Refund(RefundRequest refund)
+        {
+            return null;
+        }
         #region private methods
         private int tryParseInt(string source)
         {
@@ -404,14 +411,16 @@ namespace NWeChatPay
         /// </summary>
         /// <param name="origin">待哈希串</param>
         /// <param name="method">哈希方法</param>
+        /// <param name="encoding">编码</param>
         /// <returns></returns>
-        internal static string Hash(string origin, string method)
+        internal static string Hash(string origin, string method, string encoding = "UTF-8")
         {
             if (origin == null) return null;
             using (var algo = HashAlgorithm.Create(method))
             {
                 if (algo == null) return null;
-                var bytearray = algo.ComputeHash(Encoding.UTF8.GetBytes(origin));
+                var bytes = Encoding.GetEncoding(encoding).GetBytes(origin);
+                var bytearray = algo.ComputeHash(bytes);
                 return BitConverter.ToString(bytearray).Replace("-", "");
             }
         }
