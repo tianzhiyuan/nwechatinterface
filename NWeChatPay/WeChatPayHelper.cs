@@ -214,11 +214,17 @@ namespace NWeChatPay
         public OrderInfo QueryOrder(OrderQuery query)
         {
             var url = string.Format(Resource.OrderQuery_Url, query.AccessToken);
+            var packageParam = new Dictionary<string, string>();
+            packageParam.Add("out_trade_no", query.OutTradeNo);
+            packageParam.Add("partner", query.Partner);
+            var sign = Hash(FormatUrlQuery(packageParam, false, "") + "&key=" + query.PartnerKey, MD5).ToUpper();
+            packageParam.Add("sign", sign);
+            var package = FormatUrlQuery(packageParam, false, "");
             var jsonParam = new List<KeyValuePair<string, string>>();
             jsonParam.Add(new KeyValuePair<string, string>("appid", query.AppId));
-            jsonParam.Add(new KeyValuePair<string, string>("package", ""));
+            jsonParam.Add(new KeyValuePair<string, string>("package", package));
             jsonParam.Add(new KeyValuePair<string, string>("timestamp", Epoch.ConvertToEpoch(query.TimeStamp).ToString()));
-            jsonParam.Add(new KeyValuePair<string, string>("app_signature", ""));
+            jsonParam.Add(new KeyValuePair<string, string>("app_signature", CreatePaySign(jsonParam, query.AppKey)));
             jsonParam.Add(new KeyValuePair<string, string>("sign_method", "sha1"));
             var json = DictionaryToJson(jsonParam);
             try
