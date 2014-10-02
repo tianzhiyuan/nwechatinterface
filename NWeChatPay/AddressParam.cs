@@ -18,14 +18,19 @@ namespace NWeChatPay
         /// <summary>
         /// AccessToken
         /// 必填
+        /// oauth获取的token，获取token的scope是snsapi_base
         /// </summary>
         public string AccessToken { get; set; }
+        /// <summary>
+        /// 签名使用的url必须是调用时所在页面的url，此url域名要与填写Oauth2.0授权域名一致
+        /// 参与签名使用的url必须带上微信服务器返回的code和state参数
+        /// </summary>
         public string Url { get; set; }
         /// <summary>
-        /// Linux时间戳
-        /// 如果为空 则取当前时间
+        /// 时间戳
+        /// 默认为当前时间
         /// </summary>
-        public string TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; }
         /// <summary>
         /// 随机数
         /// 如果为空，则会自动填充

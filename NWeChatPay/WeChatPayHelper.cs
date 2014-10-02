@@ -141,9 +141,13 @@ namespace NWeChatPay
         /// <returns></returns>
         public string CreateAddressParam(AddressParam param)
         {
+            if (string.IsNullOrWhiteSpace(param.NonceStr))
+            {
+                param.NonceStr = CreateNonce();
+            }
             var parameters = new Dictionary<string, string>();
             parameters.Add("appId", param.AppId);
-            parameters.Add("timeStamp", param.TimeStamp);
+            parameters.Add("timeStamp", Epoch.ConvertToEpoch(param.TimeStamp).ToString());
             parameters.Add("nonceStr", param.NonceStr);
             parameters.Add("accessToken", param.AccessToken);
             parameters.Add("url", param.Url);
@@ -153,7 +157,7 @@ namespace NWeChatPay
             list.Add(new KeyValuePair<string, string>("scope", "jsapi_address"));
             list.Add(new KeyValuePair<string, string>("signType", "sha1"));
             list.Add(new KeyValuePair<string, string>("addrSign", addrSign));
-            list.Add(new KeyValuePair<string, string>("timeStamp", param.TimeStamp));
+            list.Add(new KeyValuePair<string, string>("timeStamp", Epoch.ConvertToEpoch(param.TimeStamp).ToString()));
             list.Add(new KeyValuePair<string, string>("nonceStr", param.NonceStr));
             return DictionaryToJson(list);
         }
