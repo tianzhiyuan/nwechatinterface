@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 移动用户分组
     /// </summary>
-    public class ShiftUserGroup:IPostRequest<WeChatResponse>
+    public class ShiftUserGroup:IPostRequest<CommonResponse>
     {
         public ShiftUserGroup(string accessToken, string openId, int groupId)
         {

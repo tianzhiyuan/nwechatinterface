@@ -2,7 +2,7 @@
 
 namespace NWeChatInterface.Response
 {
-    public class MenuResponse : WeChatResponse
+    public class MenuResponse : AbstractResponse
     {
         public Menu menu { get; set; }
     }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NWeChatInterface.Models;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 更新用户组名称
     /// </summary>
-    public class UpdateUserGroupName : IPostRequest<WeChatResponse>
+    public class UpdateUserGroupName : IPostRequest<CommonResponse>
     {
         public UpdateUserGroupName(string accessToken, UserGroup group)
         {

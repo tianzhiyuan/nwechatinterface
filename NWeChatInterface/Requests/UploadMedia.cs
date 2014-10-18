@@ -15,7 +15,7 @@ namespace NWeChatInterface.Requests
     /// 缩略图（thumb）：64KB，支持JPG格式
     /// 注意多媒体文件三天后会被删除
     /// </summary>
-    public class UploadMedia : IWeChatRequest<UploadMediaResponse>
+    public class UploadMedia : IWeChatRequest<UploadResponse>
     {
         public string AccessToken { get; private set; }
         /// <summary>

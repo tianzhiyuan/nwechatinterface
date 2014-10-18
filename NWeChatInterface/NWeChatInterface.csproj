@@ -73,12 +73,11 @@
     <Compile Include="Response\GetUserBelongGroupResponse.cs" />
     <Compile Include="Response\SendMassMessageResponse.cs" />
     <Compile Include="Response\SendTemplateResponse.cs" />
-    <Compile Include="Response\UploadNewsResponse.cs" />
     <Compile Include="Response\UploadResponse.cs" />
     <Compile Include="WeChatEventTypes.cs" />
     <Compile Include="WeChatMessageTypes.cs" />
     <Compile Include="WeChatReponseMessage.cs" />
-    <Compile Include="WeChatResponse.cs" />
+    <Compile Include="Response\CommonResponse.cs" />
     <Compile Include="CData.cs" />
     <Compile Include="ResponseMessages\ImageMessage.cs" />
     <Compile Include="ResponseMessages\MusicMessage.cs" />
@@ -98,7 +97,6 @@
     <Compile Include="Messages\WeChatLocationMsg.cs" />
     <Compile Include="Messages\WeChatMediaMsg.cs" />
     <Compile Include="Messages\WeChatMenuEvent.cs" />
-    <Compile Include="Messages\WeChatNewsMsg.cs" />
     <Compile Include="Messages\WeChatNormalMsg.cs" />
     <Compile Include="Messages\WeChatScanQrEvent.cs" />
     <Compile Include="Messages\WeChatTextMsg.cs" />
@@ -131,11 +129,10 @@
     <Compile Include="Response\OpenIdResponse.cs" />
     <Compile Include="Response\QRTicketResponse.cs" />
     <Compile Include="Response\SubscriberListResponse.cs" />
-    <Compile Include="Response\UploadMediaResponse.cs" />
     <Compile Include="Response\UserInfoResponse.cs" />
     <Compile Include="WeChatBaseMsg.cs" />
     <Compile Include="WeChatMediaType.cs" />
-    <Compile Include="WeChatOAuth.cs" />
+    <Compile Include="WeChatOAuthBuilder.cs" />
     <Compile Include="WeChatRequestException.cs" />
     <Compile Include="WeChatService.cs" />
   </ItemGroup>

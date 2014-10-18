@@ -23,7 +23,7 @@ namespace NWeChatInterface.Messages
         protected static XmlSerializer _serializer = new XmlSerializer(typeof(WeChatEventMsg),
                                                                        new XmlRootAttribute("xml"));
 
-        private static Dictionary<string, XmlSerializer> _serializerCache = new Dictionary<string, XmlSerializer>();
+        private static readonly Dictionary<string, XmlSerializer> _serializerCache = new Dictionary<string, XmlSerializer>();
 
         
         static WeChatEventMsg()

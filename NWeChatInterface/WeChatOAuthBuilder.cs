@@ -15,7 +15,7 @@ namespace NWeChatInterface
     /// 2. redirectUrl中会拿到code字段（和state字段）
     /// 3. 通过Code获取到openid<see cref="GetOpenIdByCode"/>
     /// </summary>
-    public class WeChatOAuth
+    public class WeChatOAuthBuilder
     {
         /// <summary>
         /// 只能获取到openid

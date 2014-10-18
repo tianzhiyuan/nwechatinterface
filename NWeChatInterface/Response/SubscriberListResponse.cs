@@ -9,7 +9,7 @@ namespace NWeChatInterface.Response
     /// <summary>
     /// 获取所有关注者列表的返回值
     /// </summary>
-    public class SubscriberListResponse : WeChatResponse
+    public class SubscriberListResponse : AbstractResponse
     {
         public int total { get; set; }
         public int count { get; set; }

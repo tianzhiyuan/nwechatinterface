@@ -60,7 +60,7 @@ namespace NWeChatInterface.Messages
         /// </summary>
         public long MsgID { get; set; }
         /// <summary>
-        /// 群发的结构，为“send success”或“send fail”或“err(num)”。
+        /// 群发的结果，为“send success”或“send fail”或“err(num)”。
         /// 但send success时，也有可能因用户拒收公众号的消息、系统错误等原因造成少量用户接收失败
         /// err(num)是审核失败的具体原因，可能的情况如下：
         /// err(10001), 涉嫌广告 

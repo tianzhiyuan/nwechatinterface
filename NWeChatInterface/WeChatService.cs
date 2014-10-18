@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using NWeChatInterface.Requests;
@@ -34,7 +30,7 @@ namespace NWeChatInterface
         /// <summary>
         /// 请求超时时间，单位秒。默认10s
         /// </summary>
-        public int TimeOut
+        public int TimeOutSeconds
         {
             get { return this._timeOut; }
             set { _timeOut = value; }
@@ -68,6 +64,7 @@ namespace NWeChatInterface
             var url = request.RequestUrl;
             var req = WebRequest.Create(url);
             req.Method = "POST";
+            req.Timeout = TimeOutSeconds*1000;
             req.ContentType = "application/json";
             var requestData = request.Data;
             if (!string.IsNullOrEmpty(requestData))
@@ -84,7 +81,7 @@ namespace NWeChatInterface
             return data;
         }
 
-        public UploadMediaResponse Execute(UploadMedia request)
+        public UploadResponse Execute(UploadMedia request)
         {
             //var b = "----------------------------" + DateTime.Now.Ticks.ToString("x");
             //using (var client = new HttpClient())
@@ -142,7 +139,7 @@ namespace NWeChatInterface
             memStream.Close();
             var requestStream = httpWebRequest.GetRequestStream();
             requestStream.Write(tempBuffer, 0, tempBuffer.Length);
-            var result = DoRequest<UploadMediaResponse>(httpWebRequest, request);
+            var result = DoRequest<UploadResponse>(httpWebRequest, request);
             return result;
 
 

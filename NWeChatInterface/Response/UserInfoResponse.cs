@@ -11,14 +11,14 @@ namespace NWeChatInterface.Response
     /// <summary>
     /// 获取用户信息的返回结果
     /// </summary>
-    public class UserInfoResponse:WeChatResponse
+    public class UserInfoResponse : AbstractResponse
     {
         /// <summary>
         /// 如果为false，则未关注，拉取不到其他信息
         /// 注意如果是使用OAuth接口拉取的用户信息，则不会返回该属性值，并且也不需要
         /// </summary>
         public bool subscribe { get; set; }
-        public string opendid { get; set; }
+        public string openid { get; set; }
         /// <summary>
         /// 用户的昵称
         /// </summary>

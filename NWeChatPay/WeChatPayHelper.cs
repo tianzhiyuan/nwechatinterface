@@ -511,7 +511,7 @@ namespace NWeChatPay
         /// <param name="method">哈希方法</param>
         /// <param name="encoding">编码</param>
         /// <returns></returns>
-        internal static string Hash(string origin, string method, string encoding = "UTF-8")
+        public static string Hash(string origin, string method, string encoding = "UTF-8")
         {
             if (origin == null) return null;
             using (var algo = HashAlgorithm.Create(method))

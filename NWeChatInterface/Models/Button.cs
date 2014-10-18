@@ -38,7 +38,7 @@ namespace NWeChatInterface.Models
         /// <param name="u">原Url</param>
         public void SetUrlWithAuth(string appid, string u)
         {
-            this.url = WeChatOAuth.BuildBaseUrl(appid, u);
+            this.url = WeChatOAuthBuilder.BuildBaseUrl(appid, u);
         }
     }
     public class ParentButton:Button

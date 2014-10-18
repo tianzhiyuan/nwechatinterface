@@ -2,7 +2,7 @@
 
 namespace NWeChatInterface.Response
 {
-    public class GetUserGroupResponse:WeChatResponse
+    public class GetUserGroupResponse : AbstractResponse
     {
         public UserGroup[] groups { get; set; }
     }

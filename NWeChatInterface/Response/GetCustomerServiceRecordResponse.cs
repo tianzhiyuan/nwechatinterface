@@ -6,7 +6,7 @@ using NWeChatInterface.Models;
 
 namespace NWeChatInterface.Response
 {
-    public class GetCustomerServiceRecordResponse : WeChatResponse
+    public class GetCustomerServiceRecordResponse : AbstractResponse
     {
         public CustomerServiceRecord[] recordlist { get; set; }
     }

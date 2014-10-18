@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
@@ -11,7 +12,7 @@ namespace NWeChatInterface.Requests
     /// 已经收到的用户，还是能在其本地看到消息卡片。 
     /// 另外，删除群发消息只能删除图文消息和视频消息，其他类型的消息一经发送，无法删除。
     /// </summary>
-    public class DeleteMassMessage:IPostRequest<AbstractResponse>
+    public class DeleteMassMessage:IPostRequest<CommonResponse>
     {
         public DeleteMassMessage(string accessToken, long msgid)
         {
@@ -24,7 +25,7 @@ namespace NWeChatInterface.Requests
         {
             get
             {
-                return string.Format("https://api.weixin.qq.com//cgi-bin/message/mass/delete?access_token={0}",
+                return string.Format("https://api.weixin.qq.com/cgi-bin/message/mass/delete?access_token={0}",
                                      this.AccessToken);
             }
         }

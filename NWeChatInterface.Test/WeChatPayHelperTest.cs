@@ -63,7 +63,6 @@ AwVz1PyIcUSjBrDzXAibTiaAdrTGb4eBFbib9ibFaSeic3OIg/0]]></PicUrl>
                     AppKey =
                         "2Wozy2aksie1puXUBpWD8oZxiD1DfQuEaiC7KcRATv1Ino3mdopKaPGQQ7TtkNySuAmCaDCrw4xhPY5qKTBl7Fzm0RgR3c0WaVYIXZARsxzHV2x7iwPPzOz94dnwPWSn",
                     ProductId = "123456",
-                    TimeStamp = "189026618",
                     NonceStr = "adssdasssd13d"
                 };
             var url = new WeChatPayHelper().CreateNativePayUrl(param);

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NWeChatInterface.Response;
 
 namespace NWeChatInterface.Requests
 {
     /// <summary>
     /// 设置用户备注
     /// </summary>
-    public class SetUserRemark : IPostRequest<AbstractResponse>
+    public class SetUserRemark : IPostRequest<CommonResponse>
     {
         public string AccessToken { get; private set; }
         public string OpenId { get; private set; }

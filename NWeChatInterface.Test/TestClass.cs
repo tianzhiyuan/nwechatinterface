@@ -56,10 +56,17 @@ namespace NWeChatInterface.Test
                     OutTradeNo = "outtradeno",
                     Partner = "partner",
                     PartnerKey = "partnerkey",
-                    TotalFee = "1",
+                    TotalFee = 1,
 
                 };
             var str = helper.CreateJSApiParam(api);
+        }
+        [Test]
+        public void TestHash()
+        {
+            var hash = WeChatPayHelper.Hash(
+                @"bank_type=WX&body=支付测试&fee_type=1&input_charset=UTF-8&notify_url=http://weixin.qq.com&out_trade_no=7240b65810859cbf2a8d9f76a638c0a3&partner=1900000109&spbill_create_ip=196.168.1.1&total_fee=1&key=8934e7d15453e97507ef794cf7b0519d", "MD5");
+            Assert.AreEqual(hash.ToUpper(), "7F77B507B755B3262884291517E380F8");
         }
     }
 

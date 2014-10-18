@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NWeChatInterface.Response;
 using Newtonsoft.Json;
 
 namespace NWeChatInterface.Requests
@@ -13,7 +14,7 @@ namespace NWeChatInterface.Requests
     /// 通过POST一个JSON数据包来发送消息给普通用户，在48小时内不限制发送次数。
     /// 此接口主要用于客服等有人工消息处理环节的功能，方便开发者为用户提供更加优质的服务。
     /// </summary>
-    public class SendCustomerServiceMessage : IPostRequest<WeChatResponse>
+    public class SendCustomerServiceMessage : IPostRequest<CommonResponse>
     {
         public SendCustomerServiceMessage(string accessToken, IResponseMessage message)
         {
