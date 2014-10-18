@@ -83,36 +83,7 @@ namespace NWeChatInterface
 
         public UploadResponse Execute(UploadMedia request)
         {
-            //var b = "----------------------------" + DateTime.Now.Ticks.ToString("x");
-            //using (var client = new HttpClient())
-            //using (var formData = new MultipartFormDataContent())
-            //{
-
-            //    var bytes = new ByteArrayContent(request.Content);
-            //    //formData.Headers.Remove("Content-Type");
-            //    //formData.Headers.TryAddWithoutValidation("Contenty-Type", "multipart/form-data; boundary=" + b);
-            //    bytes.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
-            //    bytes.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-            //        {
-            //            Name = "\"file\"",
-            //            FileName = "\"" + request.FileName + "\""
-            //        };
-            //    formData.Add(bytes, "file", request.FileName);
-            //    var response = client.PostAsync(request.RequestUrl, formData).Result;
-            //    if (!response.IsSuccessStatusCode)
-            //    {
-            //        throw new Exception("Remote server failed");
-            //    }
-            //    using (var reader = new JsonTextReader(new StreamReader(response.Content.ReadAsStreamAsync().Result)))
-            //    {
-            //        var obj = _serializer.Deserialize<UploadMediaResult>(reader);
-            //        if (obj.errcode != 0)
-            //        {
-            //            throw new WeChatRequestException(obj.errcode, request);
-            //        }
-            //        return obj;
-            //    }
-            //}
+            
             string boundary = "----------------------------" + DateTime.Now.Ticks.ToString("x");
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(request.RequestUrl);
             httpWebRequest.ContentType = "multipart/form-data; boundary=" + boundary;

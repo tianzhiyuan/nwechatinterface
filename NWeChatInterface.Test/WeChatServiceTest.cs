@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace NWeChatInterface.Test
 {
     [TestFixture]
-    class WeChatServiceGetTest
+    class WeChatServiceTest
     {
         WeChatService Service = WeChatTestCaseSupplier.Service;
         private string TempAT = WeChatTestCaseSupplier.TempAccessToken;

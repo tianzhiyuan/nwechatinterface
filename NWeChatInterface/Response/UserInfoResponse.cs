@@ -51,6 +51,7 @@ namespace NWeChatInterface.Response
         /// 用户特权
         /// </summary>
         public string[] privilege { get; set; }
+        public string remark { get; set; }
         public DateTime SubscribedAt
         {
             get { return Epoch.ConvertToLocalTime(this.subscribe_time); }

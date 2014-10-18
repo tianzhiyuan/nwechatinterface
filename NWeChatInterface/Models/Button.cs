@@ -19,12 +19,9 @@ namespace NWeChatInterface.Models
     /// <summary>
     /// 微信自定义菜单按钮
     /// </summary>
-    public abstract class Button
+    public class Button
     {
         public string name { get; set; }
-    }
-    public class NormalButton:Button
-    {
         /// <summary>
         /// 类型
         /// </summary>
@@ -40,9 +37,7 @@ namespace NWeChatInterface.Models
         {
             this.url = WeChatOAuthBuilder.BuildBaseUrl(appid, u);
         }
-    }
-    public class ParentButton:Button
-    {
         public Button[] sub_button { get; set; }
     }
+   
 }
