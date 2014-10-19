@@ -146,8 +146,16 @@ namespace NWeChatInterface
         #region IWeChatService Members
         TResponse IWeChatService.Execute<TResponse>(IWeChatRequest<TResponse> request)
         {
-            dynamic me = this;
-            return me.Execute(request);
+            var media = request as UploadMedia;
+            if (media != null)
+            {
+                return this.Execute(media) as TResponse;
+            }
+            if (request is IPostRequest<TResponse>)
+            {
+                return this.Execute((IPostRequest<TResponse>)request);
+            }
+            return this.Execute((IGetRequest<TResponse>) request);
         }
         bool IWeChatService.VerifySignature(string nonce, string timestamp, string token, string signature)
         {

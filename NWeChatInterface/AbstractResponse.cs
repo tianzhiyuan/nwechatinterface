@@ -16,7 +16,7 @@ namespace NWeChatInterface
             var sb = new StringBuilder();
             foreach (var property in properties)
             {
-                sb.AppendFormat("{0}:{1} ", property.Name, property.GetValue(this, null));
+                sb.AppendFormat("{0}:{1}, ", property.Name, property.GetValue(this, null));
             }
             return sb.ToString();
         }

@@ -48,9 +48,10 @@
     <Compile Include="WeChatPayHelperTest.cs" />
     <Compile Include="WeChatTestCaseSupplier.cs" />
     <Compile Include="WeChatMessageTest.cs" />
-    <Compile Include="WeChatServiceGetTest.cs" />
+    <Compile Include="WeChatServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
