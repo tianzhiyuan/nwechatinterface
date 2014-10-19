@@ -11,7 +11,7 @@ namespace NWeChatInterface.ResponseMessages
     /// <summary>
     /// 图文消息
     /// </summary>
-    public class NewsMessage : WeChatReponseMessage, IResponseMessage
+    public class NewsMessage : WeChatReponseMessage
     {
         [JsonIgnore]
         public int ArticleCount { get; set; }

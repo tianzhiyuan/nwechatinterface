@@ -16,12 +16,12 @@ namespace NWeChatInterface.Requests
     /// </summary>
     public class SendCustomerServiceMessage : IPostRequest<CommonResponse>
     {
-        public SendCustomerServiceMessage(string accessToken, IResponseMessage message)
+        public SendCustomerServiceMessage(string accessToken, WeChatReponseMessage message)
         {
             this.AccessToken = accessToken;
             this.Message = message;
         }
-        public IResponseMessage Message { get; private set; }
+        public WeChatReponseMessage Message { get; private set; }
         public string AccessToken { get; private set; }
 
         public string RequestUrl

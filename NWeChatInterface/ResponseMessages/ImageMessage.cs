@@ -15,7 +15,7 @@ namespace NWeChatInterface.ResponseMessages
     /// <summary>
     /// 图片消息
     /// </summary>
-    public class ImageMessage : WeChatReponseMessage, IResponseMessage
+    public class ImageMessage : WeChatReponseMessage
     {
         [JsonProperty("image")]
         public ImageContent Image { get; set; }

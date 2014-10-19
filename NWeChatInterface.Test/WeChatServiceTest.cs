@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
 using NWeChatInterface.Models;
 using NWeChatInterface.Requests;
 using NUnit.Framework;
+using NWeChatInterface.ResponseMessages;
+
 namespace NWeChatInterface.Test
 {
     [TestFixture]
     public class WeChatServiceTest
     {
         private readonly IWeChatService wechat = new WeChatService();
-        private string someAppKey = "";
-        private string someAppSecret = "";
+        private string someAppKey = ConfigurationManager.AppSettings["AppId"];
+        private string someAppSecret = ConfigurationManager.AppSettings["AppSecret"];
         private string tempToken = "GFreFKH0o7qiLyfqJDog8bxzd_kPBcloQcHBwBvop4GFZStCN0-Fy2biQZzT01pxEfPhUdBB1vNoMuY1LHF9ge6ISeVzWVZzEgf8fj6gsAU";
         private string tempOpenId = "ob0Yssym8ndt--BDOgIEZucfyipQ";
 
@@ -33,7 +36,7 @@ namespace NWeChatInterface.Test
         [Test]
         public void GetAccessToken()
         {
-            var svc = WeChatTestCaseSupplier.Service;
+            var svc = wechat;
             var ret = svc.Execute(new GetAccessToken(someAppKey, someAppSecret));
             Console.WriteLine(ret);
             Assert.AreEqual(ret.errcode, 0);
@@ -138,6 +141,36 @@ namespace NWeChatInterface.Test
         public void GetUserBelongGroupTest()
         {
             var response = wechat.Execute(new GetBelongUserGroup(tempToken, tempOpenId));
+            Console.WriteLine(response);
+            Assert.AreEqual(0, response.errcode);
+        }
+        [Test]
+        public void SendCustomerServiceMessage_Text()
+        {
+            var response =
+                wechat.Execute(new SendCustomerServiceMessage(tempToken,
+                                                              new TextMessage()
+                                                                  {
+                                                                      Content = "测试客服文本消息",
+                                                                      ToUserName = tempOpenId,
+                                                                      CreatedAt = DateTime.Now
+                                                                  }));
+            Console.WriteLine(response);
+            Assert.AreEqual(0, response.errcode);
+        }
+        [Test]
+        public void SendMassMessage_Text()
+        {
+            var response =
+                wechat.Execute(new SendMassMessage(tempToken, new string[] {tempOpenId}, WeChatMessageTypes.TEXT,
+                                                   "测试群发文本消息"));
+            Console.WriteLine(response);
+            Assert.AreEqual(0, response.errcode);
+        }
+        [Test]
+        public void SetUserRemarkTest()
+        {
+            var response = wechat.Execute(new SetUserRemark(tempToken, tempOpenId, "tt"));
             Console.WriteLine(response);
             Assert.AreEqual(0, response.errcode);
         }

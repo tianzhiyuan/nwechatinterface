@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IResponseMessage.cs" />
     <Compile Include="IWeChatService.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Messages\WeChatMassSendJobEvent.cs" />

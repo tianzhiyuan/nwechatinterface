@@ -37,7 +37,7 @@ namespace NWeChatInterface.Requests
             this.SendByGroupId = true;
             this.GroupId = group_id;
             this.Type = type;
-            this.MediaId = mediaId;
+            this.ContentOrMediaId = mediaId;
         }
         /// <summary>
         /// 根据openid 列表进行群发
@@ -45,27 +45,30 @@ namespace NWeChatInterface.Requests
         /// <param name="accessToken">AccessToken</param>
         /// <param name="userOpenIds">填写图文消息的接收者，一串OpenID列表，OpenID最少1个，最多10000个</param>
         /// <param name="type">消息类型，包括语音voice,图片image，文本text，多图文news，视频video<see cref="WeChatMessageTypes"/></param>
-        /// <param name="mediaId">如果消息类型问文本，这里可以直接输入文本内容，其他则输入media_id</param>
-        public SendMassMessage(string accessToken, string[] userOpenIds, string type, string mediaId)
+        /// <param name="contentOrMediaId">如果消息类型问文本，这里可以直接输入文本内容，其他则输入media_id</param>
+        public SendMassMessage(string accessToken, string[] userOpenIds, string type, string contentOrMediaId)
             : this(accessToken)
         {
             this.SendByGroupId = false;
             this.UserIds = userOpenIds;
             this.Type = type;
-            this.MediaId = mediaId;
+            this.ContentOrMediaId = contentOrMediaId;
         }
         public bool SendByGroupId { get; private set; }
         public string[] UserIds { get; private set; }
         public int GroupId { get; private set; }
-        public string MediaId { get; private set; }
+        public string ContentOrMediaId { get; private set; }
         public string AccessToken { get; private set; }
 
         public string RequestUrl
         {
             get
             {
-                return string.Format("https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token={0}",
-                                     this.AccessToken);
+                return UserIds != null
+                           ? string.Format("https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token={0}",
+                                           this.AccessToken)
+                           : string.Format("https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token={0}",
+                                           this.AccessToken);
             }
         }
 
@@ -81,29 +84,29 @@ namespace NWeChatInterface.Requests
                 }
                 else
                 {
-                    sb.AppendFormat("\"touser\":[{0}]",
+                    sb.AppendFormat("\"touser\":[{0}],",
                                     string.Join(",", this.UserIds.Select(o => string.Format("\"{0}\"", o))));
                 }
                 switch (Type)
                 {
                     case WeChatMessageTypes.TEXT:
-                        sb.AppendFormat("\"text\":{{{0}}}", JsonHelper.WriteObject("content", this.MediaId));
+                        sb.AppendFormat("\"text\":{{{0}}},", JsonHelper.WriteObject("content", this.ContentOrMediaId));
                         sb.AppendFormat("\"msgtype\":\"text\"");
                         break;
                     case WeChatMessageTypes.IMAGE:
-                        sb.AppendFormat("\"image\":{{{0}}}", JsonHelper.WriteObject("media_id", this.MediaId));
+                        sb.AppendFormat("\"image\":{{{0}}},", JsonHelper.WriteObject("media_id", this.ContentOrMediaId));
                         sb.AppendFormat("\"msgtype\":\"image\"");
                         break;
                     case WeChatMessageTypes.NEWS:
-                        sb.AppendFormat("\"mpnews\":{{\"media_id\":\"{0}\"}},", this.MediaId);
+                        sb.AppendFormat("\"mpnews\":{{\"media_id\":\"{0}\"}},", this.ContentOrMediaId);
                         sb.AppendFormat("\"msgtype\":\"mpnews\"");
                         break;
                     case WeChatMessageTypes.VIDEO:
-                        sb.AppendFormat("\"mpvideo\":{{{0}}}", JsonHelper.WriteObject("media_id", this.MediaId));
+                        sb.AppendFormat("\"mpvideo\":{{{0}}},", JsonHelper.WriteObject("media_id", this.ContentOrMediaId));
                         sb.AppendFormat("\"msgtype\":\"mpvideo\"");
                         break;
                     case WeChatMessageTypes.VOICE:
-                        sb.AppendFormat("\"voice\":{{{0}}}", JsonHelper.WriteObject("media_id", this.MediaId));
+                        sb.AppendFormat("\"voice\":{{{0}}},", JsonHelper.WriteObject("media_id", this.ContentOrMediaId));
                         sb.AppendFormat("\"msgtype\":\"voice\"");
                         break;
                 }
