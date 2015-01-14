@@ -46,29 +46,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cryptography.cs" />
     <Compile Include="IWeChatService.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Messages\WeChatMassSendJobEvent.cs" />
     <Compile Include="Messages\WeChatSubscribeEvent.cs" />
     <Compile Include="Messages\WeChatTemplateSendJobEvent.cs" />
     <Compile Include="Models\CustomerServiceRecord.cs" />
+    <Compile Include="Models\KfAccount.cs" />
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="Models\TemplateMessage.cs" />
+    <Compile Include="Requests\CreateKfAccount.cs" />
     <Compile Include="Requests\CreateShortUrl.cs" />
     <Compile Include="Requests\DeleteMassMessage.cs" />
+    <Compile Include="Requests\GetCallbackIp.cs" />
     <Compile Include="Requests\GetCustomerServiceRecord.cs" />
+    <Compile Include="Requests\GetKfList.cs" />
     <Compile Include="Requests\GetOAuthUserInfo.cs" />
+    <Compile Include="Requests\GetOnlineKfList.cs" />
     <Compile Include="Requests\GetOpenIdByCode.cs" />
     <Compile Include="Requests\GetUserBelongGroup.cs" />
     <Compile Include="Requests\SendCustomerServiceMessage.cs" />
     <Compile Include="Requests\SendMassMessage.cs" />
     <Compile Include="Requests\SendTemplateMessage.cs" />
     <Compile Include="Requests\SetUserRemark.cs" />
+    <Compile Include="Requests\UpdateKfAccount.cs" />
+    <Compile Include="Requests\UploadKfHeadimg.cs" />
     <Compile Include="Requests\UploadNews.cs" />
     <Compile Include="Requests\UploadVideo.cs" />
     <Compile Include="ResponseMessages\TransferCustomerMessage.cs" />
     <Compile Include="Response\CreateShortUrlResponse.cs" />
+    <Compile Include="Response\GetCallbackIpResponse.cs" />
     <Compile Include="Response\GetCustomerServiceRecordResponse.cs" />
+    <Compile Include="Response\GetKfListResponse.cs" />
+    <Compile Include="Response\GetOnlineKfListResponse.cs" />
     <Compile Include="Response\GetUserBelongGroupResponse.cs" />
     <Compile Include="Response\SendMassMessageResponse.cs" />
     <Compile Include="Response\SendTemplateResponse.cs" />
@@ -134,6 +145,7 @@
     <Compile Include="WeChatOAuthBuilder.cs" />
     <Compile Include="WeChatRequestException.cs" />
     <Compile Include="WeChatService.cs" />
+    <Compile Include="WXBizMsgCrypt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

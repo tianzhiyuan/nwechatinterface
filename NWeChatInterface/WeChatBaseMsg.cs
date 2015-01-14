@@ -49,6 +49,8 @@ namespace NWeChatInterface
         /// </summary>
         [JsonProperty("msgtype")]
         public virtual CData MsgType { get; set; }
+
+		public string Encrypt { get; set; }
         /// <summary>
         /// 序列化当前对象
         /// </summary>

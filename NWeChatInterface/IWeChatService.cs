@@ -19,5 +19,19 @@ namespace NWeChatInterface
         /// 解析微信推送的消息
         /// </summary>
         WeChatBaseMsg Parse(string data);
+
+	    /// <summary>
+	    /// 验证消息真实性并解析加密的消息
+	    /// </summary>
+	    /// <param name="encryptData">加密串</param>
+	    /// <param name="timestamp">时间戳</param>
+	    /// <param name="nonce">随机串</param>
+	    /// <param name="signature">签名串</param>
+	    /// <param name="accessToken"></param>
+	    /// <param name="appId"></param>
+	    /// <param name="aesKey"></param>
+	    /// <returns></returns>
+	    WeChatBaseMsg ParseEncrypt(string encryptData, string timestamp, string nonce, string signature, string accessToken,
+	                               string appId, string aesKey);
     }
 }

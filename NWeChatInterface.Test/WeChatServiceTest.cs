@@ -17,7 +17,7 @@ namespace NWeChatInterface.Test
         private readonly IWeChatService wechat = new WeChatService();
         private string someAppKey = ConfigurationManager.AppSettings["AppId"];
         private string someAppSecret = ConfigurationManager.AppSettings["AppSecret"];
-        private string tempToken = "GFreFKH0o7qiLyfqJDog8bxzd_kPBcloQcHBwBvop4GFZStCN0-Fy2biQZzT01pxEfPhUdBB1vNoMuY1LHF9ge6ISeVzWVZzEgf8fj6gsAU";
+        private string tempToken = "-b3LmQSKWonLcgvQjZ-PQCfbKswhdVl68JAk7b9a2m_ccH_SS_czfarNvvQjxS2TGyKiCoNKV_Xrp8l38_K4bkUbWNOW0p7pIeBFt_p4S-E";
         private string tempOpenId = "ob0Yssym8ndt--BDOgIEZucfyipQ";
 
         [Test]

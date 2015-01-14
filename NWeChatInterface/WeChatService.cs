@@ -6,6 +6,7 @@ using System.Text;
 using NWeChatInterface.Requests;
 using NWeChatInterface.Response;
 using Newtonsoft.Json;
+using Tencent;
 
 namespace NWeChatInterface
 {
@@ -143,7 +144,22 @@ namespace NWeChatInterface
             return WeChatBaseMsg.LoadFrom(data);
         }
 
-        #region IWeChatService Members
+	    public WeChatBaseMsg ParseEncrypt(string encryptData, string timestamp, string nonce, string signature, string accessToken,
+	                                      string appId, string aesKey)
+	    {
+		    var wxMsgCrypt = new WXBizMsgCrypt(accessToken, aesKey, appId);
+		    string decryptMsg = "";
+		    int code = wxMsgCrypt.DecryptMsg(signature, timestamp, nonce, encryptData, ref decryptMsg);
+			if (code == 0)
+			{
+				return this.Parse(decryptMsg);
+			}
+		    throw new Exception(string.Format("识别加密消息串发生错误，错误码{0}", code));
+	    }
+
+	    
+
+	    #region IWeChatService Members
         TResponse IWeChatService.Execute<TResponse>(IWeChatRequest<TResponse> request)
         {
             var media = request as UploadMedia;
