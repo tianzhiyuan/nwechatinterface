@@ -57,6 +57,7 @@
     <Compile Include="Models\KfAccount.cs" />
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="Models\TemplateMessage.cs" />
+    <Compile Include="Models\UserSource.cs" />
     <Compile Include="RequestMethod.cs" />
     <Compile Include="RequestPath.cs" />
     <Compile Include="Requests\Kf\CreateKfAccount.cs" />
@@ -69,6 +70,8 @@
     <Compile Include="Requests\Kf\GetOnlineKfList.cs" />
     <Compile Include="Requests\GetOpenIdByCode.cs" />
     <Compile Include="Requests\Message\SendMassMessageByOpenId.cs" />
+    <Compile Include="Requests\Statistic\GetUserCumulate.cs" />
+    <Compile Include="Requests\Statistic\GetUserSummary.cs" />
     <Compile Include="Requests\User\GetUserBelongGroup.cs" />
     <Compile Include="Requests\Message\SendCustomerServiceMessage.cs" />
     <Compile Include="Requests\Message\SendMassMessageByGroupId.cs" />
@@ -85,6 +88,8 @@
     <Compile Include="Response\GetKfListResponse.cs" />
     <Compile Include="Response\GetOnlineKfListResponse.cs" />
     <Compile Include="Response\GetUserBelongGroupResponse.cs" />
+    <Compile Include="Response\GetUserCumulateResponse.cs" />
+    <Compile Include="Response\GetUserSummuryResponse.cs" />
     <Compile Include="Response\SendMassMessageResponse.cs" />
     <Compile Include="Response\SendTemplateResponse.cs" />
     <Compile Include="Response\UploadResponse.cs" />
@@ -100,8 +105,6 @@
     <Compile Include="ResponseMessages\VoiceMessage.cs" />
     <Compile Include="ResponseMessages\TextMessage.cs" />
     <Compile Include="Epoch.cs" />
-    <Compile Include="IGetRequest.cs" />
-    <Compile Include="IPostRequest.cs" />
     <Compile Include="AbstractResponse.cs" />
     <Compile Include="IWeChatRequest.cs" />
     <Compile Include="Messages\WeChatEventMsg.cs" />
