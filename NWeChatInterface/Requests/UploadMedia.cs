@@ -15,9 +15,10 @@ namespace NWeChatInterface.Requests
     /// 缩略图（thumb）：64KB，支持JPG格式
     /// 注意多媒体文件三天后会被删除
     /// </summary>
-    public class UploadMedia : IWeChatRequest<UploadResponse>
+	[RequestPath("http://file.api.weixin.qq.com/cgi-bin/media/upload", IsFull = true)]
+	[RequestMethod(RequestMethod.POST)]
+	public class UploadMedia : AccessRequiredRequest<UploadResponse>
     {
-        public string AccessToken { get; private set; }
         /// <summary>
         /// 多媒体文件类型 <see cref="WeChatMediaType"/>
         /// </summary>
@@ -38,7 +39,7 @@ namespace NWeChatInterface.Requests
         /// 注意多媒体文件三天后会被删除
         /// </summary>
         public int ContentLength { get; private set; }
-        public string RequestUrl
+        public override string Param
         {
             get
             {
@@ -64,7 +65,7 @@ namespace NWeChatInterface.Requests
         /// <returns></returns>
         public static string GetMediaUrl(string acccessToken, string mediaId)
         {
-            return string.Format("http://file.api.weixin.qq.com/cgi-bin/media/get?access_token={0}&media_id={1}",
+            return string.Format("access_token={0}&media_id={1}",
                                  acccessToken, mediaId);
         }
     }

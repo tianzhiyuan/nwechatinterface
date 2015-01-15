@@ -7,6 +7,9 @@ using System.Text;
 using NWeChatInterface.Models;
 using NWeChatInterface.Requests;
 using NUnit.Framework;
+using NWeChatInterface.Requests.Menu;
+using NWeChatInterface.Requests.Message;
+using NWeChatInterface.Requests.User;
 using NWeChatInterface.ResponseMessages;
 
 namespace NWeChatInterface.Test
@@ -162,7 +165,7 @@ namespace NWeChatInterface.Test
         public void SendMassMessage_Text()
         {
             var response =
-                wechat.Execute(new SendMassMessage(tempToken, new string[] {tempOpenId}, WeChatMessageTypes.TEXT,
+                wechat.Execute(new SendMassMessageByGroupId(tempToken, new string[] {tempOpenId}, WeChatMessageTypes.TEXT,
                                                    "测试群发文本消息"));
             Console.WriteLine(response);
             Assert.AreEqual(0, response.errcode);

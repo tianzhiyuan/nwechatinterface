@@ -12,11 +12,12 @@ namespace NWeChatInterface.Requests
     /// 
     /// 公众平台的开发接口的access_token其存储至少要保留512个字符空间
     /// </summary>
-    public class GetAccessToken : IGetRequest<AccessTokenResponse>
+	[RequestPath("/cgi-bin/token")]
+	public class GetAccessToken : IWeChatRequest<AccessTokenResponse>
     {
-        public string GrandType { get; private set; }
-        public string AppId { get; private set; }
-        public string Secret { get; private set; }
+        public string GrandType { get; set; }
+        public string AppId { get; set; }
+        public string Secret { get; set; }
         public GetAccessToken(string appId, string secret, string grandType = "client_credential")
         {
             GrandType = grandType;
@@ -24,14 +25,11 @@ namespace NWeChatInterface.Requests
             Secret = secret;
         }
 
-        public string RequestUrl
+        public string Param
         {
-            get
-            {
-                return
-                    string.Format("https://api.weixin.qq.com/cgi-bin/token?grant_type={0}&appid={1}&secret={2}",
-                                  this.GrandType, this.AppId, this.Secret);
-            }
+	        get { return string.Format("grant_type={0}&appid={1}&secret={2}", this.GrandType, this.AppId, this.Secret); }
         }
+
+		public string Data { get { return ""; } }
     }
 }

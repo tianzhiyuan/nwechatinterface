@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NWeChatInterface.Response;
 
-namespace NWeChatInterface.Requests
+namespace NWeChatInterface.Requests.CustomerServicce
 {
     /// <summary>
     /// 获取客服聊天记录
@@ -12,12 +9,10 @@ namespace NWeChatInterface.Requests
     /// 包括客服和用户会话的所有消息记录和会话的创建、关闭等操作记录。
     /// 利用此接口可以开发如“消息记录”、“工作监控”、“客服绩效考核”等功能。
     /// </summary>
-    public class GetCustomerServiceRecord : IPostRequest<GetCustomerServiceRecordResponse>
+	[RequestPath("/cgi-bin/customservice/getrecord")]
+	[RequestMethod(RequestMethod.POST)]
+	public class GetCustomerServiceRecord : AccessRequiredRequest<GetCustomerServiceRecordResponse>
     {
-        /// <summary>
-        /// AccessToken调用接口凭证
-        /// </summary>
-        public string AccessToken { get; private set; }
         /// <summary>
         /// 查询开始时间
         /// </summary>
@@ -59,16 +54,8 @@ namespace NWeChatInterface.Requests
                 throw new Exception("不能跨日查询");
             }
         }
-        public string RequestUrl
-        {
-            get
-            {
-                return string.Format("https://api.weixin.qq.com/cgi-bin/customservice/getrecord?access_token={0}",
-                                     this.AccessToken);
-            }
-        }
-
-        public string Data
+        
+        public override string Data
         {
             get
             {

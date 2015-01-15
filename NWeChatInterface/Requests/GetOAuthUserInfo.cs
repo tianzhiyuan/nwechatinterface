@@ -9,7 +9,8 @@ namespace NWeChatInterface.Requests
     /// <summary>
     /// 网页授权获取用户基本信息
     /// </summary>
-    public class GetOAuthUserInfo : IGetRequest<UserInfoResponse>
+	[RequestPath("/sns/userinfo")]
+    public class GetOAuthUserInfo : IWeChatRequest<UserInfoResponse>
     {
         public GetOAuthUserInfo(string accessToken, string openId, string lang = "zh_CN")
         {
@@ -30,13 +31,15 @@ namespace NWeChatInterface.Requests
         /// </summary>
         public string Lang { get; private set; }
 
-        public string RequestUrl
+        public string Param
         {
             get
             {
-                return string.Format("https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang={2}",
+                return string.Format("access_token={0}&openid={1}&lang={2}",
                                      this.AccessToken, this.OpenId, this.Lang);
             }
         }
+
+		public string Data { get { return ""; } }
     }
 }

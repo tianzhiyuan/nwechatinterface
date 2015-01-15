@@ -22,12 +22,13 @@ namespace NWeChatInterface.Requests
     /// 
     /// https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET 获取二维码图片
     /// </summary>
-    public class CreateQRTicket : IPostRequest<QRTicketResponse>
+    [RequestMethod(RequestMethod.POST)]
+	[RequestPath("/cgi-bin/qrcode/create")]
+	public class CreateQRTicket : AccessRequiredRequest<QRTicketResponse>
     {
         public const string TempQR = "QR_SCENE";
         public const string PermanentQR = "QR_LIMIT_SCENE";
         public const int PermantQRSecenId_MAX = 100000;
-        public string AccessToken { get; private set; }
         public QRTicket QRTicket { get; private set; }
         public CreateQRTicket(string accessToken, int scene_id, string actionName = PermanentQR, int expire = 1800)
         {
@@ -60,16 +61,9 @@ namespace NWeChatInterface.Requests
             this.AccessToken = accessToken;
         }
 
-        public string RequestUrl
-        {
-            get
-            {
-                return string.Format("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={0}",
-                                     this.AccessToken);
-            }
-        }
+        
 
-        public string Data
+        public override string Data
         {
             get
             {

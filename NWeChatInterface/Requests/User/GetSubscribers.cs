@@ -1,37 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NWeChatInterface.Response;
+﻿using NWeChatInterface.Response;
 
-namespace NWeChatInterface.Requests
+namespace NWeChatInterface.Requests.User
 {
     /// <summary>
     /// 获取关注着列表
     /// </summary>
-    public class GetSubscribers : IGetRequest<SubscriberListResponse>
+	[RequestPath("/cgi-bin/user/get")]
+	public class GetSubscribers : AccessRequiredRequest<SubscriberListResponse>
     {
-        public string AccessToken { get; private set; }
         public string NextOpenId { get; private set; }
         public GetSubscribers(string accessToken, string nextOpenId = null)
         {
             this.AccessToken = accessToken;
             this.NextOpenId = nextOpenId;
         }
-        public string RequestUrl
+        public override string Param
         {
             get
             {
                 if (string.IsNullOrWhiteSpace(NextOpenId))
                 {
-                    return string.Format("https://api.weixin.qq.com/cgi-bin/user/get?access_token={0}",
+                    return string.Format("access_token={0}",
                                          this.AccessToken);
                 }
                 else
                 {
                     return
                         string.Format(
-                            "https://api.weixin.qq.com/cgi-bin/user/get?access_token={0}&next_openid={1}",
+                            "access_token={0}&next_openid={1}",
                             this.AccessToken, this.NextOpenId);
                 }
             }

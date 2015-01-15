@@ -51,42 +51,40 @@ namespace NWeChatInterface
 
         }
 
-        public TResponse Execute<TResponse>(IGetRequest<TResponse> request) where TResponse : AbstractResponse
-        {
-            var url = request.RequestUrl;
-            var req = WebRequest.Create(url);
-            req.Method = "GET";
-            var data = DoRequest<TResponse>(req, request);
-            return data;
-        }
-
-        public TResponse Execute<TResponse>(IPostRequest<TResponse> request) where TResponse : AbstractResponse
-        {
-            var url = request.RequestUrl;
-            var req = WebRequest.Create(url);
-            req.Method = "POST";
-            req.Timeout = TimeOutSeconds*1000;
-            req.ContentType = "application/json";
-            var requestData = request.Data;
-            if (!string.IsNullOrEmpty(requestData))
-            {
-                var bytes = Encoding.UTF8.GetBytes(requestData);
-                req.ContentLength = bytes.Length;
-                using (var stream = req.GetRequestStream())
-                {
-                    stream.Write(bytes, 0, bytes.Length);
-                }
-            }
-
-            var data = DoRequest<TResponse>(req, request);
-            return data;
-        }
+       
+		public TResponse Execute<TResponse>(IWeChatRequest<TResponse> request) where TResponse : AbstractResponse
+		{
+			string baseUrl = "https://api.weixin.qq.com";
+			var requestType = request.GetType();
+			var requestPathAttribute = (RequestPath) requestType.GetCustomAttributes(typeof (RequestPath), true)[0];
+			var requestMethod = (RequestMethod) requestType.GetCustomAttributes(typeof (RequestMethod), true)[0];
+			string url = new UriBuilder(baseUrl) {Path = requestPathAttribute.Path, Query = request.Param}.Uri.AbsolutePath;
+			if (requestPathAttribute.IsFull)
+			{
+				url = new UriBuilder(requestPathAttribute.Path) {Query = request.Param}.Uri.AbsolutePath;
+			}
+			var httpRequest = WebRequest.Create(url);
+			httpRequest.Method = requestMethod.Method;
+			httpRequest.ContentType = "application/json";
+			string requestData = request.Data;
+			if (!string.IsNullOrWhiteSpace(requestData))
+			{
+				var bytes = Encoding.UTF8.GetBytes(requestData);
+				httpRequest.ContentLength = bytes.Length;
+				using (var stream = httpRequest.GetRequestStream())
+				{
+					stream.Write(bytes, 0, bytes.Length);
+				}
+			}
+			var response = DoRequest<TResponse>(httpRequest, request);
+			return response;
+		}
 
         public UploadResponse Execute(UploadMedia request)
         {
             
             string boundary = "----------------------------" + DateTime.Now.Ticks.ToString("x");
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(request.RequestUrl);
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(request.Param);
             httpWebRequest.ContentType = "multipart/form-data; boundary=" + boundary;
             httpWebRequest.Method = "POST";
             httpWebRequest.KeepAlive = true;
@@ -167,11 +165,7 @@ namespace NWeChatInterface
             {
                 return this.Execute(media) as TResponse;
             }
-            if (request is IPostRequest<TResponse>)
-            {
-                return this.Execute((IPostRequest<TResponse>)request);
-            }
-            return this.Execute((IGetRequest<TResponse>) request);
+            return this.Execute(request);
         }
         bool IWeChatService.VerifySignature(string nonce, string timestamp, string token, string signature)
         {

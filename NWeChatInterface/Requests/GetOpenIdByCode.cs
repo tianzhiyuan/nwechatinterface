@@ -10,7 +10,8 @@ namespace NWeChatInterface.Requests
     /// 微信网页授权接口
     /// 根据回调中获取到的code，拿到openid
     /// </summary>
-    public class GetOpenIdByCode : IGetRequest<GetOpenIdResponse>
+	[RequestPath("/sns/oauth2/access_token")]
+    public class GetOpenIdByCode : IWeChatRequest<GetOpenIdResponse>
     {
         public string AppId { get; private set; }
         public string AppSecret { get; private set; }
@@ -21,17 +22,19 @@ namespace NWeChatInterface.Requests
             this.AppSecret = secret;
             this.Code = code;
         }
-        public string RequestUrl
+        public string Param
         {
             get
             {
                 return
                     string.Format(
-                        "https://api.weixin.qq.com/sns/oauth2/access_token?appid={0}&secret={1}&code={2}&grant_type=authorization_code",
+                        "appid={0}&secret={1}&code={2}&grant_type=authorization_code",
                         this.AppId,
                         this.AppSecret,
                         this.Code);
             }
         }
+
+		public string Data { get { return ""; } }
     }
 }

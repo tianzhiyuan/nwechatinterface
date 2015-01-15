@@ -10,9 +10,10 @@ namespace NWeChatInterface.Requests
     /// 如果想群发视频消息，必须先调用此接口获取media_id
     /// 注意接口中的media_id需通过基础支持中的上传下载多媒体文件来得到<see cref="UploadMedia"/>
     /// </summary>
-    public class UploadVideo : IPostRequest<UploadResponse>
+    [RequestMethod(RequestMethod.POST)]
+	[RequestPath("https://file.api.weixin.qq.com/cgi-bin/media/uploadvideo", IsFull = true)]
+	public class UploadVideo : AccessRequiredRequest<UploadResponse>
     {
-        public string AccessToken { get; private set; }
         public string MediaId { get; private set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
@@ -23,16 +24,9 @@ namespace NWeChatInterface.Requests
             this.Title = title;
             this.Description = desc;
         }
-        public string RequestUrl
-        {
-            get
-            {
-                return string.Format("https://file.api.weixin.qq.com/cgi-bin/media/uploadvideo?access_token={0}",
-                                     this.AccessToken);
-            }
-        }
+        
 
-        public string Data
+        public override string Data
         {
             get
             {
