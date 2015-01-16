@@ -62,6 +62,7 @@
     <Compile Include="RequestPath.cs" />
     <Compile Include="Requests\Kf\CreateKfAccount.cs" />
     <Compile Include="Requests\CreateShortUrl.cs" />
+    <Compile Include="Requests\Kf\DeleteKfAccount.cs" />
     <Compile Include="Requests\Message\DeleteMassMessage.cs" />
     <Compile Include="Requests\GetCallbackIp.cs" />
     <Compile Include="Requests\CustomerServicce\GetCustomerServiceRecord.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Requests\Kf\GetOnlineKfList.cs" />
     <Compile Include="Requests\GetOpenIdByCode.cs" />
     <Compile Include="Requests\Message\SendMassMessageByOpenId.cs" />
+    <Compile Include="Requests\Message\SendMassMessagePreview.cs" />
     <Compile Include="Requests\Statistic\GetUserCumulate.cs" />
     <Compile Include="Requests\Statistic\GetUserSummary.cs" />
     <Compile Include="Requests\User\GetUserBelongGroup.cs" />
