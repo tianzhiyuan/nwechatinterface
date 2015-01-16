@@ -54,6 +54,7 @@
     <Compile Include="Messages\WeChatSubscribeEvent.cs" />
     <Compile Include="Messages\WeChatTemplateSendJobEvent.cs" />
     <Compile Include="Models\CustomerServiceRecord.cs" />
+    <Compile Include="Models\Industry.cs" />
     <Compile Include="Models\KfAccount.cs" />
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="Models\TemplateMessage.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Requests\Message\GetMassMessageStatus.cs" />
     <Compile Include="Requests\Message\SendMassMessageByOpenId.cs" />
     <Compile Include="Requests\Message\SendMassMessagePreview.cs" />
+    <Compile Include="Requests\Message\SetIndustry.cs" />
     <Compile Include="Requests\Statistic\GetUserCumulate.cs" />
     <Compile Include="Requests\Statistic\GetUserSummary.cs" />
     <Compile Include="Requests\User\GetUserBelongGroup.cs" />
