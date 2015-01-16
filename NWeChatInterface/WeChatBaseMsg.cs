@@ -9,6 +9,7 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using NWeChatInterface.Messages;
 using Newtonsoft.Json;
+using Tencent;
 
 namespace NWeChatInterface
 {
@@ -97,6 +98,19 @@ namespace NWeChatInterface
             var sr = new StreamReader(ms);
             return sr.ReadToEnd();
         }
+
+		public string SerializeEncrypt(string accessToken, string aesKey, string appId)
+		{
+			var origin = this.Serialize();
+			var wxCrypt = new WXBizMsgCrypt(accessToken, aesKey, appId);
+			var encrypt = "";
+			int code = wxCrypt.EncryptMsg(origin, Epoch.Now.ToString(), GenerateNonce(8), ref encrypt);
+			if (code != 0)
+			{
+				throw new Exception(string.Format("加密失败，错误码：{0}", code));
+			}
+			return encrypt;
+		}
         /// <summary>
         /// 由XML字符串反序列化为微信消息对象
         /// </summary>
@@ -114,6 +128,17 @@ namespace NWeChatInterface
 
         private static readonly object _lock = new object();
         private static readonly IDictionary<Type, XmlSerializer> _serializers = new Dictionary<Type, XmlSerializer>();
+	    private static readonly string CArray = "0123456789abcdefghijklmnopqrstuvwxyz";
+		private string GenerateNonce(int length)
+		{
+			StringBuilder builder = new StringBuilder(length);
+			int arrayLength = CArray.Length;
+			for (int index = 0; index < length; index++)
+			{
+				builder.Append(CArray[new Random().Next(arrayLength)]);
+			}
+			return builder.ToString();
+		}
     }
     
     
