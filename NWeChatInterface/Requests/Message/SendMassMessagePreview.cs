@@ -9,6 +9,8 @@ namespace NWeChatInterface.Requests.Message
 	/// <summary>
 	/// 开发者可通过该接口发送消息给指定用户，在手机端查看消息的样式和排版。
 	/// </summary>
+	[RequestPath("/cgi-bin/message/mass/preview")]
+	[RequestMethod(RequestMethod.POST)]
 	public class SendMassMessagePreview : AccessRequiredRequest<SendMassMessageResponse>
 	{
 		/// <summary>

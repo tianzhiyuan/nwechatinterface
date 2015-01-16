@@ -70,6 +70,7 @@
     <Compile Include="Requests\GetOAuthUserInfo.cs" />
     <Compile Include="Requests\Kf\GetOnlineKfList.cs" />
     <Compile Include="Requests\GetOpenIdByCode.cs" />
+    <Compile Include="Requests\Message\GetMassMessageStatus.cs" />
     <Compile Include="Requests\Message\SendMassMessageByOpenId.cs" />
     <Compile Include="Requests\Message\SendMassMessagePreview.cs" />
     <Compile Include="Requests\Statistic\GetUserCumulate.cs" />
