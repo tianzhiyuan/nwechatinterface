@@ -49,7 +49,7 @@ namespace NWeChatInterface.Test
         public void GetMenu()
         {
             var svc = wechat;
-            var obj = svc.Execute(new GetMenu(tempToken));
+            var obj = svc.Execute(new GetMenu(){AccessToken = tempToken});
             Console.WriteLine(obj);
             Assert.AreEqual(obj.errcode, 0);
         }
@@ -76,7 +76,7 @@ namespace NWeChatInterface.Test
                             new Button(){name = "Wechat", type = ButtonTypes.View, url = "http://weixin.qq.com"}
                         }}
                 };
-            var response = wechat.Execute(new CreateMenu(tempToken, menu));
+            var response = wechat.Execute(new CreateMenu(){AccessToken = tempToken, Menu = menu});
             Console.WriteLine(response);
             Assert.AreEqual(0, response.errcode);
         }
@@ -118,7 +118,7 @@ namespace NWeChatInterface.Test
         [TestCase("ob0Yss10rtb1WAL29qG6x2SbtiZY")]
         public void GetUserInfo(string openid)
         {
-            var obj = wechat.Execute(new GetUserInfo(openid, tempToken));
+            var obj = wechat.Execute(new GetUserInfo(){OpenId = openid, AccessToken = tempToken});
             Console.WriteLine(obj);
             Assert.AreEqual(0, obj.errcode);
         }
@@ -143,7 +143,7 @@ namespace NWeChatInterface.Test
         [Test]
         public void GetUserBelongGroupTest()
         {
-            var response = wechat.Execute(new GetBelongUserGroup(tempToken, tempOpenId));
+            var response = wechat.Execute(new GetBelongUserGroup(){AccessToken = tempToken, OpenId = tempOpenId});
             Console.WriteLine(response);
             Assert.AreEqual(0, response.errcode);
         }
@@ -151,13 +151,12 @@ namespace NWeChatInterface.Test
         public void SendCustomerServiceMessage_Text()
         {
             var response =
-                wechat.Execute(new SendCustomerServiceMessage(tempToken,
-                                                              new TextMessage()
+                wechat.Execute(new SendCustomerServiceMessage(){AccessToken = tempToken, Message = new TextMessage()
                                                                   {
                                                                       Content = "测试客服文本消息",
                                                                       ToUserName = tempOpenId,
                                                                       CreatedAt = DateTime.Now
-                                                                  }));
+                                                                  }});
             Console.WriteLine(response);
             Assert.AreEqual(0, response.errcode);
         }
@@ -165,15 +164,14 @@ namespace NWeChatInterface.Test
         public void SendMassMessage_Text()
         {
             var response =
-                wechat.Execute(new SendMassMessageByGroupId(tempToken, new string[] {tempOpenId}, WeChatMessageTypes.TEXT,
-                                                   "测试群发文本消息"));
+				wechat.Execute(new SendMassMessageByOpenId() { AccessToken = tempToken, UserIds = new string[] { tempOpenId }, ContentOrMediaId = "测试群发消息", Type = WeChatMessageTypes.TEXT });
             Console.WriteLine(response);
             Assert.AreEqual(0, response.errcode);
         }
         [Test]
         public void SetUserRemarkTest()
         {
-            var response = wechat.Execute(new SetUserRemark(tempToken, tempOpenId, "tt"));
+            var response = wechat.Execute(new SetUserRemark(){AccessToken = tempToken, OpenId = tempOpenId, Remark = "tt"});
             Console.WriteLine(response);
             Assert.AreEqual(0, response.errcode);
         }

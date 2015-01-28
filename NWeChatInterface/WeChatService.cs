@@ -58,7 +58,8 @@ namespace NWeChatInterface
 			var requestType = request.GetType();
 			var requestPathAttribute = (RequestPath) requestType.GetCustomAttributes(typeof (RequestPath), true)[0];
 			var requestMethod = (RequestMethod) requestType.GetCustomAttributes(typeof (RequestMethod), true)[0];
-			string url = new UriBuilder(baseUrl) {Path = requestPathAttribute.Path, Query = request.Param}.Uri.AbsolutePath;
+			var uri = new UriBuilder(baseUrl) {Path = requestPathAttribute.Path, Query = request.Param};
+			var url = uri.ToString();
 			if (requestPathAttribute.IsFull)
 			{
 				url = new UriBuilder(requestPathAttribute.Path) {Query = request.Param}.Uri.AbsolutePath;

@@ -11,6 +11,7 @@ namespace NWeChatInterface.Requests
     /// 根据回调中获取到的code，拿到openid
     /// </summary>
 	[RequestPath("/sns/oauth2/access_token")]
+	[RequestMethod(RequestMethod.GET)]
     public class GetOpenIdByCode : IWeChatRequest<GetOpenIdResponse>
     {
         public string AppId { get; private set; }

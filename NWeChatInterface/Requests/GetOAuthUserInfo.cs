@@ -10,6 +10,7 @@ namespace NWeChatInterface.Requests
     /// 网页授权获取用户基本信息
     /// </summary>
 	[RequestPath("/sns/userinfo")]
+	[RequestMethod(RequestMethod.GET)]
     public class GetOAuthUserInfo : IWeChatRequest<UserInfoResponse>
     {
         public GetOAuthUserInfo(string accessToken, string openId, string lang = "zh_CN")

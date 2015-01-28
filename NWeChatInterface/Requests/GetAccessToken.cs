@@ -13,6 +13,7 @@ namespace NWeChatInterface.Requests
     /// 公众平台的开发接口的access_token其存储至少要保留512个字符空间
     /// </summary>
 	[RequestPath("/cgi-bin/token")]
+	[RequestMethod(RequestMethod.GET)]
 	public class GetAccessToken : IWeChatRequest<AccessTokenResponse>
     {
         public string GrandType { get; set; }
