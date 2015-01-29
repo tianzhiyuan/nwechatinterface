@@ -17,6 +17,7 @@ namespace NWeChatInterface.Requests.Message
 	/// 4、具备微信支付权限的公众号，在使用高级群发接口上传、群发图文消息类型时，可使用a标签加入外链
 	/// </summary>
 	[RequestPath("/cgi-bin/message/mass/send")]
+	[RequestMethod(RequestMethod.POST)]
 	public class SendMassMessageByOpenId : AccessRequiredRequest<SendMassMessageResponse>
 	{
 		/// <summary>

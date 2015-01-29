@@ -6,6 +6,7 @@ namespace NWeChatInterface.Requests.User
     /// 移动用户分组
     /// </summary>
 	[RequestPath("/cgi-bin/groups/members/update")]
+	[RequestMethod(RequestMethod.POST)]
 	public class ShiftUserGroup : AccessRequiredRequest<CommonResponse>
     {
         public string OpenId { get; set; }

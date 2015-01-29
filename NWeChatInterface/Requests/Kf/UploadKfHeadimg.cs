@@ -6,6 +6,7 @@ namespace NWeChatInterface.Requests.Kf
 	/// TODO
 	/// </summary>
 	[RequestPath("/customservice/kfacount/uploadheadimg")]
+	[RequestMethod(RequestMethod.POST)]
 	public class UploadKfHeadimg : AccessRequiredRequest<CommonResponse>
 	{
 		public string KfAccount { get; set; }

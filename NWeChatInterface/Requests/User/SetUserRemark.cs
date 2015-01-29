@@ -7,6 +7,7 @@ namespace NWeChatInterface.Requests.User
     /// 设置用户备注
     /// </summary>
 	[RequestPath("/cgi-bin/user/info/updateremark")]
+	[RequestMethod(RequestMethod.POST)]
 	public class SetUserRemark : AccessRequiredRequest<CommonResponse>
     {
         public string OpenId { get; set; }

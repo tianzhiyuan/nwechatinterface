@@ -20,8 +20,8 @@ namespace NWeChatInterface.Test
         private readonly IWeChatService wechat = new WeChatService();
         private string someAppKey = ConfigurationManager.AppSettings["AppId"];
         private string someAppSecret = ConfigurationManager.AppSettings["AppSecret"];
-        private string tempToken = "-b3LmQSKWonLcgvQjZ-PQCfbKswhdVl68JAk7b9a2m_ccH_SS_czfarNvvQjxS2TGyKiCoNKV_Xrp8l38_K4bkUbWNOW0p7pIeBFt_p4S-E";
-        private string tempOpenId = "ob0Yssym8ndt--BDOgIEZucfyipQ";
+		private string tempToken = "O9nUnG3siW_rhjGNk86ecUmDtsyzKtlbIauOo22QHuV2Q7uoxXMNH33QcRiHNCt9qVuVm-1IdLsxnu_cmxwfRujugh1ioIKNXv7NKu6_xs8";
+		private string tempOpenId = "onVystwzSY2HXb2Qs-56aSl6a5mE";
 
         [Test]
         public void VerifySignatureTest()
@@ -106,16 +106,7 @@ namespace NWeChatInterface.Test
             
             Assert.AreEqual(0, obj.errcode);
         }
-        [TestCase("ob0Yss3q_2hKYB2Rz9t4rEB-2ByI")]
-        [TestCase("ob0Yss8LQtzpA_Vmm0qtAhrNe36U")]
-        [TestCase("ob0Yss9IViTXFQopqMr1Fc-CDlRk")]
-        [TestCase("ob0Yss002wYHtMu57TKYBRLoFUtA")]
-        [TestCase("ob0Yss676OJrVjlI7EjjQY-bx-jo")]
-        [TestCase("ob0Yss6pGhEYd8TkEHTgLH5_VHnU")]
-        [TestCase("ob0YssxWU0ffm8TQAHedA2kWbVA4")]
-        [TestCase("ob0Yssym8ndt--BDOgIEZucfyipQ")]
-        [TestCase("ob0Yss7SyO5ZB1me5xBplA3TB4Bg")]
-        [TestCase("ob0Yss10rtb1WAL29qG6x2SbtiZY")]
+		[TestCase("onVystwzSY2HXb2Qs-56aSl6a5mE")]
         public void GetUserInfo(string openid)
         {
             var obj = wechat.Execute(new GetUserInfo(){OpenId = openid, AccessToken = tempToken});

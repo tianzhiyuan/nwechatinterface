@@ -2,6 +2,8 @@
 
 namespace NWeChatInterface
 {
+	[RequestMethod(RequestMethod.GET)]
+	[RequestPath("")]
 	public abstract class AccessRequiredRequest<TResponse> : IWeChatRequest<TResponse> where TResponse : AbstractResponse
 	{
 		/// <summary>
